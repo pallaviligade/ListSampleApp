@@ -13,7 +13,7 @@
 		8EE47F5F2A8BC87C0023BA87 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EE47F5D2A8BC87C0023BA87 /* Main.storyboard */; };
 		8EE47F612A8BC87D0023BA87 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EE47F602A8BC87D0023BA87 /* Assets.xcassets */; };
 		8EE47F642A8BC87D0023BA87 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EE47F622A8BC87D0023BA87 /* LaunchScreen.storyboard */; };
-		8EE47F6F2A8BC87D0023BA87 /* ListSampleAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE47F6E2A8BC87D0023BA87 /* ListSampleAppTests.swift */; };
+		8EE47F6F2A8BC87D0023BA87 /* FeedLoaderWithFallbackCompositeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE47F6E2A8BC87D0023BA87 /* FeedLoaderWithFallbackCompositeTests.swift */; };
 		8EE47F792A8BC87D0023BA87 /* ListSampleAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE47F782A8BC87D0023BA87 /* ListSampleAppUITests.swift */; };
 		8EE47F7B2A8BC87D0023BA87 /* ListSampleAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE47F7A2A8BC87D0023BA87 /* ListSampleAppUITestsLaunchTests.swift */; };
 		8EE47F8A2A8BC8EF0023BA87 /* EssentialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EE47F882A8BC8EF0023BA87 /* EssentialFeed.framework */; };
@@ -64,7 +64,7 @@
 		8EE47F632A8BC87D0023BA87 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8EE47F652A8BC87D0023BA87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8EE47F6A2A8BC87D0023BA87 /* ListSampleAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ListSampleAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8EE47F6E2A8BC87D0023BA87 /* ListSampleAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSampleAppTests.swift; sourceTree = "<group>"; };
+		8EE47F6E2A8BC87D0023BA87 /* FeedLoaderWithFallbackCompositeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLoaderWithFallbackCompositeTests.swift; sourceTree = "<group>"; };
 		8EE47F742A8BC87D0023BA87 /* ListSampleAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ListSampleAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EE47F782A8BC87D0023BA87 /* ListSampleAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSampleAppUITests.swift; sourceTree = "<group>"; };
 		8EE47F7A2A8BC87D0023BA87 /* ListSampleAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSampleAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -137,7 +137,7 @@
 		8EE47F6D2A8BC87D0023BA87 /* ListSampleAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				8EE47F6E2A8BC87D0023BA87 /* ListSampleAppTests.swift */,
+				8EE47F6E2A8BC87D0023BA87 /* FeedLoaderWithFallbackCompositeTests.swift */,
 			);
 			path = ListSampleAppTests;
 			sourceTree = "<group>";
@@ -302,7 +302,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8EE47F6F2A8BC87D0023BA87 /* ListSampleAppTests.swift in Sources */,
+				8EE47F6F2A8BC87D0023BA87 /* FeedLoaderWithFallbackCompositeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
