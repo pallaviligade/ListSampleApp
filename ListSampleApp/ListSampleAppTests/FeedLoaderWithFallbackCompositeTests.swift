@@ -39,17 +39,7 @@ class FeedLoaderWithFallbackCompositeTests: XCTestCase {
         let fallbackFeed = createuniqueFeedImage()
         let sut = makeSUT(primaryResult: .success(primaryFeed), fallbackResult: .success(fallbackFeed))
         
-        let exp = expectation(description: "wait till expection")
-        sut.load { result in
-            switch result {
-            case let .success(receivedFeed):
-                XCTAssertEqual(receivedFeed,primaryFeed)
-            case .failure:
-                XCTFail("Expcted sucessfully load feedresult, got \(result) instead")
-            }
-            exp.fulfill()
-        }
-        wait(for: [exp], timeout: 1.0)
+        expect(sut, toCompleteWith: .success(primaryFeed))
     }
     
     func test_load_deliversFallbackFeedOnPrimaryFailure() {
@@ -57,18 +47,7 @@ class FeedLoaderWithFallbackCompositeTests: XCTestCase {
         let fallbackFeed = createuniqueFeedImage()
         let sut = makeSUT(primaryResult: .failure(anyError()), fallbackResult: .success(fallbackFeed))
         
-        let exp = expectation(description: "wait till expection")
-        sut.load { result in
-            switch result {
-            case let .success(receivedFeed):
-                XCTAssertEqual(receivedFeed,fallbackFeed)
-            case .failure:
-                XCTFail("Expcted sucessfully load feedresult, got \(result) instead")
-            }
-            exp.fulfill()
-        }
-        wait(for: [exp], timeout: 1.0)
-        
+        expect(sut, toCompleteWith: .success(fallbackFeed))
     }
     
     private func makeSUT(primaryResult: FeedLoader.Result, fallbackResult: FeedLoader.Result, file: StaticString = #file, line: UInt = #line) -> FeedLoader {
@@ -76,6 +55,26 @@ class FeedLoaderWithFallbackCompositeTests: XCTestCase {
         let fallbackloader = LoaderStub(result: fallbackResult)
         let sut = FeedLoaderWithFallbackComposite(primary: primaryloader, fallback: fallbackloader)
         return sut
+    }
+    
+    private func expect(_ sut: FeedLoader, toCompleteWith expectedResult: FeedLoader.Result, file: StaticString = #file, line: UInt = #line) {
+        
+        let exp = expectation(description: "Wait for load completion")
+        sut.load { Recivedresult in
+            switch (Recivedresult,expectedResult) {
+            case let (.success(receivedFeed), .success(expectedFeed)):
+                XCTAssertEqual(receivedFeed,expectedFeed)
+            case (.failure, .failure ):
+             
+                break
+            default:
+                XCTFail("Expcted sucessfully load feedresult, got \(Recivedresult) instead")
+            }
+            exp.fulfill()
+        }
+
+        wait(for: [exp], timeout: 1.0)
+        
     }
    
     private func createuniqueFeedImage() -> [FeedImage] {
