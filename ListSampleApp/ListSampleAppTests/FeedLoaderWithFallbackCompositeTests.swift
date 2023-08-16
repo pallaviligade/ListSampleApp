@@ -27,10 +27,8 @@ class FeedLoaderWithFallbackCompositeTests: XCTestCase {
     func test_load_deliveryRemoteFeedOnRemoteSucess(){
         
         let primaryFeed = createuniqueFeedImage()
-        let fallbaclFeed = createuniqueFeedImage()
-        let primaryloader = LoaderStub(result: .success(primaryFeed))
-        let fallbackloader = LoaderStub(result: .success(fallbaclFeed))
-        let sut = FeedLoaderWithFallbackComposite(primary: primaryloader, fallback: fallbackloader)
+        let fallbackFeed = createuniqueFeedImage()
+        let sut = makeSUT(primaryResult: .success(primaryFeed), fallbackResult: .success(fallbackFeed))
         
         let exp = expectation(description: "wait till expection")
         sut.load { result in
@@ -43,6 +41,13 @@ class FeedLoaderWithFallbackCompositeTests: XCTestCase {
             exp.fulfill()
         }
         wait(for: [exp], timeout: 1.0)
+    }
+    
+    private func makeSUT(primaryResult: FeedLoader.Result, fallbackResult: FeedLoader.Result, file: StaticString = #file, line: UInt = #line) -> FeedLoader {
+        let primaryloader = LoaderStub(result: primaryResult)
+        let fallbackloader = LoaderStub(result: fallbackResult)
+        let sut = FeedLoaderWithFallbackComposite(primary: primaryloader, fallback: fallbackloader)
+        return sut
     }
    
     private func createuniqueFeedImage() -> [FeedImage] {
