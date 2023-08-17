@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8E0AB6672A8CF8F200B96410 /* FeedLoaderWithFallbackComposite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0AB6662A8CF8F200B96410 /* FeedLoaderWithFallbackComposite.swift */; };
+		8E45454C2A8CFE130052DA60 /* FeedImageDataLoaderWithFallbackCompositeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E45454B2A8CFE130052DA60 /* FeedImageDataLoaderWithFallbackCompositeTests.swift */; };
 		8EE47F582A8BC87C0023BA87 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE47F572A8BC87C0023BA87 /* AppDelegate.swift */; };
 		8EE47F5A2A8BC87C0023BA87 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE47F592A8BC87C0023BA87 /* SceneDelegate.swift */; };
 		8EE47F5C2A8BC87C0023BA87 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE47F5B2A8BC87C0023BA87 /* ViewController.swift */; };
@@ -57,6 +58,7 @@
 
 /* Begin PBXFileReference section */
 		8E0AB6662A8CF8F200B96410 /* FeedLoaderWithFallbackComposite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLoaderWithFallbackComposite.swift; sourceTree = "<group>"; };
+		8E45454B2A8CFE130052DA60 /* FeedImageDataLoaderWithFallbackCompositeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageDataLoaderWithFallbackCompositeTests.swift; sourceTree = "<group>"; };
 		8EE47F542A8BC87C0023BA87 /* ListSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ListSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EE47F572A8BC87C0023BA87 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8EE47F592A8BC87C0023BA87 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				8EE47F6E2A8BC87D0023BA87 /* FeedLoaderWithFallbackCompositeTests.swift */,
+				8E45454B2A8CFE130052DA60 /* FeedImageDataLoaderWithFallbackCompositeTests.swift */,
 			);
 			path = ListSampleAppTests;
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E45454C2A8CFE130052DA60 /* FeedImageDataLoaderWithFallbackCompositeTests.swift in Sources */,
 				8EE47F6F2A8BC87D0023BA87 /* FeedLoaderWithFallbackCompositeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
