@@ -120,17 +120,7 @@ class FeedImageDataLoaderWithFallbackCompositeTests: XCTestCase {
     
     //MARK: - Helpers
     
-    private func anyUrls() -> URL {
-        return URL(string: "http://any-urls.com")!
-    }
-    
-    private func anyError() -> Error {
-        return NSError(domain: "any Error", code: 0)
-    }
-    
-    private func anyData() -> Data {
-        return Data(count: 100)
-    }
+  
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut:FeedImageDataLoaderWithFallbackComposite,primaryLoader: LoaderSpy,fallbackLoader: LoaderSpy) {
         let primaryLoader = LoaderSpy()
         let fallbackLoader = LoaderSpy()
