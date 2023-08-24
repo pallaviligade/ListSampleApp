@@ -34,6 +34,13 @@ class FeedLoaderCacheDecoratorTests:  XCTestCase {
         expect(sut: sut, toCompleteWith: .success(feed))
     }
     
+    func test_load_deliversFeedOnFailourloaded() {
+        
+        let loderStub = LoderStub(result: .failure(anyError()))
+        let sut = FeedLoaderCacheDecorator(decoratee: loderStub)
+        expect(sut: sut, toCompleteWith: .failure(anyError()))
+    }
+    
     private func expect(sut:FeedLoaderCacheDecorator, toCompleteWith expectedResult: FeedLoader.Result, file: StaticString = #file, line: UInt = #line ) {
         let exp = expectation(description: "wait until done")
         sut.load { receivedResult in
