@@ -29,19 +29,20 @@ class FeedLoaderCacheDecoratorTests: XCTestCase ,FeedLoderTestCase {
     func test_load_deliversFeedOnSucessloaded() {
         
         let feed = createuniqueFeedImage()
-        let loderStub = FeedLoderStub(result: .success(feed))
-        let sut = FeedLoaderCacheDecorator(decoratee: loderStub)
+        let sut = makeSUT(loaderResult: .success(feed))
         expect(sut: sut, toCompleteWith: .success(feed))
     }
     
     func test_load_deliversFeedOnFailourloaded() {
-        
-        let loderStub = FeedLoderStub(result: .failure(anyError()))
-        let sut = FeedLoaderCacheDecorator(decoratee: loderStub)
+       let sut = makeSUT(loaderResult: .failure(anyError()))
         expect(sut: sut, toCompleteWith: .failure(anyError()))
     }
     
-   
-    
-    
+    private func makeSUT(loaderResult: FeedLoader.Result, file: StaticString = #file, line: UInt = #line ) -> FeedLoader  {
+        
+        let loderStub = FeedLoderStub(result: loaderResult)
+        let sut = FeedLoaderCacheDecorator(decoratee: loderStub)
+        return sut
+    }
+  
 }
