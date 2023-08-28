@@ -8,6 +8,7 @@
 import UIKit
 import EssentialFeed
 import EssentialFeediOS
+import CoreData
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -27,6 +28,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                let feedloader = RemoteFeedLoader(url: url, client: httpclient)
                let feedViewController = FeedUIComposer.createFeedView(feedloader: feedloader, imageLoader: imageloader)
                self.window?.rootViewController = feedViewController
+        
+        /*  let localStore = try! CoreDataFeedStore(storeURL: localStoreUrl)
+         let localFeedLoder = LocalFeedLoader(store: localStore, currentDate: Date.init)
+         let localImageLoder = LocalFeedImageDataLoader(store: localStore)
+         let feedview = FeedUIComposer.createFeedView(
+             feedloader: FeedLoaderWithFallbackComposite(
+                 primary: FeedLoaderCacheDecorator(
+                     decoratee: remoteFeedloader,
+                     cache: localFeedLoder),
+                 fallback: localFeedLoder),
+             imageLoader: FeedImageDataLoaderWithFallbackComposite(
+                 primary: localImageLoder,
+                 fallback: FeedImageDataLoaderCacheDecorator(
+                     decorate: remoteImageloader,
+                     cache: localImageLoder)))
+         
+               // let feedViewController =  //FeedUIComposer.createFeedView(feedloader: remoteFeedloader, imageLoader: remoteImageloader)
+                self.window?.rootViewController = feedview*/
 
     }
 
