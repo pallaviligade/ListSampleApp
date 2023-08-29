@@ -21,15 +21,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
         
-        let url = URL(string: "https://ile-api.essentialdeveloper.com/essential-feed/v1/feed")!
-               let session = URLSession(configuration: .ephemeral)
-               let httpclient = URLSessionHTTPClient(session: session)
-               let imageloader = RemoteFeedImageDataLoader(client: httpclient)
-               let feedloader = RemoteFeedLoader(url: url, client: httpclient)
-               let feedViewController = FeedUIComposer.createFeedView(feedloader: feedloader, imageLoader: imageloader)
+               let localStoreUrl = URL(string: "https://ile-api.essentialdeveloper.com/essential-feed/v1/feed")!
+               let remoteClient = URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
+               let RemoteImageloader = RemoteFeedImageDataLoader(client: remoteClient)
+               let remoteFeedloader = RemoteFeedLoader(url: localStoreUrl, client: remoteClient)
+               let feedViewController = FeedUIComposer.createFeedView(feedloader: remoteFeedloader, imageLoader: RemoteImageloader)
                self.window?.rootViewController = feedViewController
         
-        /*  let localStore = try! CoreDataFeedStore(storeURL: localStoreUrl)
+         /* let localStore = try! CoreDataFeedStore(storeURL: localStoreUrl)
          let localFeedLoder = LocalFeedLoader(store: localStore, currentDate: Date.init)
          let localImageLoder = LocalFeedImageDataLoader(store: localStore)
          let feedview = FeedUIComposer.createFeedView(
