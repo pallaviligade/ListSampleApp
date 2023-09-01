@@ -25,7 +25,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 .defaultDirectoryURL()
                 .appendingPathComponent("feed-store.sqlite")
         
-        let remoteURL = URL(string: "https://static1.squarespace.com/static/5891c5b8d1758ec68ef5dbc2/t/5db4155a4fbade21d17ecd28/1572083034355/essential_app_feed.json")!
+        let remoteURL = URL(string: "https://ile-api.essentialdeveloper.com/essential-feed/v1/feed")!
         
               // let localStoreUrl = URL(string: "https://ile-api.essentialdeveloper.com/essential-feed/v1/feed")!
                let remoteClient = makeRemoteClient()
@@ -49,7 +49,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                      decorate: RemoteImageloader,
                      cache: localImageLoder)))
          
-               // let feedViewController =  //FeedUIComposer.createFeedView(feedloader: remoteFeedloader, imageLoader: remoteImageloader)
                 self.window?.rootViewController = feedview
 
     }
