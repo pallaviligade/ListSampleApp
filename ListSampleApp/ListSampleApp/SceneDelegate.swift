@@ -33,7 +33,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                let remoteFeedloader = RemoteFeedLoader(url: remoteURL, client: remoteClient)
 //               let feedViewController = FeedUIComposer.createFeedView(feedloader: remoteFeedloader, imageLoader: RemoteImageloader)
 //               self.window?.rootViewController = feedViewController
-        
+        if CommandLine.arguments.contains("-reset") {
+                    try? FileManager.default.removeItem(at: localStoreURL)
+                }
          let localStore = try! CoreDataFeedStore(storeURL: localStoreURL)
          let localFeedLoder = LocalFeedLoader(store: localStore, currentDate: Date.init)
          let localImageLoder = LocalFeedImageDataLoader(store: localStore)
