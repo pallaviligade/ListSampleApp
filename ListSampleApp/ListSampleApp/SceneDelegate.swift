@@ -21,14 +21,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
         
-               let localStoreUrl = URL(string: "https://ile-api.essentialdeveloper.com/essential-feed/v1/feed")!
-               let remoteClient = URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
-               let RemoteImageloader = RemoteFeedImageDataLoader(client: remoteClient)
-               let remoteFeedloader = RemoteFeedLoader(url: localStoreUrl, client: remoteClient)
-               let feedViewController = FeedUIComposer.createFeedView(feedloader: remoteFeedloader, imageLoader: RemoteImageloader)
-               self.window?.rootViewController = feedViewController
+        let localStoreURL = NSPersistentContainer
+                .defaultDirectoryURL()
+                .appendingPathComponent("feed-store.sqlite")
         
-         /* let localStore = try! CoreDataFeedStore(storeURL: localStoreUrl)
+        let remoteURL = URL(string: "https://static1.squarespace.com/static/5891c5b8d1758ec68ef5dbc2/t/5db4155a4fbade21d17ecd28/1572083034355/essential_app_feed.json")!
+        
+              // let localStoreUrl = URL(string: "https://ile-api.essentialdeveloper.com/essential-feed/v1/feed")!
+               let remoteClient = makeRemoteClient()
+               let RemoteImageloader = RemoteFeedImageDataLoader(client: remoteClient)
+               let remoteFeedloader = RemoteFeedLoader(url: remoteURL, client: remoteClient)
+//               let feedViewController = FeedUIComposer.createFeedView(feedloader: remoteFeedloader, imageLoader: RemoteImageloader)
+//               self.window?.rootViewController = feedViewController
+        
+         let localStore = try! CoreDataFeedStore(storeURL: localStoreURL)
          let localFeedLoder = LocalFeedLoader(store: localStore, currentDate: Date.init)
          let localImageLoder = LocalFeedImageDataLoader(store: localStore)
          let feedview = FeedUIComposer.createFeedView(
@@ -40,13 +46,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
              imageLoader: FeedImageDataLoaderWithFallbackComposite(
                  primary: localImageLoder,
                  fallback: FeedImageDataLoaderCacheDecorator(
-                     decorate: remoteImageloader,
+                     decorate: RemoteImageloader,
                      cache: localImageLoder)))
          
                // let feedViewController =  //FeedUIComposer.createFeedView(feedloader: remoteFeedloader, imageLoader: remoteImageloader)
-                self.window?.rootViewController = feedview*/
+                self.window?.rootViewController = feedview
 
     }
+    
+    func makeRemoteClient() -> Httpclient {
+            return URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
+        }
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
