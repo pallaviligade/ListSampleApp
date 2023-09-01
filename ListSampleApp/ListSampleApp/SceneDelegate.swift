@@ -33,9 +33,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                let remoteFeedloader = RemoteFeedLoader(url: remoteURL, client: remoteClient)
 //               let feedViewController = FeedUIComposer.createFeedView(feedloader: remoteFeedloader, imageLoader: RemoteImageloader)
 //               self.window?.rootViewController = feedViewController
+        
+        #if DEBUG
         if CommandLine.arguments.contains("-reset") {
                     try? FileManager.default.removeItem(at: localStoreURL)
                 }
+        #endif
          let localStore = try! CoreDataFeedStore(storeURL: localStoreURL)
          let localFeedLoder = LocalFeedLoader(store: localStore, currentDate: Date.init)
          let localImageLoder = LocalFeedImageDataLoader(store: localStore)
@@ -56,14 +59,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     private func makeRemoteClient() -> Httpclient {
-            switch UserDefaults.standard.string(forKey: "connectivity") {
-            case "offline":
-                return AlwaysFailingHTTPClient()
-
-            default:
-                return URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
-            }
+        #if DEBUG
+        if UserDefaults.standard.string(forKey: "connectivity") == "offline" {
+            return AlwaysFailingHTTPClient()
         }
+        #endif
+        return URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
+    }
+     
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
@@ -96,6 +99,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 }
 
+#if DEBUG
 private class AlwaysFailingHTTPClient: Httpclient {
     private class Task: HTTPClientTask {
         func cancel() {}
@@ -106,4 +110,5 @@ private class AlwaysFailingHTTPClient: Httpclient {
         return Task()
     }
 }
+#endif
 
