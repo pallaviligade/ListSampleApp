@@ -53,8 +53,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     }
     
-    func makeRemoteClient() -> Httpclient {
-            return URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
+    private func makeRemoteClient() -> Httpclient {
+            switch UserDefaults.standard.string(forKey: "connectivity") {
+            case "offline":
+                return AlwaysFailingHTTPClient()
+
+            default:
+                return URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
+            }
         }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -86,5 +92,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
 
+}
+
+private class AlwaysFailingHTTPClient: Httpclient {
+    private class Task: HTTPClientTask {
+        func cancel() {}
+    }
+
+    func get(from url: URL, completion: @escaping (Httpclient.Result) -> Void) -> HTTPClientTask {
+        completion(.failure(NSError(domain: "offline", code: 0)))
+        return Task()
+    }
 }
 
