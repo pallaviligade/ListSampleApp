@@ -10,19 +10,14 @@ import XCTest
 final class ListSampleAppUIAcceptanceTests: XCTestCase {
 
     func test_OnLaunchDisplayRemoteFeedWhenCustomerHasFeed() {
-        
-        let app = XCUIApplication()
-        
-        app.launch()
-        
         let offlineApp = XCUIApplication()
         offlineApp.launchArguments = ["-reset", "-connectivity", "online"]
         offlineApp.launch()
         
-        let feedCells = app.cells.matching(identifier: "feed-image-cell")
+        let feedCells = offlineApp.cells.matching(identifier: "feed-image-cell")
         XCTAssertEqual(feedCells.count, 2)
         
-        let firstImage = app.images.matching(identifier: "feed-image-view").firstMatch
+        let firstImage = offlineApp.images.matching(identifier: "feed-image-view").firstMatch
         XCTAssertTrue(firstImage.exists)
         
     }
