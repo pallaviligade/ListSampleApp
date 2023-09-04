@@ -14,6 +14,11 @@ final class ListSampleAppUIAcceptanceTests: XCTestCase {
         let app = XCUIApplication()
         
         app.launch()
+        
+        let offlineApp = XCUIApplication()
+        offlineApp.launchArguments = ["-reset", "-connectivity", "online"]
+        offlineApp.launch()
+        
         let feedCells = app.cells.matching(identifier: "feed-image-cell")
         XCTAssertEqual(feedCells.count, 2)
         
