@@ -9,6 +9,7 @@ import UIKit
 import XCTest
 import EssentialFeed
 import EssentialFeediOS
+import ListSampleApp
 
 
 final class FeedViewControllerTests: XCTestCase {
@@ -399,7 +400,7 @@ final class FeedViewControllerTests: XCTestCase {
             }
        }
     
-        func loadImageData(from url: URL, completionHandler: @escaping (FeedImageDataLoader.Result) -> Void) -> EssentialFeediOS.FeedImageDataLoaderTask {
+        func loadImageData(from url: URL, completionHandler: @escaping (FeedImageDataLoader.Result) -> Void) -> FeedImageDataLoaderTask {
             imageRequest.append((url, completionHandler))
             return TaskSpy { [weak self]  in
                 self?.cancelledImageURLs.append(url)
