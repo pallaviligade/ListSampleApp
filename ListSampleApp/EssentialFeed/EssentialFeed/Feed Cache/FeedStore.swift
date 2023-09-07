@@ -13,6 +13,7 @@ public enum CachedFeed {
      case found (feed: [LocalFeedImage], timestamp: Date)
      case failure(Error)
 }
+//public typealias CachedFeed = (feed: [LocalFeedImage], timestamp: Date)
 
 
 public protocol FeedStore {

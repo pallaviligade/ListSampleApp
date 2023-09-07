@@ -16,11 +16,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let localStoreURL = NSPersistentContainer
             .defaultDirectoryURL()
             .appendingPathComponent("feed-store.sqlite")
+    private lazy var httpClient: Httpclient = {
+         URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
+    }()
+    
+    private lazy var store: FeedStore & FeedImageDataStore = {
+         try! CoreDataFeedStore(storeURL: localStoreURL)
+    }()
+    
+    convenience init(httpClient: Httpclient, store: FeedStore & FeedImageDataStore) {
+        self.init()
+        self.httpClient = httpClient
+        self.store = store
+        
+    }
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+     
         guard let _ = (scene as? UIWindowScene) else { return }
         
         configureWindow()
@@ -37,9 +49,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //               self.window?.rootViewController = feedViewController
         
        
-         let localStore = try! CoreDataFeedStore(storeURL: localStoreURL)
-         let localFeedLoder = LocalFeedLoader(store: localStore, currentDate: Date.init)
-         let localImageLoder = LocalFeedImageDataLoader(store: localStore)
+         let localFeedLoder = LocalFeedLoader(store: store, currentDate: Date.init)
+         let localImageLoder = LocalFeedImageDataLoader(store: store)
          let feedview = FeedUIComposer.createFeedView(
              feedloader: FeedLoaderWithFallbackComposite(
                  primary: FeedLoaderCacheDecorator(
@@ -56,7 +67,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     }
     func makeRemoteClient() -> Httpclient{
-        return URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
+        return httpClient
     }
      
 

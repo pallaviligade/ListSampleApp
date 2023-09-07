@@ -410,7 +410,7 @@ final class FeedViewControllerTests: XCTestCase {
     }
 }
 
-private extension FeedViewController {
+public extension FeedViewController {
     func simulateUserInitiatedFeedReload() {
             refreshControl?.simulatePullToRefresh()
         }
@@ -427,16 +427,22 @@ private extension FeedViewController {
     
     
     func numberOfRenderFeedImageView() ->  Int {
-        
-        return tableView.numberOfRows(inSection: feedImageNumberOfSections())
+        return tableView.numberOfSections > feedImageNumberOfSections() ? tableView.numberOfRows(inSection: feedImageNumberOfSections()) : 0
+       // return tableView.numberOfRows(inSection: feedImageNumberOfSections())
     }
     
     private func feedImageNumberOfSections() -> Int {
         return 0
     }
     
+     func numberOfRows(in section: Int) -> Int {
+         return tableView.numberOfSections > section ? tableView.numberOfRows(inSection: section)  : 0
+    }
+    
     func feedImageView(at row:Int) -> UITableViewCell? {
-        
+        guard numberOfRows(in: feedImageNumberOfSections()) > row else {
+            return nil
+        }
         let ds = tableView.dataSource
         let index = IndexPath(row: row, section: feedImageNumberOfSections())
         return ds?.tableView(tableView, cellForRowAt: index)
@@ -462,6 +468,14 @@ private extension FeedViewController {
         let ds = tableView.prefetchDataSource
         let index = IndexPath(row: row, section: feedImageNumberOfSections())
         ds?.tableView?(tableView, cancelPrefetchingForRowsAt: [index])
+    }
+    
+    func renderedFeedImageData(at index: Int) -> Data? {
+        return simulateFeedImageViewVisible(at: index)?.renderImage
+    }
+    @discardableResult
+    func simulateFeedImageViewVisible(at index: Int) -> FeedImageCell? {
+        return feedImageView(at: index) as? FeedImageCell
     }
 }
 
@@ -516,7 +530,7 @@ extension UIRefreshControl {
     }
 }
 
-private extension UIImage {
+public extension UIImage {
     static func make(withColor color: UIColor) -> UIImage {
         let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
         UIGraphicsBeginImageContext(rect.size)
