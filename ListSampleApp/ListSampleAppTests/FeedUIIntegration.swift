@@ -439,8 +439,12 @@ public extension FeedViewController {
          return tableView.numberOfSections > section ? tableView.numberOfRows(inSection: section)  : 0
     }
     
+    func numberOfRenderedFeedImageViews() -> Int {
+            return tableView.numberOfRows(inSection: feedImageNumberOfSections())
+        }
+    
     func feedImageView(at row:Int) -> UITableViewCell? {
-        guard numberOfRows(in: feedImageNumberOfSections()) > row else {
+        guard numberOfRenderedFeedImageViews() > row else {
             return nil
         }
         let ds = tableView.dataSource
