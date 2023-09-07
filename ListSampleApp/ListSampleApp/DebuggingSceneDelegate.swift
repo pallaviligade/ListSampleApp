@@ -4,7 +4,7 @@
 //
 //  Created by Pallavi on 01.09.23.
 //
-
+/*
 import UIKit
 import EssentialFeed
 
@@ -88,3 +88,4 @@ private class DebuggingHTTPClient: Httpclient {
         }
 }
 #endif
+ */

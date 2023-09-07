@@ -13,15 +13,14 @@ import CoreData
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    let localStoreURL = NSPersistentContainer
-            .defaultDirectoryURL()
-            .appendingPathComponent("feed-store.sqlite")
     private lazy var httpClient: Httpclient = {
          URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
     }()
     
     private lazy var store: FeedStore & FeedImageDataStore = {
-         try! CoreDataFeedStore(storeURL: localStoreURL)
+         try! CoreDataFeedStore(storeURL: NSPersistentContainer
+            .defaultDirectoryURL()
+            .appendingPathComponent("feed-store.sqlite"))
     }()
     
     convenience init(httpClient: Httpclient, store: FeedStore & FeedImageDataStore) {
@@ -42,9 +41,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let remoteURL = URL(string: "https://ile-api.essentialdeveloper.com/essential-feed/v1/feed")!
         
               // let localStoreUrl = URL(string: "https://ile-api.essentialdeveloper.com/essential-feed/v1/feed")!
-               let remoteClient = makeRemoteClient()
-               let RemoteImageloader = RemoteFeedImageDataLoader(client: remoteClient)
-               let remoteFeedloader = RemoteFeedLoader(url: remoteURL, client: remoteClient)
+              
+               let remoteFeedloader = RemoteFeedLoader(url: remoteURL, client: httpClient)
+                let RemoteImageloader = RemoteFeedImageDataLoader(client: httpClient)
 //               let feedViewController = FeedUIComposer.createFeedView(feedloader: remoteFeedloader, imageLoader: RemoteImageloader)
 //               self.window?.rootViewController = feedViewController
         
@@ -66,14 +65,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 self.window?.rootViewController = UINavigationController(rootViewController: feedview) 
 
     }
-    func makeRemoteClient() -> Httpclient{
-        return httpClient
-    }
-     
-
-    
-
-
+//    func makeRemoteClient() -> Httpclient{
+//        return httpClient
+//    }
 }
 
 
