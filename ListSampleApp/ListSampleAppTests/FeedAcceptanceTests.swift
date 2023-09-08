@@ -37,6 +37,26 @@ class FeedAcceptanceTest: XCTestCase
             XCTAssertEqual(feed.numberOfRenderFeedImageView(),0)
         }
     
+    func test_onEnteringBackground_deletesExpiredFeedCache() {
+            let store = InMemoryFeedStore.withExpiredFeedCache
+
+            enterBackground(with: store)
+
+            XCTAssertNil(store.feedCache, "Expected to delete expired cache")
+        }
+
+        func test_onEnteringBackground_keepsNonExpiredFeedCache() {
+            let store = InMemoryFeedStore.withNonExpiredFeedCache
+
+            enterBackground(with: store)
+
+            XCTAssertNotNil(store.feedCache, "Expected to keep non-expired cache")
+        }
+    
+    private func enterBackground(with store: InMemoryFeedStore) {
+            let sut = SceneDelegate(httpClient: HTTPClientStub.offline, store: store)
+            sut.sceneWillResignActive(UIApplication.shared.connectedScenes.first!)
+        }
     // MARK: - Helpers
         private func launch(
             httpClient: HTTPClientStub = .offline,
@@ -76,9 +96,13 @@ class FeedAcceptanceTest: XCTestCase
         }
 
         private class InMemoryFeedStore: FeedStore, FeedImageDataStore {
-            private var feedCache: CachedFeed?
+            private(set) var feedCache: CachedFeed?
             private var feedImageDataCache: [URL: Data] = [:]
 
+            init(feedCache: CachedFeed? = nil) {
+                self.feedCache = feedCache
+            }
+            
             func deleteCachedFeed(completion: @escaping FeedStore.DeletionCompletion) {
                 feedCache = nil
                 completion(.success(()))
@@ -105,6 +129,14 @@ class FeedAcceptanceTest: XCTestCase
             static var empty: InMemoryFeedStore {
                 InMemoryFeedStore()
             }
+            
+            static var withExpiredFeedCache: InMemoryFeedStore {
+                InMemoryFeedStore(feedCache:CachedFeed.found(feed: [], timestamp: Date.distantPast))
+                    }
+
+                    static var withNonExpiredFeedCache: InMemoryFeedStore {
+                        InMemoryFeedStore(feedCache: CachedFeed.found(feed: [], timestamp: Date()))
+                    }
         }
 
         private func response(for url: URL) -> (Data, HTTPURLResponse) {
