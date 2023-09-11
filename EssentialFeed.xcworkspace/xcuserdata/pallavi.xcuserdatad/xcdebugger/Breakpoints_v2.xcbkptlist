@@ -16,5 +16,53 @@
             stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E10B2CC9-E4D3-401C-987E-40A97E103EC2"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ListSampleApp/EssentialFeed/EssentialFeediOSTests/Feed UI/FeedSnapShotTests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "test_emptyFeed()"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  uuid = "E10B2CC9-E4D3-401C-987E-40A97E103EC2 - c6e519e6b3802c10"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EssentialFeediOSTests.FeedSnapShotTests.test_emptyFeed() -&gt; ()"
+                  moduleName = "EssentialFeediOSTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pallavi/Desktop/Git/ListSampleApp/ListSampleApp/EssentialFeed/EssentialFeediOSTests/Feed%20UI/FeedSnapShotTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "96">
+               </Location>
+               <Location
+                  uuid = "E10B2CC9-E4D3-401C-987E-40A97E103EC2 - c6e519e6b3802c10"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EssentialFeediOSTests.FeedSnapShotTests.test_emptyFeed() -&gt; ()"
+                  moduleName = "EssentialFeediOSTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pallavi/Desktop/Git/ListSampleApp/ListSampleApp/EssentialFeed/EssentialFeediOSTests/Feed%20UI/FeedSnapShotTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "108">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

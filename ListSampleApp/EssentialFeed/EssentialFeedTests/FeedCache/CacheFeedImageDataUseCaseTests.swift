@@ -21,7 +21,7 @@ final class CacheFeedImageDataUseCaseTests: XCTestCase {
         let url = anyURL()
         let data = anyData()
         
-        sut.save(from: data, for: url) { _ in  }
+        sut.save(data, for: url) { _ in  }
         XCTAssertEqual(store.recivedMessage, [.insert(data: data, url: url)])
     }
     
@@ -52,7 +52,7 @@ final class CacheFeedImageDataUseCaseTests: XCTestCase {
         
         var recviedMessage  = [LocalFeedImageDataLoader.SaveResult]()
         
-        sut?.save(from: anyData(), for: anyURL()) { result in
+        sut?.save(anyData(), for: anyURL()) { result in
             recviedMessage.append(result)
         }
         
@@ -65,7 +65,7 @@ final class CacheFeedImageDataUseCaseTests: XCTestCase {
         
         let exp = expectation(description: "wait for load completion")
         
-        sut.save(from: anyData(), for: anyURL()) { RecivedResult in
+        sut.save(anyData(), for: anyURL()) { RecivedResult in
             
             switch (RecivedResult, ExpectedResult) {
             case (.success(), .success()):
