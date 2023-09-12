@@ -16,7 +16,7 @@ class FeedSnapShotTests: XCTestCase {
         
         sut.display(emptyFeed())
         
-        record(snapShot: sut.snapshot(), named: "EMPTY_FEED")
+        assert(snapShot: sut.snapshot(), named: "EMPTY_FEED")
     }
     
     func test_FeedWithContent() {
@@ -24,14 +24,14 @@ class FeedSnapShotTests: XCTestCase {
         
         sut.display(feedWithContent())
         
-        record(snapShot: sut.snapshot(), named: "FEED_WITH_CONTENT")
+        assert(snapShot: sut.snapshot(), named: "FEED_WITH_CONTENT")
     }
     
     func test_FeedWithError() {
         let sut = makeSUT()
         sut.display(.error(message: "This is a\n Muti line \n Error Message"))
         
-        record(snapShot: sut.snapshot(), named: "Feed_WITH_ERROR")
+        assert(snapShot: sut.snapshot(), named: "Feed_WITH_ERROR")
     }
     
     func test_FeedWithFailedImageLoading() {
@@ -40,7 +40,7 @@ class FeedSnapShotTests: XCTestCase {
         
         sut.display(feedWithFailedImageLoading())
         
-        record(snapShot: sut.snapshot(), named: "FEED_WITH_FAILED_IMAGE_LOADING")
+        assert(snapShot: sut.snapshot(), named: "FEED_WITH_FAILED_IMAGE_LOADING")
         
     }
     
@@ -57,6 +57,32 @@ class FeedSnapShotTests: XCTestCase {
         return []
     }
     
+    private func assert(snapShot: UIImage, named: String, file: StaticString = #file, line: UInt = #line) {
+        
+        guard let snapShotData = snapShot.pngData() else {
+            XCTFail("Failed to generate PNG data representation from snapshot", file: file, line: line)
+            return
+        }
+        
+        let snapshotURL = URL(filePath: String(describing: file))
+            .deletingLastPathComponent()
+            .appendingPathComponent("snapShots")
+            .appendingPathComponent("\(named).png")
+        
+        guard let storedSnapShotsData =  try? Data(contentsOf: snapshotURL)  else {
+            XCTFail("Failed to load stored snapshot at URL: \(snapshotURL). Use the `record` method to store a snapshot before asserting.", file: file, line: line)
+            return
+        }
+        
+        if snapShotData != storedSnapShotsData {
+            let temporarySnapshotURL = URL(filePath: NSTemporaryDirectory()).appendingPathComponent(snapshotURL.lastPathComponent)
+            
+            try? snapShotData.write(to: temporarySnapshotURL)
+            
+            XCTFail("New snapshot does not match stored snapshot. New snapshot URL: \(temporarySnapshotURL), Stored snapshot URL: \(snapshotURL)", file: file, line: line)
+        }
+        
+    }
     private func feedWithContent() -> [ImageStub] {
         
         let stub = [ImageStub(description: "The East Side Gallery is an open-air gallery in Berlin. It consists of a series of murals painted directly on a 1,316 m long remnant of the Berlin Wall, located near the centre of Berlin, on Mühlenstraße in Friedrichshain-Kreuzberg. The gallery has official status as a Denkmal, or heritage-protected landmark.",
