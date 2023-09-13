@@ -18,6 +18,7 @@ public final  class FeedViewController: UITableViewController,UITableViewDataSou
    
     @IBOutlet private(set) public var errorView: ErrorView?
     public var delegate: FeedViewControllerDelegate?
+    private var loadingController = [IndexPath: FeedImageCellController]()
     private var tableModel = [FeedImageCellController]() {
         didSet { tableView.reloadData() }
     }
@@ -40,7 +41,9 @@ public final  class FeedViewController: UITableViewController,UITableViewDataSou
         
         tableView.sizeTableHeaderToFit()
     }
+    // Every time we get new model we so reseting it loadingController
     public func display(_ cellController: [FeedImageCellController]) {
+        loadingController = [:]
         tableModel = cellController
     }
     public func display(_ viewModel: FeedLoadingViewModel) {
@@ -83,10 +86,16 @@ public final  class FeedViewController: UITableViewController,UITableViewDataSou
     }
     
     private func cellController(forRowAt indexPath: IndexPath) -> FeedImageCellController {
-        return tableModel[indexPath.row]
+        //return tableModel[indexPath.row]
+        
+        let controller = tableModel[indexPath.row]
+        loadingController[indexPath] = controller
+        return controller
     }
     
     private func cancelCellControllerLoads(forRowAt indexPath: IndexPath) {
-        cellController(forRowAt: indexPath).cancelLoad()
+        loadingController[indexPath]?.cancelLoad()
+        loadingController[indexPath] = nil
+       // cellController(forRowAt: indexPath).cancelLoad()
     }
 }

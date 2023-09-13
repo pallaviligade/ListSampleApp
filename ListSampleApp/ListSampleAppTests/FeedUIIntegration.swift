@@ -75,6 +75,21 @@ final class FeedViewControllerTests: XCTestCase {
 
     }
     
+    func test_loadFeedCompletion_rendersSuccessfullyLoadedEmptyFeedAfterNonEmptyFeed() {
+        
+        let imageO  = makeFeedImage()
+        let image1  = makeFeedImage()
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        loader.completeFeedloading(with: [imageO , image1], at: 0)
+        assertThat(sut, isRendering: [imageO, image1])
+        
+        sut.simulateUserInitiatedFeedReload()
+        loader.completeFeedloading(with: [], at: 1) // Check the count(4) only there is  values too
+       assertThat(sut, isRendering: [])
+    }
+    
     func test_loadFeedCompletion_doesNotAlterCurrentRenderingStateOnError() {
         let image0 = makeFeedImage()
         let (sut,loader) = makeSUT()
@@ -268,6 +283,9 @@ final class FeedViewControllerTests: XCTestCase {
     
    
     private func assertThat(_ sut: FeedViewController, isRendering feed: [FeedImage],file: StaticString = #file, line: UInt = #line ) {
+
+        sut.tableView.layoutIfNeeded()
+        RunLoop.main.run(until: Date())
         guard sut.numberOfRenderFeedImageView() == feed.count else {
             XCTFail("Expected \(feed.count) images, got \(sut.numberOfRenderFeedImageView()) instead.", file: file, line: line)
             return
