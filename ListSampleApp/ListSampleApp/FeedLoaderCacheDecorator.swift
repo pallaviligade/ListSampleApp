@@ -8,14 +8,7 @@
 import EssentialFeed
 import Combine
 
-extension Publisher where Output == [FeedImage] {
-    func caching(to cache: FeedCache) -> AnyPublisher<Output, Failure> {
-        map { feed in
-            cache.save(feed, completion: { _ in })
-            return feed
-        }.eraseToAnyPublisher()
-    }
-}
+
 
 public final class FeedLoaderCacheDecorator: FeedLoader {
     private let decoratee: FeedLoader
