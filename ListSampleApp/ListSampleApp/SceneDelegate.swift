@@ -82,9 +82,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let remoteFeedLoader = RemoteFeedLoader(url: remoteURL, client: httpClient)
         
         return Deferred {
-            Future  { completion in
-                remoteFeedLoader.load(completion: completion)
-            }
+            Future  (remoteFeedLoader.load)
         }.eraseToAnyPublisher() // Used when we wants to hide Publisher
     }
 
