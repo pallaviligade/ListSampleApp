@@ -47,7 +47,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
               // let localStoreUrl = URL(string: "https://ile-api.essentialdeveloper.com/essential-feed/v1/feed")!
               
-               let remoteFeedloader = RemoteFeedLoader(url: remoteURL, client: httpClient)
+             //  let remoteFeedloader = RemoteFeedLoader(url: remoteURL, client: httpClient)
                 let RemoteImageloader = RemoteFeedImageDataLoader(client: httpClient)
 //               let feedViewController = FeedUIComposer.createFeedView(feedloader: remoteFeedloader, imageLoader: RemoteImageloader)
 //               self.window?.rootViewController = feedViewController
@@ -56,11 +56,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
        //  let localFeedLoder = LocalFeedLoader(store: store, currentDate: Date.init)
          let localImageLoder = LocalFeedImageDataLoader(store: store)
          let feedview = FeedUIComposer.createFeedView(
-             feedloader: FeedLoaderWithFallbackComposite(
-                 primary: FeedLoaderCacheDecorator(
-                     decoratee: remoteFeedloader,
-                     cache: localFeedLoder),
-                 fallback: localFeedLoder),
+             feedloader: makeRemoteFeedLoaderWithLocalFallback,
              imageLoader: FeedImageDataLoaderWithFallbackComposite(
                  primary: localImageLoder,
                  fallback: FeedImageDataLoaderCacheDecorator(
@@ -90,7 +86,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 }
 
-extension FeedLoader {
+public extension FeedLoader {
     typealias Publisher = AnyPublisher<[FeedImage], Error>
     func loadPublisher() -> Publisher {
         Deferred {
@@ -131,7 +127,7 @@ extension Publisher {
 extension DispatchQueue {
     
     static var immediateWhenOnMainQueueScheduler: InmediatesWhenOnMainQueueSchduler {
-        InmediatesWhenOnMainQueueSchduler()
+        InmediatesWhenOnMainQueueSchduler.shared
     }
     struct InmediatesWhenOnMainQueueSchduler: Scheduler {
         var now: DispatchQueue.SchedulerTimeType {
@@ -146,15 +142,28 @@ extension DispatchQueue {
         
         typealias SchedulerOptions = DispatchQueue.SchedulerOptions
         
+        static let shared = Self()
+
+                private static let key = DispatchSpecificKey<UInt8>()
+                private static let value = UInt8.max
+
+                private init() {
+                    DispatchQueue.main.setSpecific(key: Self.key, value: Self.value)
+                }
+
+                private func isMainQueue() -> Bool {
+                    DispatchQueue.getSpecific(key: Self.key) == Self.value
+                }
+        
         func schedule(options: DispatchQueue.SchedulerOptions?, _ action: @escaping () -> Void) {
-            guard Thread.isMainThread else {
+            guard isMainQueue() else {
                 return DispatchQueue.main.schedule(options: options, action)
             }
             action()
         }
         
         func schedule(after date: DispatchQueue.SchedulerTimeType, interval: DispatchQueue.SchedulerTimeType.Stride, tolerance: DispatchQueue.SchedulerTimeType.Stride, options: DispatchQueue.SchedulerOptions?, _ action: @escaping () -> Void) -> Cancellable {
-            DispatchQueue.main.schedule(after: date, tolerance: tolerance, options: options, action)
+            DispatchQueue.main.schedule(after: date, tolerance: tolerance, options: options, action) as! Cancellable
         }
         
         func schedule(after date: DispatchQueue.SchedulerTimeType, tolerance: DispatchQueue.SchedulerTimeType.Stride, options: DispatchQueue.SchedulerOptions?, _ action: @escaping () -> Void) {
