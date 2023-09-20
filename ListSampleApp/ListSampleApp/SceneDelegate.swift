@@ -75,7 +75,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         localFeedLoder.validateCache(completion: {_ in })
     }
     
-    private func makeRemoteFeedLoaderWithLocalFallback() -> RemoteFeedLoader.Publisher
+    private func makeRemoteFeedLoaderWithLocalFallback() -> FeedLoader.Publisher
     {
         let remoteURL = URL(string: "https://static1.squarespace.com/static/5891c5b8d1758ec68ef5dbc2/t/5db4155a4fbade21d17ecd28/1572083034355/essential_app_feed.json")!
         
@@ -83,14 +83,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
        return remoteFeedLoader
             .loadPublisher()
             .caching(to: localFeedLoder)
+            .fallback(to: localFeedLoder.loadPublisher)
             
         
     }
 
 }
 
-extension RemoteFeedLoader {
-    typealias Publisher = AnyPublisher<[FeedImage], Swift.Error>
+extension FeedLoader {
+    typealias Publisher = AnyPublisher<[FeedImage], Error>
     func loadPublisher() -> Publisher {
         Deferred {
             Future(self.load(completion:))
@@ -111,4 +112,12 @@ extension Publisher where Output == [FeedImage] {
 //            return feed
 //        }.eraseToAnyPublisher()
     }
+}
+
+extension Publisher {
+    
+    func fallback(to fallbackPubliser: @escaping () -> AnyPublisher<Output, Failure>) -> AnyPublisher<Output, Failure> {
+        self.catch{ _ in fallbackPubliser() }.eraseToAnyPublisher()
+    }
+    
 }
