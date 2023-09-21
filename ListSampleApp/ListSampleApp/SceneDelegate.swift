@@ -52,16 +52,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                let feedViewController = FeedUIComposer.createFeedView(feedloader: remoteFeedloader, imageLoader: RemoteImageloader)
                self.window?.rootViewController = feedViewController
         
-       
+        let localImageLoder = LocalFeedImageDataLoader(store: store)
          let localFeedLoder = LocalFeedLoader(store: store, currentDate: Date.init)*/
         
         
-         let localImageLoder = LocalFeedImageDataLoader(store: store)
+      
          let feedview = FeedUIComposer.createFeedView(
              feedloader: makeRemoteFeedLoaderWithLocalFallback,
-             imageLoader: makeImageFeedLoaderWithLocalFallBack(url: <#T##URL#>))
+             imageLoader: makeImageFeedLoaderWithLocalFallBack)
          
-                self.window?.rootViewController = UINavigationController(rootViewController: feedview) 
+        self.window?.rootViewController = UINavigationController(rootViewController: feedview)
 
     }
     
@@ -87,7 +87,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let localImageLoder = LocalFeedImageDataLoader(store: store)
         
         return localImageLoder.loadImageDataPubliser(from: url)
-            .fallback (to: { remoteImageloader.loadImageDataPubliser(from: url)
+            .fallback (to: { remoteImageloader
+                    .loadImageDataPubliser(from: url)
                     .caching(to: localImageLoder, using: url)
             })
     }
@@ -105,7 +106,7 @@ public extension FeedImageDataLoader {
                 task = self.loadImageData(from: url, completionHandler: completion)
             }
         }
-        .handleEvents(receiveCancel: {task?.cancel() }) // we are  using side effect after recving effect that is cancel
+        .handleEvents(receiveCancel: {task?.cancel() }) // we are using side effect after recving effect that is cancel
         .eraseToAnyPublisher()
     }
 }
@@ -143,9 +144,9 @@ extension Publisher where Output == [FeedImage] {
         }).eraseToAnyPublisher()
         
         //        map { feed in
-//            cache.save(feed, completion: { _ in })
-//            return feed
-//        }.eraseToAnyPublisher()
+        //            cache.save(feed, completion: { _ in })
+        //            return feed
+        //        }.eraseToAnyPublisher()
     }
 }
 
