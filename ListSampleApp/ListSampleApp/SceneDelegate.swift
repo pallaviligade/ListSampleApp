@@ -100,9 +100,17 @@ public extension FeedImageDataLoader {
         .handleEvents(receiveCancel: {task?.cancel() }) // we are  using side effect after recving effect that is cancel
         .eraseToAnyPublisher()
     }
-    
-    
 }
+
+extension Publisher where Output == Data {
+    func caching(to cache: FeedImageDataCache, using url: URL, completionHandler:@escaping() -> Void) -> AnyPublisher<Output, Failure> {
+        handleEvents(receiveOutput: { data in
+            cache.save(data, for: url) { _ in }
+        }).eraseToAnyPublisher()
+    }
+}
+
+
 
 public extension FeedLoader {
     typealias Publisher = AnyPublisher<[FeedImage], Error>
