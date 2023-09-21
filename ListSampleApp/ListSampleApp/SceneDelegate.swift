@@ -105,12 +105,17 @@ public extension FeedImageDataLoader {
 extension Publisher where Output == Data {
     func caching(to cache: FeedImageDataCache, using url: URL, completionHandler:@escaping() -> Void) -> AnyPublisher<Output, Failure> {
         handleEvents(receiveOutput: { data in
-            cache.save(data, for: url) { _ in }
+            cache.saveIgnoringResult(data, url: url)
         }).eraseToAnyPublisher()
     }
 }
 
-
+private extension FeedImageDataCache {
+    
+    func saveIgnoringResult(_ data: Data, url: URL) {
+        save(data, for: url) { _ in }
+    }
+}
 
 public extension FeedLoader {
     typealias Publisher = AnyPublisher<[FeedImage], Error>
