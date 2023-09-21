@@ -22,7 +22,7 @@ final class feedLoaderPresentionAdapter: FeedViewControllerDelegate  {
     func didRefershFeedRequest() {
         presenter?.didStartLoadingFeed()
         
-       cancellable = feedloader().sink { [weak self] completion in
+        cancellable = feedloader().dispatchOnMainQueue().sink(receiveCompletion:  { [weak self] completion in
             switch completion {
             case .finished: break
             
@@ -31,9 +31,9 @@ final class feedLoaderPresentionAdapter: FeedViewControllerDelegate  {
                 break
             }
             
-        } receiveValue: { [weak self] feed in
+        }, receiveValue: { [weak self] feed in
             self?.presenter?.didFinishLoadingFeed(feed)
-        }
+        })
 
         
         

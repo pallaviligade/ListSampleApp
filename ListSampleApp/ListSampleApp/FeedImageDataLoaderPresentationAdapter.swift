@@ -29,15 +29,15 @@ final class FeedImageDataLoaderPresentationAdapter<View: FeedImageView, Image>: 
         presenter?.didStartImageLoadingData(for: model)
 
         let model = self.model
-        cacellable = imageLoader(model.imageURL).sink {[weak self] completion in
+        cacellable = imageLoader(model.imageURL).sink(receiveCompletion: { [weak self] completion in
             switch completion {
             case .finished: break
             case let .failure(error):
                 self?.presenter?.didFinishLoadingImageData(with: error, for: model)
             }
-        } receiveValue: {[weak  self] data in
+        }, receiveValue: {[weak  self] data in
             self?.presenter?.didFinishLoadingImageData(with: data, for: model)
-        }
+        })
 
         
         
