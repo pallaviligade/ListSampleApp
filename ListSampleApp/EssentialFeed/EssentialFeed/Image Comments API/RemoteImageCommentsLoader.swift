@@ -27,7 +27,8 @@ public final class RemoteImageCommentsLoader: FeedLoader {
     
     public func load(completion: @escaping (Result) -> Void) {
         
-        httpClient.get(from: url) { result in
+        httpClient.get(from: url) { [weak self] result in
+            guard self != nil else { return }
             
             switch result {
             case let .success((data, response)):
@@ -40,18 +41,34 @@ public final class RemoteImageCommentsLoader: FeedLoader {
     }
     
     private static func map_(_ data: Data, from response: HTTPURLResponse) -> Result {
-        let root = try? JSONDecoder().decode(Root.self, from: data)
-        guard let item = root?.items.map({ FeedImage(id: $0.id, description: $0.description, location: $0.location, imageURL: $0.image) }) else
-        { return .failure(Error.invalidData) }
-        return .success(item)
+        do{
+            let item = try ImageCommentMapper.map(data, response: response)
+            return .success(item.toModels())
+        } catch {
+            return .failure(error)
+        }
     }
-       
-        
-    struct Root: Decodable {
+}
+
+private extension Array where Element == RemoteFeedItem {
+    func toModels() -> [FeedImage] {
+        return map({ FeedImage(id: $0.id, description: $0.description, location: $0.location, imageURL: $0.image) })
+    }
+}
+
+final class ImageCommentMapper {
+    
+    private struct Root: Decodable {
         let items: [RemoteFeedItem]
     }
     
+    static func map(_ data: Data, response: HTTPURLResponse) throws ->  [RemoteFeedItem] {
+         guard let root = try? JSONDecoder().decode(Root.self, from: data) else {
+           throw RemoteFeedLoader.Error.invaildData
+        }
+        return root.items
+    }
+    
 }
-
 
 
