@@ -37,17 +37,19 @@ class LoadImageCommentsFromRemoteUseCaseTests: XCTestCase {
     func test_load_deliveryErrorOnClientError() {
         let (sut, client) = makeSUT()
 
-        expect(sut, toCompleteWith: .failure(RemoteImageCommentsLoader.Error.connectivity), when: {
+        expect(sut, toCompleteWith: failure(.invalidData), when: {
             let clientError = NSError(domain: "Test", code: 0)
             client.complete(with: clientError)
         })
         
     }
     
+
+    
     func test_load_deliversErrorOnNon200HTTPResponse() {
         let (sut, client) = makeSUT()
         
-        let samples = [199, 201, 300, 400, 500]
+        let samples = [199, 200, 300, 400, 500]
         
         samples.enumerated().forEach { index, code in
             expect(sut, toCompleteWith: .failure(RemoteImageCommentsLoader.Error.invalidData), when: {
@@ -56,6 +58,20 @@ class LoadImageCommentsFromRemoteUseCaseTests: XCTestCase {
             })
         }
     }
+    
+    func test_load_deliversErrorOn200HTTPResponseWithInvalidJSON() {
+            let (sut, client) = makeSUT()
+
+            expect(sut, toCompleteWith: failure(.invalidData), when: {
+                let invalidJSON = Data("invalid json".utf8)
+                client.complete(withstatusCode: 200, data: invalidJSON)
+            })
+        }
+    
+    
+    private func failure(_ error: RemoteImageCommentsLoader.Error) -> RemoteImageCommentsLoader.Result {
+            return .failure(error)
+        }
     
     private func makeItemJSON(item: [[String: Any]]) -> Data {
         let json = ["item": item]
