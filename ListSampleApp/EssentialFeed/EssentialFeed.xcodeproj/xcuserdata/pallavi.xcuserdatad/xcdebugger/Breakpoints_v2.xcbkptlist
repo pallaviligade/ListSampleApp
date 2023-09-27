@@ -49,6 +49,36 @@
                   endingLineNumber = "31"
                   offsetFromSymbolStart = "36">
                </Location>
+               <Location
+                  uuid = "C53228A6-692C-41BF-817D-C49F6E1B490F - 3beae04f1743a861"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EssentialFeedTests.CacheFeedImageDataUseCaseTests.test_saveImageDataFromURL_failsOnStoreInsertionError() -&gt; ()"
+                  moduleName = "EssentialFeedTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pallavi/Desktop/Git/ListSampleApp/ListSampleApp/EssentialFeed/EssentialFeedTests/FeedCache/CacheFeedImageDataUseCaseTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "31"
+                  endingLineNumber = "31"
+                  offsetFromSymbolStart = "120">
+               </Location>
+               <Location
+                  uuid = "C53228A6-692C-41BF-817D-C49F6E1B490F - 4abb2877119e10d7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in EssentialFeedTests.CacheFeedImageDataUseCaseTests.test_saveImageDataFromURL_failsOnStoreInsertionError() -&gt; ()"
+                  moduleName = "EssentialFeedTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pallavi/Desktop/Git/ListSampleApp/ListSampleApp/EssentialFeed/EssentialFeedTests/FeedCache/CacheFeedImageDataUseCaseTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "31"
+                  endingLineNumber = "31"
+                  offsetFromSymbolStart = "36">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>

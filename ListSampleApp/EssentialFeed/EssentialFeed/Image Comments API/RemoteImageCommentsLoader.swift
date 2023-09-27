@@ -20,7 +20,7 @@ public final class RemoteImageCommentsLoader: FeedLoader {
     public typealias Result = FeedLoader.Result
     
     
-    init(url: URL, client: Httpclient) {
+   public init(url: URL, client: Httpclient) {
         self.url = url
         self.httpClient = client
     }

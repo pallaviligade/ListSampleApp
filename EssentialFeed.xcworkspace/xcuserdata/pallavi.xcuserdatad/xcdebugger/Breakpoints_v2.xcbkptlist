@@ -16,5 +16,69 @@
             stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "02CE0F4D-D734-41EE-88B6-DFC44EF88FF2"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ListSampleApp/EssentialFeed/EssentialFeed/Image Comments API/RemoteImageCommentsLoader.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "load(completion:)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B85DB327-E4B2-4FBF-A99B-DE13E8B82B18"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ListSampleApp/EssentialFeed/EssentialFeed/Image Comments API/RemoteImageCommentsLoader.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "load(completion:)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  uuid = "B85DB327-E4B2-4FBF-A99B-DE13E8B82B18 - 7353103ff3610f7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EssentialFeed.RemoteImageCommentsLoader.load(completion: (Swift.Result&lt;Swift.Array&lt;EssentialFeed.FeedImage&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "EssentialFeed"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pallavi/Desktop/Git/ListSampleApp/ListSampleApp/EssentialFeed/EssentialFeed/Image%20Comments%20API/RemoteImageCommentsLoader.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "30"
+                  endingLineNumber = "30"
+                  offsetFromSymbolStart = "136">
+               </Location>
+               <Location
+                  uuid = "B85DB327-E4B2-4FBF-A99B-DE13E8B82B18 - 3cc56d55b9b1cda9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;(Foundation.Data, __C.NSHTTPURLResponse), Swift.Error&gt;) -&gt; () in EssentialFeed.RemoteImageCommentsLoader.load(completion: (Swift.Result&lt;Swift.Array&lt;EssentialFeed.FeedImage&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "EssentialFeed"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pallavi/Desktop/Git/ListSampleApp/ListSampleApp/EssentialFeed/EssentialFeed/Image%20Comments%20API/RemoteImageCommentsLoader.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "30"
+                  endingLineNumber = "30"
+                  offsetFromSymbolStart = "120">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
