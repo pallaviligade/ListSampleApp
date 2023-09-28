@@ -37,7 +37,7 @@ class LoadImageCommentsFromRemoteUseCaseTests: XCTestCase {
     func test_load_deliveryErrorOnClientError() {
         let (sut, client) = makeSUT()
 
-        expect(sut, toCompleteWith: failure(.invalidData), when: {
+        expect(sut, toCompleteWith: failure(.connectivity), when: {
             let clientError = NSError(domain: "Test", code: 0)
             client.complete(with: clientError)
         })
@@ -49,7 +49,7 @@ class LoadImageCommentsFromRemoteUseCaseTests: XCTestCase {
     func test_load_deliversErrorOnNon200HTTPResponse() {
         let (sut, client) = makeSUT()
         
-        let samples = [199, 200, 300, 400, 500]
+        let samples = [199, 300, 400, 500]
         
         samples.enumerated().forEach { index, code in
             expect(sut, toCompleteWith: .failure(RemoteImageCommentsLoader.Error.invalidData), when: {
@@ -86,7 +86,7 @@ class LoadImageCommentsFromRemoteUseCaseTests: XCTestCase {
 
                 let item2 = makeItem(
                     id: UUID(),
-                    location: "a location", description: "a description",
+                    description: "a description", location: "a location",
                     imageURL: URL(string: "http://another-url.com")!)
 
         let itemsJSON = ["items":
@@ -104,13 +104,13 @@ class LoadImageCommentsFromRemoteUseCaseTests: XCTestCase {
             return .failure(error)
         }
     
-    private func makeItem(id: UUID, location: String? = nil, description: String? = nil, imageURL: URL) -> (model: FeedImage, json: [String: Any]) {
+    private func makeItem(id:  UUID, description: String? = nil, location: String? = nil,imageURL: URL ) -> (model: FeedImage, json: [String: Any]) {
         let item = FeedImage(id: id, description: description, location: location, imageURL: imageURL)
         
         let json = ["id":  id.uuidString,
-                    "description": description ?? "",
-                    "location":  location ?? "",
-                    "imageURL": imageURL.absoluteString
+                    "description": description,
+                    "location":  location,
+                    "image": imageURL.absoluteString
         ].compactMapValues { $0 }
         
         return (item, json)
