@@ -68,13 +68,58 @@ class LoadImageCommentsFromRemoteUseCaseTests: XCTestCase {
             })
         }
     
+    func test_load_deliversNoItemsOn200HTTPResponseWithEmptyJSONList() {
+           let (sut, client) = makeSUT()
+
+        expect(sut, toCompleteWith: .success([]), when: {
+               let emptyListJSON = makeItemJSON(item: [])
+               client.complete(withstatusCode: 200, data: emptyListJSON)
+           })
+       }
+    
+    func test_load_deliversItemsOn200HTTPResponseWithJSONItems() {
+        let (sut, client) = makeSUT()
+        
+        let item1 = makeItem(
+                    id: UUID(),
+                    imageURL: URL(string: "http://a-url.com")!)
+
+                let item2 = makeItem(
+                    id: UUID(),
+                    location: "a location", description: "a description",
+                    imageURL: URL(string: "http://another-url.com")!)
+
+        let itemsJSON = ["items":
+        [item1.json, item2.json]]
+        
+        let items = [item1.model, item2.model]
+        
+        expect(sut, toCompleteWith: .success(items), when: {
+            let json = try! JSONSerialization.data(withJSONObject: itemsJSON)
+            client.complete(withstatusCode: 200,data: json)
+        })
+    }
     
     private func failure(_ error: RemoteImageCommentsLoader.Error) -> RemoteImageCommentsLoader.Result {
             return .failure(error)
         }
     
+    private func makeItem(id: UUID, location: String? = nil, description: String? = nil, imageURL: URL) -> (model: FeedImage, json: [String: Any]) {
+        let item = FeedImage(id: id, description: description, location: location, imageURL: imageURL)
+        
+        let json = ["id":  id.uuidString,
+                    "description": description ?? "",
+                    "location":  location ?? "",
+                    "imageURL": imageURL.absoluteString
+        ].compactMapValues { $0 }
+        
+        return (item, json)
+        
+        
+    }
+    
     private func makeItemJSON(item: [[String: Any]]) -> Data {
-        let json = ["item": item]
+        let json = ["items": item]
         
         return try! JSONSerialization.data(withJSONObject: json)
     }

@@ -17,81 +17,15 @@
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
          <BreakpointContent
-            uuid = "FFEE72C3-3652-48FF-A81F-9E63526E01E0"
+            uuid = "0A0CFB2E-32E2-482C-BD12-54071335659D"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ListSampleApp/EssentialFeed/EssentialFeedTests/Feed API/LoadImageCommentsFromRemoteUseCaseTests.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
-            landmarkName = "expect(_:toCompleteWith:when:file:line:)"
-            landmarkType = "9">
-            <Locations>
-               <Location
-                  uuid = "FFEE72C3-3652-48FF-A81F-9E63526E01E0 - f6c2e4b667d0cb58"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;Swift.Array&lt;EssentialFeed.FeedImage&gt;, Swift.Error&gt;) -&gt; () in EssentialFeedTests.LoadImageCommentsFromRemoteUseCaseTests.expect(_: EssentialFeed.RemoteImageCommentsLoader, toCompleteWith: Swift.Result&lt;Swift.Array&lt;EssentialFeed.FeedImage&gt;, Swift.Error&gt;, when: () -&gt; (), file: Swift.StaticString, line: Swift.UInt) -&gt; ()"
-                  moduleName = "EssentialFeedTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/pallavi/Desktop/Git/ListSampleApp/ListSampleApp/EssentialFeed/EssentialFeedTests/Feed%20API/LoadImageCommentsFromRemoteUseCaseTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "92"
-                  endingLineNumber = "92"
-                  offsetFromSymbolStart = "272">
-               </Location>
-               <Location
-                  uuid = "FFEE72C3-3652-48FF-A81F-9E63526E01E0 - f6c2e4b667d0ca50"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;Swift.Array&lt;EssentialFeed.FeedImage&gt;, Swift.Error&gt;) -&gt; () in EssentialFeedTests.LoadImageCommentsFromRemoteUseCaseTests.expect(_: EssentialFeed.RemoteImageCommentsLoader, toCompleteWith: Swift.Result&lt;Swift.Array&lt;EssentialFeed.FeedImage&gt;, Swift.Error&gt;, when: () -&gt; (), file: Swift.StaticString, line: Swift.UInt) -&gt; ()"
-                  moduleName = "EssentialFeedTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/pallavi/Desktop/Git/ListSampleApp/ListSampleApp/EssentialFeed/EssentialFeedTests/Feed%20API/LoadImageCommentsFromRemoteUseCaseTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "84"
-                  endingLineNumber = "84"
-                  offsetFromSymbolStart = "272">
-               </Location>
-               <Location
-                  uuid = "FFEE72C3-3652-48FF-A81F-9E63526E01E0 - f6c2e4b667d0cbb1"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;Swift.Array&lt;EssentialFeed.FeedImage&gt;, Swift.Error&gt;) -&gt; () in EssentialFeedTests.LoadImageCommentsFromRemoteUseCaseTests.expect(_: EssentialFeed.RemoteImageCommentsLoader, toCompleteWith: Swift.Result&lt;Swift.Array&lt;EssentialFeed.FeedImage&gt;, Swift.Error&gt;, when: () -&gt; (), file: Swift.StaticString, line: Swift.UInt) -&gt; ()"
-                  moduleName = "EssentialFeedTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/pallavi/Desktop/Git/ListSampleApp/ListSampleApp/EssentialFeed/EssentialFeedTests/Feed%20API/LoadImageCommentsFromRemoteUseCaseTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "85"
-                  endingLineNumber = "85"
-                  offsetFromSymbolStart = "272">
-               </Location>
-               <Location
-                  uuid = "FFEE72C3-3652-48FF-A81F-9E63526E01E0 - f6c2e4b667d0c8fb"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;Swift.Array&lt;EssentialFeed.FeedImage&gt;, Swift.Error&gt;) -&gt; () in EssentialFeedTests.LoadImageCommentsFromRemoteUseCaseTests.expect(_: EssentialFeed.RemoteImageCommentsLoader, toCompleteWith: Swift.Result&lt;Swift.Array&lt;EssentialFeed.FeedImage&gt;, Swift.Error&gt;, when: () -&gt; (), file: Swift.StaticString, line: Swift.UInt) -&gt; ()"
-                  moduleName = "EssentialFeedTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/pallavi/Desktop/Git/ListSampleApp/ListSampleApp/EssentialFeed/EssentialFeedTests/Feed%20API/LoadImageCommentsFromRemoteUseCaseTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "95"
-                  endingLineNumber = "95"
-                  offsetFromSymbolStart = "272">
-               </Location>
-            </Locations>
+            breakpointStackSelectionBehavior = "1"
+            scope = "1"
+            stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
