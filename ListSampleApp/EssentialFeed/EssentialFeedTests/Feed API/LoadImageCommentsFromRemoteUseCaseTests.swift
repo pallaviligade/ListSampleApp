@@ -82,12 +82,12 @@ class LoadImageCommentsFromRemoteUseCaseTests: XCTestCase {
         
         let item1 = makeItem(id: UUID(),
                              message: "First message",
-                             createdAt: (Date(timeIntervalSince1970: 1598766), "2020-08-30T15:07:02+00:00"),
+                             createdAt: (Date(timeIntervalSince1970: 1598627222), "2020-08-30T15:07:02+00:00"),
                              username: "Dnyanesh")
         
         let item2 = makeItem(id: UUID(),
                              message: "I am working",
-                             createdAt: (Date(timeIntervalSince1970: 1598766), "2020-08-28T15:07:02+00:00"),
+                             createdAt: (Date(timeIntervalSince1970: 1598627222), "2020-08-28T15:07:02+00:00"),
                              username:"Pallavi")
 
         let itemsJSON = ["items":
