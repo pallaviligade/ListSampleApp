@@ -14,6 +14,10 @@ internal final class FeedItemMapper
 {
     private struct Root:Decodable {
         var items: [RemoteFeedItem]
+        
+        var images: [FeedImage] {
+            items.map({ FeedImage(id: $0.id, description: $0.description, location: $0.location, imageURL: $0.image) })
+        }
     }
     
    
@@ -29,14 +33,9 @@ internal final class FeedItemMapper
             throw RemoteFeedLoader.Error.invaildData
         }
        
-        return json.items.toModel()
+        return json.images
        
     }
     
 }
 
-extension Array where Element ==  RemoteFeedItem {
-    func toModel() -> [FeedImage] {
-        return map({ FeedImage(id: $0.id, description: $0.description, location: $0.location, imageURL: $0.image)})
-    }
-}
