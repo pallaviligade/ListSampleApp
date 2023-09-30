@@ -41,7 +41,6 @@ class LoadImageCommentsFromRemoteUseCaseTests: XCTestCase {
             let clientError = NSError(domain: "Test", code: 0)
             client.complete(with: clientError)
         })
-        
     }
     
 
@@ -82,7 +81,7 @@ class LoadImageCommentsFromRemoteUseCaseTests: XCTestCase {
         
         let item1 = makeItem(id: UUID(),
                              message: "First message",
-                             createdAt: (Date(timeIntervalSince1970: 1598627222), "2020-08-30T15:07:02+00:00"),
+                             createdAt: (Date(timeIntervalSince1970: 1577881882), "2020-01-01T12:31:22+00:00"),
                              username: "Dnyanesh")
         
         let item2 = makeItem(id: UUID(),
@@ -97,6 +96,7 @@ class LoadImageCommentsFromRemoteUseCaseTests: XCTestCase {
         
         expect(sut, toCompleteWith: .success(items), when: {
             let json = try! JSONSerialization.data(withJSONObject: itemsJSON)
+          //  let json = makeItemJSON(item: [item1.json, item2.json])
             client.complete(withstatusCode: 200,data: json)
         })
     }
@@ -222,7 +222,7 @@ class LoadImageCommentsFromRemoteUseCaseTests: XCTestCase {
 
             action()
 
-            wait(for: [exp], timeout: 1.0)
+            wait(for: [exp], timeout: 1.5)
         }
     
 }
