@@ -23,13 +23,20 @@ internal final class FeedItemMapper
     
    
     
-    internal static func map(_ data:Data, from response: HTTPURLResponse) throws -> [RemoteFeedItem] {
+    internal static func map(_ data:Data, from response: HTTPURLResponse) throws -> [FeedImage] {
         guard response.statusCode == 200,
         let json = try? JSONDecoder().decode(Root.self, from: data) else {
             throw RemoteFeedLoader.Error.invaildData
         }
        
-        return json.items
+        return json.items.toModel()
        
+    }
+    
+}
+
+extension Array where Element ==  RemoteFeedItem {
+    func toModel() -> [FeedImage] {
+        return map({ FeedImage(id: $0.id, description: $0.description, location: $0.location, imageURL: $0.image)})
     }
 }
