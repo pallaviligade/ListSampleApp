@@ -7,7 +7,16 @@
 
 import Foundation
 
-public final class RemoteFeedLoader: FeedLoader
+
+public typealias RemoteFeedLoader = RemoteLoader<[FeedImage]>
+
+public extension RemoteFeedLoader {
+    convenience init(url: URL, client: Httpclient) {
+        self.init(url: url, client: client, mapper: FeedItemMapper.map(_:from:))
+    }
+}
+
+/*public final class RemoteFeedLoader: FeedLoader
 {
    
    private let client: Httpclient
@@ -53,7 +62,7 @@ public final class RemoteFeedLoader: FeedLoader
             return (.failure(error))
         }
     }
-}
+}*/
 
 
 
