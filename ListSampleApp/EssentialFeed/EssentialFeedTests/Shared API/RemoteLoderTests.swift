@@ -79,9 +79,13 @@ class RemoteLoaderTests: XCTestCase {
     }
 
     func test_load_deliversMappedResource() {
-        let (sut, client) = makeSUT()
+        let resource = "a resource"
+        
+        let (sut, client) = makeSUT(mapper: {data, _ in
+            String(data: data, encoding: .utf8)!
+        })
 
-        let item1 = makeItem(
+       /* let item1 = makeItem(
             id: UUID(),
             imageURL: URL(string: "http://a-url.com")!)
 
@@ -91,11 +95,11 @@ class RemoteLoaderTests: XCTestCase {
             location: "a location",
             imageURL: URL(string: "http://another-url.com")!)
 
-        let items = [item1.model, item2.model]
+        let items = [item1.model, item2.model]*/
 
-        expect(sut, toCompleteWith: .success(items), when: {
-            let json = makeItemsJSON([item1.json, item2.json])
-            client.complete(withstatusCode: 200, data: json)
+        expect(sut, toCompleteWith: .success(resource), when: {
+           // let json = makeItemsJSON([item1.json, item2.json])
+            client.complete(withstatusCode: 200, data: Data(resource.utf8))
         })
     }
 
