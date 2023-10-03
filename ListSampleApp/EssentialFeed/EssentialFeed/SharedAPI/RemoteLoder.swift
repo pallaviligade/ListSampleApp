@@ -16,6 +16,7 @@ public final class RemoteLoader: FeedLoader {
         case invalidData
     }
 
+    public typealias Mapper = (Data, HTTPURLResponse) throws -> Resource
     public typealias Result = FeedLoader.Result
 
     public init(url: URL, client: Httpclient) {
