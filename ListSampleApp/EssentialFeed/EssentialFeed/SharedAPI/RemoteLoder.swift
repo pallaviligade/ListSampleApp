@@ -7,9 +7,10 @@
 
 import Foundation
 
-public final class RemoteLoader: FeedLoader {
+public final class RemoteLoader<Resource>: FeedLoader {
     private let url: URL
     private let client: Httpclient
+    private let mapper: Mapper
 
     public enum Error: Swift.Error {
         case connectivity
@@ -19,9 +20,10 @@ public final class RemoteLoader: FeedLoader {
     public typealias Mapper = (Data, HTTPURLResponse) throws -> Resource
     public typealias Result = FeedLoader.Result
 
-    public init(url: URL, client: Httpclient) {
+    public init(url: URL, client: Httpclient, mapper: @escaping Mapper) {
         self.url = url
         self.client = client
+        self.mapper = mapper
     }
 
     public func load(completion: @escaping (Result) -> Void) {
