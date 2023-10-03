@@ -44,18 +44,7 @@ class RemoteLoaderTests: XCTestCase {
         })
     }
 
-    func test_load_deliversErrorClientMapperError() {
-        let (sut, client) = makeSUT()
-
-        let samples = [199, 201, 300, 400, 500]
-
-        samples.enumerated().forEach { index, code in
-            expect(sut, toCompleteWith: failure(.invalidData), when: {
-                let json = makeItemsJSON([])
-                client.complete(withstatusCode: code, data: json, at: index)
-            })
-        }
-    }
+   
 
     func test_load_deliversErrorOnMapperError() {
         let (sut, client) = makeSUT(mapper: { data,response in
@@ -69,14 +58,7 @@ class RemoteLoaderTests: XCTestCase {
         })
     }
 
-    func test_load_deliversNoItemsOn200HTTPResponseWithEmptyJSONList() {
-        let (sut, client) = makeSUT()
-
-        expect(sut, toCompleteWith: .success([]), when: {
-            let emptyListJSON = makeItemsJSON([])
-            client.complete(withstatusCode: 200, data: emptyListJSON)
-        })
-    }
+    
 
     func test_load_deliversMappedResource() {
         let resource = "a resource"

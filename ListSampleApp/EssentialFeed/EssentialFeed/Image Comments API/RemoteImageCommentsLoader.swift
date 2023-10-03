@@ -7,7 +7,15 @@
 
 import Foundation
 
-public final class RemoteImageCommentsLoader {
+public typealias RemoteImageCommentsLoader = RemoteLoader<[ImageComment]>
+
+public extension RemoteImageCommentsLoader {
+    convenience init(url: URL, client: Httpclient) {
+        self.init(url: url, client: client, mapper: ImageCommentMapper.map(_:response:))
+    }
+}
+
+/*public final class RemoteImageCommentsLoader {
     
     private let url: URL
     private let httpClient: Httpclient
@@ -49,5 +57,4 @@ public final class RemoteImageCommentsLoader {
         }
     }
 }
-
-
+*/
