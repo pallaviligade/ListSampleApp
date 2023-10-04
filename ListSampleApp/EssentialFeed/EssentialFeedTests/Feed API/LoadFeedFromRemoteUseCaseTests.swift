@@ -81,18 +81,17 @@ final class LoadFeedFromRemoteUseCaseTests: XCTestCase {
     }
     
     
-    func test_load_deliversNoItemsOn200HTTPResponseWithEmptyJSONList() {
-        let (sut,  client) = makeSUT()
+    func test_map_deliversNoItemsOn200HTTPResponseWithEmptyJSONList() throws  {
+        let emptyJson = Data("{\"items\": []}".utf8)
         
-        expact(sut, toCompleteWithResult: .success([])) {
-            let emptyJson = Data("{\"items\": []}".utf8)
-            client.complete(withstatusCode: 200,data: emptyJson)
-        }
+        let result = try FeedItemMapper.map(emptyJson, from: HTTPURLResponse(url: anyURL(), statusCode: 200, httpVersion: nil, headerFields: nil)!)
+        
+        XCTAssertEqual(result, [])
+       
     }
     
-    func test_loaditemAfter_Recvied200Response()
+    func test_loaditemAfter_Recvied200Response() throws
     {
-        let (sut, client) = makeSUT()
         
         let item1 = makeItem(
             id: UUID(),
@@ -108,16 +107,16 @@ final class LoadFeedFromRemoteUseCaseTests: XCTestCase {
         
         
         
-        let itemsJSON = ["items":
-        [item1.json, item2.json]]
+      
         
         let item = [item1.model, item2.model]
+        let json = makeItemsJSON([item1.json, item2.json])
         
+        let result = try FeedItemMapper.map(json, from: HTTPURLResponse(url: anyURL(), statusCode: 200, httpVersion: nil, headerFields: nil)!)
         
-        expact(sut, toCompleteWithResult: .success(item), when: {
-            let json = try! JSONSerialization.data(withJSONObject: itemsJSON)
-            client.complete(withstatusCode: 200,data: json)
-        })
+        XCTAssertEqual(result, item)
+        
+       
         
     }
     func test_load_doesNotDeliverResultAfterSUTInstanceHasBeenDeallocated() {
@@ -226,6 +225,13 @@ final class LoadFeedFromRemoteUseCaseTests: XCTestCase {
             messages[index].complection(.success((data, response)))
             
         }
+    }
+    
+}
+
+private extension HTTPURLResponse {
+    convenience init(statusCode: Int) {
+        self.init(url: anyURL(), statusCode: statusCode, httpVersion: nil, headerFields: nil)!
     }
     
 }
