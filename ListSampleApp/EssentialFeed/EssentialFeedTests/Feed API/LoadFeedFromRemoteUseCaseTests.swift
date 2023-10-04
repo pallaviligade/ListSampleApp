@@ -50,16 +50,15 @@ final class LoadFeedFromRemoteUseCaseTests: XCTestCase {
         }
     }
     
-    func test_load_deliversErrorOnNon200HTTPResponse() {
-            let (sut, client) = makeSUT()
+    func test_map_ThrowsErrorOnNon200HTTPResponse() throws {
+            let json = makeItemsJSON([])
 
             let samples = [199, 201, 300, 400, 500]
 
-            samples.enumerated().forEach { index, code in
-                expact(sut, toCompleteWithResult: failure(.invalidData), when: {
-                    let json = makeItemsJSON([])
-                    client.complete(withstatusCode: code, data: json, at: index)
-                })
+            try samples.forEach {  code in
+                XCTAssertThrowsError(
+               try FeedItemMapper.map(json, from: HTTPURLResponse(url: anyURL(), statusCode: code, httpVersion: nil, headerFields: nil)!)
+               )
             }
         }
     
