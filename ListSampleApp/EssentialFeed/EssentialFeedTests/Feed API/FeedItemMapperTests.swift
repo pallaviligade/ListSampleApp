@@ -11,44 +11,7 @@ import EssentialFeed
 
 final class FeedItemMapperTests: XCTestCase {
     
-    func test_doesNotRequestDataFromUrl() {
-        
-        let (_,client)  = makeSUT()
-        XCTAssertTrue(client.requestUrls.isEmpty)
-        
-    }
     
-    func test_load_RequestsDataFromUrl() {
-        let url = URL(string: "https://a-given-uel.com")!
-        
-        let (sut,client)  = makeSUT(url: url)
-        
-        sut.load { _ in  }
-        
-        XCTAssertEqual(client.requestUrls, [url])
-        
-    }
-    
-    func test_loadTwice_RequestsDataTwiceFromUrl() {
-        let url = URL(string: "https://a-given-uel.com")!
-        
-        let (sut,client)  = makeSUT(url: url)
-        
-        sut.load { _ in  }
-        sut.load { _ in  }
-        
-        XCTAssertEqual(client.requestUrls,[url, url])
-        
-    }
-    
-    func test_deliery_ErrorOnClientError() {
-        let (sut,  client) = makeSUT()
-        
-        expact(sut, toCompleteWithResult: failure(.connectivity)) {
-            let error =  NSError(domain: "Test", code: 0) // This is client error
-            client.complete(with:error)
-        }
-    }
     
     func test_map_ThrowsErrorOnNon200HTTPResponse() throws {
             let json = makeItemsJSON([])
@@ -61,16 +24,6 @@ final class FeedItemMapperTests: XCTestCase {
                )
             }
         }
-    
-    func test_deliery_ErrorOn200HttpResponseError() {
-        let (sut,  client) = makeSUT()
-        [199,400, 101, 300].enumerated().forEach { index,statusCode in
-            expact(sut, toCompleteWithResult: failure(.invalidData)) {
-                let jsondata = makeItemsJSON([])
-                client.complete(withstatusCode: statusCode, data: jsondata, at: index)
-            }
-        }
-    }
     
     func test_map_throwsErrorOn200HTTPResponsesWithInvalidJson() {
         let invalidJson = Data("invalid json".utf8)
@@ -89,6 +42,7 @@ final class FeedItemMapperTests: XCTestCase {
         XCTAssertEqual(result, [])
        
     }
+    
     
     func test_loaditemAfter_Recvied200Response() throws
     {
@@ -139,6 +93,67 @@ final class FeedItemMapperTests: XCTestCase {
         }
     
     
+   /*
+    func test_deliery_ErrorOn200HttpResponseError() {
+        let (sut,  client) = makeSUT()
+        [199,400, 101, 300].enumerated().forEach { index,statusCode in
+            expact(sut, toCompleteWithResult: failure(.invalidData)) {
+                let jsondata = makeItemsJSON([])
+                client.complete(withstatusCode: statusCode, data: jsondata, at: index)
+            }
+        }
+    }
+    
+   
+    func test_deliery_ErrorOnClientError() {
+        let (sut,  client) = makeSUT()
+        
+        expact(sut, toCompleteWithResult: failure(.connectivity)) {
+            let error =  NSError(domain: "Test", code: 0) // This is client error
+            client.complete(with:error)
+        }
+    }
+    
+    func test_doesNotRequestDataFromUrl() {
+        
+        let (_,client)  = makeSUT()
+        XCTAssertTrue(client.requestUrls.isEmpty)
+        
+    }
+    
+    func test_load_RequestsDataFromUrl() {
+        let url = URL(string: "https://a-given-uel.com")!
+        
+        let (sut,client)  = makeSUT(url: url)
+        
+        sut.load { _ in  }
+        
+        XCTAssertEqual(client.requestUrls, [url])
+        
+    }
+    
+    func test_loadTwice_RequestsDataTwiceFromUrl() {
+        let url = URL(string: "https://a-given-uel.com")!
+        
+        let (sut,client)  = makeSUT(url: url)
+        
+        sut.load { _ in  }
+        sut.load { _ in  }
+        
+        XCTAssertEqual(client.requestUrls,[url, url])
+        
+    }
+    // MARK: - Helper
+    
+    private func failure(_ error: RemoteFeedLoader.Error) -> RemoteFeedLoader.Result {
+        return .failure(error)
+    }
+    */
+    
+  
+    
+    
+   
     private func makeItem(id:  UUID, description: String? = nil, location: String? = nil,imageURL: URL ) -> (model: FeedImage, json: [String:Any])
     {
         let item = FeedImage(id: id, description: description, location: location, imageURL: imageURL)
@@ -152,7 +167,7 @@ final class FeedItemMapperTests: XCTestCase {
         
     }
     
-    private func expact(_ sut:RemoteFeedLoader, toCompleteWithResult  expectedResult: RemoteFeedLoader.Result, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
+   /* private func expact(_ sut:RemoteFeedLoader, toCompleteWithResult  expectedResult: RemoteFeedLoader.Result, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
        // var captureError = [RemoteFeedLoader.Result]()
         
 //        sut.load { error in
@@ -181,15 +196,11 @@ final class FeedItemMapperTests: XCTestCase {
         action()
        
         wait(for: [exp], timeout: 1.0)
-    }
+    }*/
     
     
-    // MARK: - Helper
-    
-    private func failure(_ error: RemoteFeedLoader.Error) -> RemoteFeedLoader.Result {
-        return .failure(error)
-    }
-    private func makeSUT(url: URL = URL(string: "https://some-uel.com")!, file: StaticString = #file, line: UInt = #line ) -> (sut:RemoteFeedLoader, client:HTTPClientSpy)
+   
+   /* private func makeSUT(url: URL = URL(string: "https://some-uel.com")!, file: StaticString = #file, line: UInt = #line ) -> (sut:RemoteFeedLoader, client:HTTPClientSpy)
     {
         let client = HTTPClientSpy()
         let sut = RemoteFeedLoader(url: url, client: client)
@@ -225,7 +236,7 @@ final class FeedItemMapperTests: XCTestCase {
             messages[index].complection(.success((data, response)))
             
         }
-    }
+    }*/
     
 }
 
