@@ -49,6 +49,20 @@ final class LoadFeedFromRemoteUseCaseTests: XCTestCase {
             client.complete(with:error)
         }
     }
+    
+    func test_load_deliversErrorOnNon200HTTPResponse() {
+            let (sut, client) = makeSUT()
+
+            let samples = [199, 201, 300, 400, 500]
+
+            samples.enumerated().forEach { index, code in
+                expact(sut, toCompleteWithResult: failure(.invalidData), when: {
+                    let json = makeItemsJSON([])
+                    client.complete(withstatusCode: code, data: json, at: index)
+                })
+            }
+        }
+    
     func test_deliery_ErrorOn200HttpResponseError() {
         let (sut,  client) = makeSUT()
         [199,400, 101, 300].enumerated().forEach { index,statusCode in
