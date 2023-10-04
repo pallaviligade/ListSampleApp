@@ -72,13 +72,12 @@ final class LoadFeedFromRemoteUseCaseTests: XCTestCase {
         }
     }
     
-    func test_delivery200Response_WithInvalidJson() {
-        let (sut,  client) = makeSUT()
+    func test_map_throwsErrorOn200HTTPResponsesWithInvalidJson() {
+        let invalidJson = Data("invalid json".utf8)
         
-        expact(sut, toCompleteWithResult: failure(.invalidData)) {
-            let invalidJson = Data("invalid json".utf8)
-            client.complete(withstatusCode: 200, data:invalidJson)
-        }
+       XCTAssertThrowsError(
+       try FeedItemMapper.map(invalidJson, from: HTTPURLResponse(url: anyURL(), statusCode: 200, httpVersion: nil, headerFields: nil)!)
+       )
     }
     
     
