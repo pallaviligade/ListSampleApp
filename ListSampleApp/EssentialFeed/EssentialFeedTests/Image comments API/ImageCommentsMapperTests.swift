@@ -45,18 +45,18 @@ class ImageCommentsMapperTests: XCTestCase {
     
 
     
-    func test_load_deliversErrorOnNon200HTTPResponse() {
-        let (sut, client) = makeSUT()
-        
+    func test_map_ThrowsErrorOnNon200HTTPResponse() throws {
+        let json = makeItemJSON(item: [])
+     
         let samples = [199, 300, 400, 500, 150]
         
-        samples.enumerated().forEach { index, code in
-            expect(sut, toCompleteWith: .failure(RemoteImageCommentsLoader.Error.invalidData), when: {
-                let json = makeItemJSON(item: [])
-                client.complete(withstatusCode: code, data: json, at: index)
-            })
+       try samples.forEach {  code in
+            XCTAssertThrowsError(
+                try ImageCommentMapper.map(json, response: HTTPURLResponse(url: anyURL(), statusCode: code, httpVersion: nil, headerFields: nil)!)
+            )
+            
+            }
         }
-    }
     
     func test_load_deliversErrorOn200HTTPResponseWithInvalidJSON() {
             let (sut, client) = makeSUT()
@@ -115,16 +115,15 @@ class ImageCommentsMapperTests: XCTestCase {
            XCTAssertTrue(capturedResults.isEmpty)
         }
     
-    func test_load_deliversErrorOn2xxHTTPResponseWithInvalidJSON() {
-            let (sut, client) = makeSUT()
+    func test_map_throwsErrorOn2xxHTTPResponseWithInvalidJSON() throws {
+        let invalidJSON = Data("invalid json".utf8)
 
             let samples = [200, 201, 250, 280, 299]
 
-            samples.enumerated().forEach { index, code in
-                expect(sut, toCompleteWith: failure(.invalidData), when: {
-                    let invalidJSON = Data("invalid json".utf8)
-                    client.complete(withstatusCode: code, data: invalidJSON, at: index)
-                })
+            try samples.forEach {  code in
+                XCTAssertThrowsError(
+                    try ImageCommentMapper.map(invalidJSON, response: HTTPURLResponse(url: anyURL(), statusCode: code, httpVersion: nil, headerFields: nil)!)
+                )
             }
         }
 
