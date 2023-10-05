@@ -7,6 +7,7 @@
 
 import XCTest
 import EssentialFeed
+import Combine
 
 final class EssentialFeedAPIEndToEndTestTests: XCTestCase {
 
@@ -31,18 +32,30 @@ final class EssentialFeedAPIEndToEndTestTests: XCTestCase {
     private func getFeedResult() ->  FeedLoader.Result? {
         let url = URL(string: "https://static1.squarespace.com/static/5891c5b8d1758ec68ef5dbc2/t/5c52cdd0b8a045df091d2fff/1548930512083/feed-case-study-test-api-feed.json")!
         let httpclient = URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
+        
         let loader = RemoteLoader(url: url, client: httpclient, mapper: FeedItemMapper.map)
         
         let exp = expectation(description: "wait till result  load")
         var recivedResult: FeedLoader.Result?
         
-        loader.load { result in
-           recivedResult = result
+        httpclient.get(from: url, completion: { result in
+            recivedResult = result.flatMap({ (data, response) in
+                do {
+                    return.success(try FeedItemMapper.map(data, from: response))
+                } catch {
+                    return .failure(error)
+                }
+            })
             exp.fulfill()
-        }
+        })
         wait(for: [exp], timeout: 4.0)
         return recivedResult
     }
+    
+    private func ephemeralClient(file: StaticString = #file, line: UInt = #line) -> Httpclient {
+            let client = URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
+            return client
+        }
     private func expectedItem(at index:Int) -> FeedImage {
         
         return FeedImage(id: itemID(at: index),
