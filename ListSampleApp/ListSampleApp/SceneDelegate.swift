@@ -83,8 +83,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
        //  lazy var remoteFeedLoader = RemoteFeedLoader(url: remoteURL, client: httpClient)
 
        // let remoteFeedLoader = RemoteFeedLoader(url: remoteURL, client: httpClient)
-       return remoteFeedLoader
-            .loadPublisher()
+        return httpClient
+            .getPublisher(url: remoteURL)
+            .tryMap(FeedItemMapper.map)
             .caching(to: localFeedLoder)
             .fallback(to: localFeedLoder.loadPublisher)
     }
