@@ -8,13 +8,7 @@
 import Foundation
 
 
-public typealias RemoteFeedLoader = RemoteLoader<[FeedImage]>
 
-public extension RemoteFeedLoader {
-    convenience init(url: URL, client: Httpclient) {
-        self.init(url: url, client: client, mapper: FeedItemMapper.map(_:from:))
-    }
-}
 
 /*public final class RemoteFeedLoader: FeedLoader
 {

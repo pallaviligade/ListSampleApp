@@ -73,19 +73,7 @@ final class FeedItemMapperTests: XCTestCase {
        
         
     }
-    func test_load_doesNotDeliverResultAfterSUTInstanceHasBeenDeallocated() {
-            let url = URL(string: "http://any-url.com")!
-            let client = HTTPClientSpy()
-            var sut: RemoteFeedLoader? = RemoteFeedLoader(url: url, client: client)
-
-            var capturedResults = [RemoteFeedLoader.Result]()
-            sut?.load { capturedResults.append($0) }
-
-            sut = nil
-            client.complete(withstatusCode: 200, data: makeItemsJSON([]))
-
-            XCTAssertTrue(capturedResults.isEmpty)
-        }
+    
     
     private func makeItemsJSON(_ items: [[String: Any]]) -> Data {
             let json = ["items": items]
@@ -94,6 +82,21 @@ final class FeedItemMapperTests: XCTestCase {
     
     
    /*
+    
+    func test_load_doesNotDeliverResultAfterSUTInstanceHasBeenDeallocated() {
+            let url = URL(string: "http://any-url.com")!
+            let client = HTTPClientSpy()
+            var sut: RemoteFeedLoader? = RemoteLoader(url: url, client: client)
+
+            var capturedResults = [RemoteLoader.Result]()
+            sut?.load { capturedResults.append($0) }
+
+            sut = nil
+            client.complete(withstatusCode: 200, data: makeItemsJSON([]))
+
+            XCTAssertTrue(capturedResults.isEmpty)
+        }
+    
     func test_deliery_ErrorOn200HttpResponseError() {
         let (sut,  client) = makeSUT()
         [199,400, 101, 300].enumerated().forEach { index,statusCode in

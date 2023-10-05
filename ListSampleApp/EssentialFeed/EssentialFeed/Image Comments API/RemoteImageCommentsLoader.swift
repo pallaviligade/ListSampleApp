@@ -7,13 +7,7 @@
 
 import Foundation
 
-public typealias RemoteImageCommentsLoader = RemoteLoader<[ImageComment]>
 
-public extension RemoteImageCommentsLoader {
-    convenience init(url: URL, client: Httpclient) {
-        self.init(url: url, client: client, mapper: ImageCommentMapper.map(_:response:))
-    }
-}
 
 /*public final class RemoteImageCommentsLoader {
     
