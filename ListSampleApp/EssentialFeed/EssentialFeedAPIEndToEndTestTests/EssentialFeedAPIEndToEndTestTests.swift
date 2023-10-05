@@ -29,14 +29,14 @@ final class EssentialFeedAPIEndToEndTestTests: XCTestCase {
     }
     
     //MARK: - helper
-    private func getFeedResult() ->  FeedLoader.Result? {
+    private func getFeedResult() ->  Swift.Result<[FeedImage], Error>? {
         let url = URL(string: "https://static1.squarespace.com/static/5891c5b8d1758ec68ef5dbc2/t/5c52cdd0b8a045df091d2fff/1548930512083/feed-case-study-test-api-feed.json")!
         let httpclient = URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
         
         let loader = RemoteLoader(url: url, client: httpclient, mapper: FeedItemMapper.map)
         
         let exp = expectation(description: "wait till result  load")
-        var recivedResult: FeedLoader.Result?
+        var recivedResult:Swift.Result<[FeedImage], Error>?
         
         httpclient.get(from: url, completion: { result in
             recivedResult = result.flatMap({ (data, response) in

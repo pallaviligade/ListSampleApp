@@ -10,6 +10,7 @@ import XCTest
 import EssentialFeed
 import EssentialFeediOS
 import ListSampleApp
+import Combine
 
 
 final class FeedViewControllerTests: XCTestCase {
@@ -372,25 +373,27 @@ final class FeedViewControllerTests: XCTestCase {
         }
    
     //MARK: - Helpers
-    class FeedViewSpy: FeedLoader, FeedImageDataLoader{
+    class FeedViewSpy: FeedImageDataLoader{
        
-    private var feedRequest = [(FeedLoader.Result) -> Void] ()
+    private var feedRequests = [PassthroughSubject<[FeedImage], Error>] ()
      
         var loadFeedCallCount: Int {
-            return feedRequest.count
+            return feedRequests.count
         }
         
-        func load(completion: @escaping (FeedLoader.Result) -> Void) {
-            feedRequest.append(completion)
-        }
+        func loadPublisher() -> AnyPublisher<[FeedImage], Error> {
+                   let publisher = PassthroughSubject<[FeedImage], Error>()
+                   feedRequests.append(publisher)
+                   return publisher.eraseToAnyPublisher()
+               }
         
         func completeFeedloading(with feedImage: [FeedImage] = [], at index:Int = 0) {
-            feedRequest[index](.success(feedImage))
+            feedRequests[index].send(feedImage)
         }
         
         func completeFeedLoadingWithError(at index:Int) {
             let error = NSError(domain: "any error", code: 1)
-            feedRequest[index](.failure(error))
+            feedRequests[index].send(completion:.failure(error))
         }
         
         func compeletImageLoading(with imageData: Data = Data(), at index: Int = 0) {

@@ -10,7 +10,7 @@ import Combine
 
 
 
-public final class FeedLoaderCacheDecorator: FeedLoader {
+public final class FeedLoaderCacheDecorator : FeedLoader{
     private let decoratee: FeedLoader
     private let cache: FeedCache
     
@@ -21,7 +21,7 @@ public final class FeedLoaderCacheDecorator: FeedLoader {
         
     }
     
-    public func load(completion: @escaping (FeedLoader.Result) -> Void) {
+    public func load(completion: @escaping (Swift.Result<[FeedImage], Error>) -> Void) {
         decoratee.load { [weak self] result in
 //            if let feed = try? result.get() {
 //                self?.cache.save(feed, completion: { _ in
