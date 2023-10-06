@@ -28,20 +28,7 @@ class ImageCommentsMapperTests: XCTestCase {
     
     
     
-    func test_load_doesNotDeliverResultAfterSUTInstanceHasBeenDeallocated() {
-            let url = URL(string: "http://any-url.com")!
-            let client = HTTPClientSpy()
-            var sut: RemoteImageCommentsLoader? = RemoteImageCommentsLoader(url: url, client: client)
-
-            var capturedResults = [RemoteImageCommentsLoader.Result]()
-            sut?.load { capturedResults.append($0) }
-
-            sut = nil
-            client.complete(withstatusCode: 200,data: makeItemJSON(item: []))
-
-           XCTAssertTrue(capturedResults.isEmpty)
-        }
-    
+  
     func test_map_throwsErrorOn2xxHTTPResponseWithInvalidJSON() throws {
         let invalidJSON = Data("invalid json".utf8)
 
@@ -114,6 +101,20 @@ class ImageCommentsMapperTests: XCTestCase {
     }
     
    /*
+    
+    func test_load_doesNotDeliverResultAfterSUTInstanceHasBeenDeallocated() {
+            let url = URL(string: "http://any-url.com")!
+            let client = HTTPClientSpy()
+            var sut: RemoteImageCommentsLoader? = RemoteImageCommentsLoader(url: url, client: client)
+
+            var capturedResults = [RemoteImageCommentsLoader.Result]()
+            sut?.load { capturedResults.append($0) }
+
+            sut = nil
+            client.complete(withstatusCode: 200,data: makeItemJSON(item: []))
+
+           XCTAssertTrue(capturedResults.isEmpty)
+        }
     
     private func failure(_ error: RemoteImageCommentsLoader.Error) -> RemoteImageCommentsLoader.Result {
             return .failure(error)
