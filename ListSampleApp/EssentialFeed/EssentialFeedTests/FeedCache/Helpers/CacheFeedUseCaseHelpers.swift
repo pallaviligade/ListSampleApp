@@ -8,14 +8,14 @@
 import Foundation
 import EssentialFeed
 
-func uiqureItem() -> FeedImage  {
+func uniqueImage() -> FeedImage  {
     return FeedImage(id: UUID(), description: "any", location: "any", imageURL: anyURL())
     
 }
 
  func uniqueItems() -> (models: [FeedImage], localitems: [LocalFeedImage]) {
     
-    let model = [uiqureItem(), uiqureItem()]
+    let model = [uniqueImage(), uniqueImage()]
     let localitems = model.map { LocalFeedImage(id: $0.id, description: $0.description, location: $0.location, url: $0.imageURL) }
 return (model, localitems)
     
@@ -29,10 +29,10 @@ return (model, localitems)
  extension Date {
      
      private var feedCacheMaxageIndays: Int {
-         return -7
+         return 7
      }
      func minusFeedCacheMaxAge() -> Date {
-         return adding(days: feedCacheMaxageIndays)
+         return adding(days: -feedCacheMaxageIndays)
      }
    private func adding(days: Int) -> Date {
         return Calendar(identifier: .gregorian).date(byAdding: .day, value: days, to: self)!

@@ -55,7 +55,7 @@ final class CacheFeedUseCaseTests: XCTestCase {
     
     func test_save_requestsNewCacheInsertionWithTimeStampOnSuccessfulDeletion() {
         let timestamp = Date()
-        let items = [uiqureItem(), uiqureItem()]
+        let items = [uniqueImage(), uniqueImage()]
         let localitems = items.map { LocalFeedImage(id: $0.id, description: $0.description, location: $0.location, url: $0.imageURL) }
         let (sut, store) =  makeSUT(currentDate: { timestamp })
       

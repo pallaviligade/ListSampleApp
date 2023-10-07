@@ -39,10 +39,14 @@ final class URLSessionHTTPClientTest : XCTestCase {
                 
     }
     func test_cancelGetFromURLTask_cancelsURLRequest() {
-            let receivedError = restltError(taskHandler: { $0.cancel() }) as NSError?
+        let exp = expectation(description: "Wait for request")
+        URLProtocolStub.observeRequests { _ in exp.fulfill() }
+        
+        let receivedError = restltError(taskHandler: { $0.cancel() }) as NSError?
+        wait(for: [exp], timeout: 1.0)
 
-            XCTAssertEqual(receivedError?.code, URLError.cancelled.rawValue)
-        }
+        XCTAssertEqual(receivedError?.code, URLError.cancelled.rawValue)
+    }
     
     func test_getFromUrl_FailsOnRequestError() {
         let requestError = anyError()
@@ -139,7 +143,18 @@ final class URLSessionHTTPClientTest : XCTestCase {
     
     // MARK: - helpers
     private func restltError(_ values: (data:Data?, response:URLResponse?, error: Error?)? = nil, taskHandler: (HTTPClientTask) -> Void = { _ in}, file: StaticString = #file, line: UInt = #line) -> Error? {
-        values.map { URLProtocolStub.stub(data: $0, response: $1, error: $2) }
+        
+        let result = resultFor(values, taskHandler: taskHandler, file: file, line: line)
+        
+        switch result {
+        case let .failure(error):
+            return error
+        default:
+            XCTFail("Expected failure, got \(result) instead", file: file, line: line)
+            return nil
+        }
+        
+      /*  values.map { URLProtocolStub.stub(data: $0, response: $1, error: $2) }
         
 //        URLProtocolStub.startInterceptingRequests()
 //        URLProtocolStub.stub(data:data, response:response, error: error)
@@ -162,8 +177,24 @@ final class URLSessionHTTPClientTest : XCTestCase {
         
         wait(for: [exp], timeout: 1.0)
       //  URLProtocolStub.removeStub()
-        return recivedError
+        return recivedError*/
         
+    }
+    
+    private func resultFor(_ values: (data: Data?, response: URLResponse?, error: Error?)?, taskHandler: (HTTPClientTask) -> Void = { _ in },  file: StaticString = #filePath, line: UInt = #line) -> Httpclient.Result {
+        values.map { URLProtocolStub.stub(data: $0, response: $1, error: $2) }
+        
+        let sut = makeSUT(file: file, line: line)
+        let exp = expectation(description: "Wait for completion")
+        
+        var receivedResult: Httpclient.Result!
+        taskHandler(sut.get(from: anyURL()) { result in
+            receivedResult = result
+            exp.fulfill()
+        })
+        
+        wait(for: [exp], timeout: 1.0)
+        return receivedResult
     }
     private func makeSUT(file: StaticString = #file, line: UInt = #line ) -> Httpclient {
         let configuration = URLSessionConfiguration.ephemeral
