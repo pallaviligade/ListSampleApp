@@ -33,7 +33,7 @@ class LoadResourcePresenterTests: XCTestCase {
     func test_didFinishLoading_displaysResourceAndStopsLoading() {
        // we are injecting mapper that converts resource into viewModel
         let (sut, view) = makeSUT(mapper: { resource in
-            resource + "view model" // convert resource into viewModel
+            resource + " view model" // convert resource into viewModel
         })
 
         sut.didFinishLoading(with: "resource") // we pass resource to the presenter

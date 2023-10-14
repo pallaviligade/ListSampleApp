@@ -40,7 +40,7 @@ public final class LoadResourcePresenter {
     }
 
     public func didFinishLoading(with resource: String) {
-        resourceView.display(resource)
+        resourceView.display(mapper(resource)) // This will tarnsform resource into view models
         loadingView.display(FeedLoadingViewModel(isLoading: false))
     }
 
