@@ -30,14 +30,16 @@ class LoadResourcePresenterTests: XCTestCase {
         ])
     }
 
-    func test_didFinishLoadingFeed_displaysFeedAndStopsLoading() {
-        let (sut, view) = makeSUT()
-        let feed = uniqueItems().models
+    func test_didFinishLoading_displaysResourceAndStopsLoading() {
+       // we are injecting mapper that converts resource into viewModel
+        let (sut, view) = makeSUT(mapper: { resource in
+            resource + "view model" // convert resource into viewModel
+        })
 
-        sut.didFinishLoadingFeed(with: feed)
+        sut.didFinishLoading(with: "resource") // we pass resource to the presenter
 
         XCTAssertEqual(view.messages, [
-            .display(feed: feed),
+            .display(resourceviewModel: "resource view model"), // we expect to recive view model UI
             .display(isLoading: false)
         ])
     }
@@ -54,9 +56,12 @@ class LoadResourcePresenterTests: XCTestCase {
     }
 
     // MARK: - Helpers
-    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: LoadResourcePresenter, view: ViewSpy) {
+    private func makeSUT( mapper: @escaping (String) -> String = {  _ in "Any string"},
+        file: StaticString = #file,
+        line: UInt = #line
+         ) -> (sut: LoadResourcePresenter, view: ViewSpy) {
         let view = ViewSpy()
-        let sut = LoadResourcePresenter(feedView: view, loadingView: view, errorView: view)
+        let sut = LoadResourcePresenter(feedView: view, loadingView: view, errorView: view, mapper: mapper)
         trackForMemoryLeaks(view, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
         return (sut, view)
