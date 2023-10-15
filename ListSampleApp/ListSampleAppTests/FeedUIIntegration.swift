@@ -448,10 +448,12 @@ public extension FeedViewController {
     
     
     func numberOfRenderFeedImageView() ->  Int {
-        return tableView.numberOfSections > feedImageNumberOfSections() ? tableView.numberOfRows(inSection: feedImageNumberOfSections()) : 0
+       // return tableView.numberOfSections > feedImageNumberOfSections() ? tableView.numberOfRows(inSection: feedImageNumberOfSections()) : 0
        // return tableView.numberOfRows(inSection: feedImageNumberOfSections())
+        numberOfRows(in: feedImagesSection)
     }
-    
+    private var feedImagesSection: Int { 0 }
+
     private func feedImageNumberOfSections() -> Int {
         return 0
     }
