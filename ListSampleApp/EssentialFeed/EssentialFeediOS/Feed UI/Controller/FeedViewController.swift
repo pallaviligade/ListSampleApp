@@ -36,6 +36,10 @@ public final  class FeedViewController: UITableViewController,UITableViewDataSou
         
     }
     
+    public var errorMessage: String? {
+        return errorView?.message
+    }
+    
     public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         

@@ -164,6 +164,9 @@ Location, </string>
                             <action selector="refresh" destination="sEs-bl-d31" eventType="valueChanged" id="L8w-Zv-IsP"/>
                         </connections>
                     </refreshControl>
+                    <connections>
+                        <outlet property="errorView" destination="Eu9-zf-QHs" id="6ZZ-4y-9q9"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wv0-yC-PfV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
