@@ -23,7 +23,7 @@ public final class LoadResourcePresenter<Resource, View: ResourceView> {
     public static var loadError: String {
         return NSLocalizedString("GENERIC_CONNECTION_ERROR",
                 tableName: "Shared",
-                bundle: Bundle(for: self.self),
+                bundle: Bundle(for: Self.self),
                 comment: "Error message displayed when we can't load the resource from the server")
     }
 
