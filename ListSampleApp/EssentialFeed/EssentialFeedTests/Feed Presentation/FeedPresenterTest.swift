@@ -18,6 +18,13 @@ class FeedPresenterTest: XCTestCase{
         
     }
     
+    func test_map_createsViewModel() {
+        let feed = uniqueItems().models
+        let feedViewModel = FeedPresenter.map(feed)
+        XCTAssertEqual(feedViewModel.feed, feed)
+        
+    }
+    
     func test_init_doesNotSendMessagesToView() {
       let (_, view) = makeSUT()
       XCTAssertTrue(view.message.isEmpty,"Expected no view messages")
