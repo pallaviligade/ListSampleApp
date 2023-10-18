@@ -11,7 +11,7 @@ import EssentialFeed
 import EssentialFeediOS
 
 final class feedLoaderPresentionAdapter: FeedViewControllerDelegate  {
-   var presenter: FeedPresenter?
+    var presenter: LoadResourcePresenter<[FeedImage], FeedViewAdapter>?
     private let feedloader: () -> AnyPublisher<[FeedImage], Error>
     private var cancellable: Cancellable?
     
@@ -20,19 +20,19 @@ final class feedLoaderPresentionAdapter: FeedViewControllerDelegate  {
     }
     
     func didRefershFeedRequest() {
-        presenter?.didStartLoadingFeed()
+        presenter?.didStartLoading()
         
         cancellable = feedloader().dispatchOnMainQueue().sink(receiveCompletion:  { [weak self] completion in
             switch completion {
             case .finished: break
             
             case let .failure(error):
-                self?.presenter?.didFinishLoadingFeed(with: error)
+                self?.presenter?.didFinishLoading(with: error)
                 break
             }
             
         }, receiveValue: { [weak self] feed in
-            self?.presenter?.didFinishLoadingFeed(feed)
+            self?.presenter?.didFinishLoading(with: feed)
         })
 
         

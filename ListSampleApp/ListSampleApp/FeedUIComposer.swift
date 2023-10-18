@@ -23,10 +23,11 @@ public final class FeedUIComposer {
 //            feedview: WeakRefVirtualProxy(feedViewController),
 //            errorView: FeedViewAdapter(controller: feedViewController, loader: MainQueueDispatchDecorater(decoratee: imageLoader)))
         
-        presentionAdapter.presenter = FeedPresenter(feedview: FeedViewAdapter(controller: feedViewController,
-                                                                              loader: { imageLoader($0).dispatchOnMainQueue() }),
-        errorView: WeakRefVirtualProxy(feedViewController), loadingview: WeakRefVirtualProxy(feedViewController))
-      
+        presentionAdapter.presenter = LoadResourcePresenter(resourceView: FeedViewAdapter(controller: feedViewController,
+                                                                                          loader: { imageLoader($0).dispatchOnMainQueue() }),
+                                                            loadingView: WeakRefVirtualProxy(feedViewController),
+                                                            errorView: WeakRefVirtualProxy(feedViewController), mapper: FeedPresenter.map)
+        
       
         return feedViewController
     }
