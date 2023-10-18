@@ -15,9 +15,7 @@ public protocol FeedView {
 
 
 
-public protocol FeedLoadingView {
-    func display(_ viewModel: FeedLoadingViewModel)
-}
+
 
 
 
@@ -27,7 +25,7 @@ public protocol FeedErrorView {
 
 public final class FeedPresenter {
     private let errorView: FeedErrorView
-    private let loadingView: FeedLoadingView
+    private let loadingView: ResourceLoadingView
     private let feedview: FeedView
     private var feedLoadError: String {
             return NSLocalizedString("GENERIC_CONNECTION_ERROR",
@@ -42,7 +40,7 @@ public final class FeedPresenter {
                 comment: "Title for the feed view")
         }
     
-    public  init(feedview: FeedView,errorView: FeedErrorView, loadingview: FeedLoadingView) {
+    public  init(feedview: FeedView,errorView: FeedErrorView, loadingview: ResourceLoadingView) {
         self.errorView = errorView
         self.loadingView = loadingview
         self.feedview = feedview
@@ -50,22 +48,22 @@ public final class FeedPresenter {
     
     public func didStartLoadingFeed() {
         errorView.display(.noError)
-        loadingView.display(FeedLoadingViewModel(isLoading: true))
+        loadingView.display(ResourceLoadingViewModel(isLoading: true))
     }
     
     public func didFinishLoadingFeed() {
         errorView.display(.noError)
-        loadingView.display(FeedLoadingViewModel(isLoading: false))
+        loadingView.display(ResourceLoadingViewModel(isLoading: false))
     }
     
     public func didFinishLoadingFeed(_ feed: [FeedImage])  {
         feedview.display(FeedViewModel(feed: feed))
-        loadingView.display(FeedLoadingViewModel(isLoading: false))
+        loadingView.display(ResourceLoadingViewModel(isLoading: false))
     }
     
     public func didFinishLoadingFeed(with error: Error) {
         errorView.display(.error(message: feedLoadError))
-        loadingView.display(FeedLoadingViewModel(isLoading: false))
+        loadingView.display(ResourceLoadingViewModel(isLoading: false))
     }
     
      
