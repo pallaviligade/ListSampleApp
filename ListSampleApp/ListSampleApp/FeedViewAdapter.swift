@@ -25,17 +25,37 @@ final class  FeedViewAdapter: ResourceView {
         controller?.display(viewmodel.feed.map { model in
           //  FeedImageCellController(ViewModel: FeedImageCellViewModel(model:model , imageLoader: loader, imageTransfer: UIImage.init) )
             
-            let adapter = FeedImageDataLoaderPresentationAdapter<WeakRefVirtualProxy<FeedImageCellController>, UIImage>(model: model, imageLoader: imageloader)
-                        let view = FeedImageCellController(delegate: adapter)
+            let adapter = LoadResourcePresentionAdapter<Data, WeakRefVirtualProxy<FeedImageCellController>>(loader: { [imageloader] in
+                
+                imageloader(model.imageURL)
+                
+            })
+            
+            let view = FeedImageCellController(
+                            viewModel: FeedImagePresenter<FeedImageCellController, UIImage>.map(model),
+                            delegate: adapter)
 
-                        adapter.presenter = FeedImagePresenter(
-                            view: WeakRefVirtualProxy(view),
-                            imageTransformer: UIImage.init)
+                        adapter.presenter = LoadResourcePresenter(
+                            resourceView: WeakRefVirtualProxy(view),
+                            loadingView: WeakRefVirtualProxy(view),
+                            errorView: WeakRefVirtualProxy(view),
+                            mapper: { data in
+                                guard let image = UIImage(data: data) else {
+                                    throw InvalidImageData()
+                                }
+                                return image
+                            })
+              //          let view = FeedImageCellController(delegate: adapter)
+
+                //        adapter.presenter = FeedImagePresenter(
+                  //          view: WeakRefVirtualProxy(view),
+                    //        imageTransformer: UIImage.init)
 
                         return view
         })
     }
 
+    private struct InvalidImageData: Error {}
 }
 
 

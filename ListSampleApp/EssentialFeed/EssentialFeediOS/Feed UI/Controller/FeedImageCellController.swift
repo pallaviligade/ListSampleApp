@@ -13,21 +13,32 @@ public protocol FeedImageCellControllerDelegate {
     func didCancelImageRequest()
 }
 
-public final class FeedImageCellController: FeedImageView {
+public final class FeedImageCellController: FeedImageView, ResourceView, ResourceLoadingView, ResourceErrorView {
+  
     
+    
+    public typealias ResourceViewModel = UIImage
     
     public typealias Image = UIImage
    
+    private let viewModel: FeedImageViewModel <UIImage>
+    
     private let delegate: FeedImageCellControllerDelegate
     private var cell: FeedImageCell?
   
-   public init(delegate: FeedImageCellControllerDelegate) {
+    public init(viewModel:FeedImageViewModel<UIImage> ,delegate: FeedImageCellControllerDelegate) {
         self.delegate = delegate
+        self.viewModel = viewModel
     }
     
     public  func view(at tableView: UITableView) -> UITableViewCell {
         cell = tableView.dequeReuableCell()
         //cell = tableView.dequeueReusableCell(withIdentifier: "FeedImageCell") as? FeedImageCell
+        cell?.locationContainer.isHidden = !viewModel.hasLocation
+        cell?.locationLabel.text = viewModel.location
+        cell?.discrptionLabel.text = viewModel.description
+        cell?.feedImageView.image = nil
+        cell?.onRetry = delegate.didRequestImage
         delegate.didRequestImage()
         return cell!
     }
@@ -41,19 +52,23 @@ public final class FeedImageCellController: FeedImageView {
         delegate.didCancelImageRequest()
     }
     
-    public func display(_ model: FeedImageViewModel<UIImage>) {
-        cell?.locationContainer.isHidden = !model.hasLocation
-        cell?.locationLabel.text = model.location
-        cell?.discrptionLabel.text = model.description
-        cell?.feedImageView.setAnimatedImage(model.image)
-        cell?.feedImageContainer.isShimmering = model.isLoading
-        cell?.feedImageRetryButton.isHidden = !model.shouldRetry
-        cell?.onRetry = delegate.didRequestImage
-    }
+    public func display(_ model: FeedImageViewModel<UIImage>) {}
+  
     private func releaseCellForReuse() {
         cell = nil
     }
    
+    public func display(_ viewModel: UIImage) {
+        cell?.feedImageView.setAnimatedImage(viewModel)
+    }
+    
+    public func display(_ viewModel: EssentialFeed.ResourceLoadingViewModel) {
+        cell?.feedImageView.isShimmering  = viewModel.isLoading
+    }
+    
+    public func display(_ viewModel: EssentialFeed.ResourceErrorViewModel) {
+        cell?.feedImageRetryButton.isHidden = viewModel.message == nil
+    }
 }
 
 
