@@ -13,7 +13,14 @@ class FeedImagePresenterTests: XCTestCase {
         XCTAssertEqual(FeedPresenter.title, localized("FEED_VIEW_TITLE"))
     }
     
-    
+    func test_map_createsViewModel() {
+            let image = uniqueImage()
+
+            let viewModel = FeedImagePresenter<ViewSpy, AnyImage>.map(image)
+
+            XCTAssertEqual(viewModel.description, image.description)
+            XCTAssertEqual(viewModel.location, image.location)
+        }
     
   
     
