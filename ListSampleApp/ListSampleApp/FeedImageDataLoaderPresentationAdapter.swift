@@ -4,7 +4,7 @@
 //
 //  Created by Pallavi on 04.07.23.
 //
-
+/*
 import Foundation
 import UIKit
 import EssentialFeed
@@ -57,3 +57,4 @@ final class FeedImageDataLoaderPresentationAdapter<View: FeedImageView, Image>: 
         cacellable?.cancel()
     }
 }
+*/
