@@ -472,7 +472,7 @@ public extension FeedViewController {
     }
     
      func numberOfRows(in section: Int) -> Int {
-         return tableView.numberOfSections > section ? tableView.numberOfRows(inSection: section)  : 0
+          tableView.numberOfSections > section ? tableView.numberOfRows(inSection: section)  : 0
     }
     
     func numberOfRenderedFeedImageViews() -> Int {
