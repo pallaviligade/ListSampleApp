@@ -24,7 +24,7 @@ final class  FeedViewAdapter: ResourceView {
     
     func display(_ viewmodel: EssentialFeed.FeedViewModel) {
         controller?.display(viewmodel.feed.map { model in
-          //  FeedImageCellController(ViewModel: FeedImageCellViewModel(model:model , imageLoader: loader, imageTransfer: UIImage.init) )
+            //  FeedImageCellController(ViewModel: FeedImageCellViewModel(model:model , imageLoader: loader, imageTransfer: UIImage.init) )
             
             let adapter = FeedPresentatioAdapter (loader: { [imageloader] in
                 
@@ -33,32 +33,38 @@ final class  FeedViewAdapter: ResourceView {
             })
             
             let view = FeedImageCellController(
-                            viewModel: FeedImagePresenter.map(model),
-                            delegate: adapter)
-
-                        adapter.presenter = LoadResourcePresenter(
-                            resourceView: WeakRefVirtualProxy(view),
-                            loadingView: WeakRefVirtualProxy(view),
-                            errorView: WeakRefVirtualProxy(view),
-                            mapper: { data in
-                                guard let image = UIImage(data: data) else {
-                                    throw InvalidImageData()
-                                }
-                                return image
-                            })
-              //          let view = FeedImageCellController(delegate: adapter)
-
-                //        adapter.presenter = FeedImagePresenter(
-                  //          view: WeakRefVirtualProxy(view),
-                    //        imageTransformer: UIImage.init)
-
-                        return view
+                viewModel: FeedImagePresenter.map(model),
+                delegate: adapter)
+            
+            adapter.presenter = LoadResourcePresenter(
+                resourceView: WeakRefVirtualProxy(view),
+                loadingView: WeakRefVirtualProxy(view),
+                errorView: WeakRefVirtualProxy(view),
+                mapper: UIImage.tryMake)
+            //          let view = FeedImageCellController(delegate: adapter)
+            
+            //        adapter.presenter = FeedImagePresenter(
+            //          view: WeakRefVirtualProxy(view),
+            //        imageTransformer: UIImage.init)
+            
+            return view
         })
     }
-
-    private struct InvalidImageData: Error {}
+    
+    
 }
 
+extension UIImage {
+     struct InvalidImageData: Error {}
+    
+    static func tryMake(data: Data) throws -> UIImage {
+     
+        guard let image = UIImage(data: data) else {
+            throw InvalidImageData()
+        }
+        return image
+    }
+}
 
 
 
