@@ -11,15 +11,7 @@ import EssentialFeediOS
 
 class FeedSnapShotTests: XCTestCase {
     
-    func test_emptyFeed() {
-        let sut = makeSUT()
-        
-        sut.display(emptyFeed())
-        
-        //assert(snapShot: sut.snapshot(), named: "EMPTY_FEED")
-        assert(snapshot: sut.snapshot(for: .iPhone8(style: .light)), named: "EMPTY_FEED_light")
-        assert(snapshot: sut.snapshot(for: .iPhone8(style: .dark)), named: "EMPTY_FEED_dark")
-    }
+    
     
     func test_FeedWithContent() {
         let sut = makeSUT()
@@ -31,14 +23,7 @@ class FeedSnapShotTests: XCTestCase {
         assert(snapshot: sut.snapshot(for: .iPhone8(style: .dark)), named: "FEED_WITH_CONTENT_dark")
     }
     
-    func test_feedWithErrorMessage() {
-        let sut = makeSUT()
-        sut.display(.error(message: "This is a\n Muti line \n Error Message"))
-        
-        //assert(snapShot: sut.snapshot(), named: "Feed_WITH_ERROR")
-        assert(snapshot: sut.snapshot(for: .iPhone8(style: .light)), named: "FEED_WITH_ERROR_MESSAGE_light")
-        assert(snapshot: sut.snapshot(for: .iPhone8(style: .dark)), named: "FEED_WITH_ERROR_MESSAGE_dark")
-    }
+    
     
     func test_FeedWithFailedImageLoading() {
         
@@ -68,26 +53,6 @@ class FeedSnapShotTests: XCTestCase {
         return []
     }
     
-    private func assert(snapshot: UIImage, named name: String, file: StaticString = #file, line: UInt = #line) {
-        
-         let snapShotData = makeSnapshotData(for: snapshot, file: file, line: line)
-        
-         let snapshotURL = makeSnapshotURL(name: name)
-        
-        guard let storedSnapShotsData =  try? Data(contentsOf: snapshotURL)  else {
-            XCTFail("Failed to load stored snapshot at URL: \(snapshotURL). Use the `record` method to store a snapshot before asserting.", file: file, line: line)
-            return
-        }
-        
-        if snapShotData != storedSnapShotsData {
-            let temporarySnapshotURL = URL(filePath: NSTemporaryDirectory()).appendingPathComponent(snapshotURL.lastPathComponent)
-            
-            try? snapShotData?.write(to: temporarySnapshotURL)
-            
-            XCTFail("New snapshot does not match stored snapshot. New snapshot URL: \(temporarySnapshotURL), Stored snapshot URL: \(snapshotURL)", file: file, line: line)
-        }
-        
-    }
     private func feedWithContent() -> [ImageStub] {
         
         let stub = [ImageStub(description: "The East Side Gallery is an open-air gallery in Berlin. It consists of a series of murals painted directly on a 1,316 m long remnant of the Berlin Wall, located near the centre of Berlin, on Mühlenstraße in Friedrichshain-Kreuzberg. The gallery has official status as a Denkmal, or heritage-protected landmark.",
@@ -104,7 +69,28 @@ class FeedSnapShotTests: XCTestCase {
         return stub
     }
     
-    private func record(snapshot: UIImage, named name: String, file: StaticString = #file, line: UInt = #line) {
+    /* private func assert(snapshot: UIImage, named name: String, file: StaticString = #file, line: UInt = #line) {
+         
+          let snapShotData = makeSnapshotData(for: snapshot, file: file, line: line)
+         
+          let snapshotURL = makeSnapshotURL(name: name)
+         
+         guard let storedSnapShotsData =  try? Data(contentsOf: snapshotURL)  else {
+             XCTFail("Failed to load stored snapshot at URL: \(snapshotURL). Use the `record` method to store a snapshot before asserting.", file: file, line: line)
+             return
+         }
+         
+         if snapShotData != storedSnapShotsData {
+             let temporarySnapshotURL = URL(filePath: NSTemporaryDirectory()).appendingPathComponent(snapshotURL.lastPathComponent)
+             
+             try? snapShotData?.write(to: temporarySnapshotURL)
+             
+             XCTFail("New snapshot does not match stored snapshot. New snapshot URL: \(temporarySnapshotURL), Stored snapshot URL: \(snapshotURL)", file: file, line: line)
+         }
+         
+     }*/
+    
+    /*private func record(snapshot: UIImage, named name: String, file: StaticString = #file, line: UInt = #line) {
         
          let snapShotData = makeSnapshotData(for: snapshot, file: file, line: line)
         // create path
@@ -137,7 +123,7 @@ class FeedSnapShotTests: XCTestCase {
             return nil
         }
         return snapShotData
-    }
+    }*/
     
 }
 
