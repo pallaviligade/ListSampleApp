@@ -296,7 +296,7 @@ final class FeedUIIntegration: XCTestCase {
     }
     
    
-    private func assertThat(_ sut: FeedViewController, isRendering feed: [FeedImage],file: StaticString = #file, line: UInt = #line ) {
+    private func assertThat(_ sut: ListViewController, isRendering feed: [FeedImage],file: StaticString = #file, line: UInt = #line ) {
 
         sut.tableView.layoutIfNeeded()
         RunLoop.main.run(until: Date())
@@ -310,7 +310,7 @@ final class FeedUIIntegration: XCTestCase {
         }
     }
     
-    private func assertThat(_ sut: FeedViewController, hasViewConfiguredFor image: FeedImage, at index: Int, file: StaticString = #file, line: UInt = #line) {
+    private func assertThat(_ sut: ListViewController, hasViewConfiguredFor image: FeedImage, at index: Int, file: StaticString = #file, line: UInt = #line) {
             let view = sut.feedImageView(at: index)
 
             guard let cell = view as? FeedImageCell else {
@@ -326,7 +326,7 @@ final class FeedUIIntegration: XCTestCase {
         }
     
     
-    func makeSUT(file: StaticString = #file, line: UInt = #line ) -> (sut:FeedViewController, loader: FeedViewSpy) {
+    func makeSUT(file: StaticString = #file, line: UInt = #line ) -> (sut:ListViewController, loader: FeedViewSpy) {
         let loader = FeedViewSpy()
         let sut  = FeedUIComposer.createFeedView(feedloader: loader.loadPublisher, imageLoader: loader.loadImageDataPubliser)
         trackForMemoryLeaks(loader, file: file, line: line)
@@ -444,7 +444,7 @@ final class FeedUIIntegration: XCTestCase {
     }
 }
 
-public extension FeedViewController {
+public extension ListViewController {
     func simulateUserInitiatedFeedReload() {
             refreshControl?.simulatePullToRefresh()
         }

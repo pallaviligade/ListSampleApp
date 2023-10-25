@@ -13,11 +13,11 @@ import EssentialFeediOS
 final class  FeedViewAdapter: ResourceView {
     
     private typealias FeedPresentatioAdapter =  LoadResourcePresentionAdapter<Data, WeakRefVirtualProxy<FeedImageCellController>>
-    private weak var controller : FeedViewController?
+    private weak var controller : ListViewController?
     //private let imageloader: FeedImageDataLoader
     private let imageloader:(URL) -> FeedImageDataLoader.Publisher
     
-    init(controller: FeedViewController, loader:@escaping(URL) -> FeedImageDataLoader.Publisher) {
+    init(controller: ListViewController, loader:@escaping(URL) -> FeedImageDataLoader.Publisher) {
         self.controller = controller
         self.imageloader = loader
     }
