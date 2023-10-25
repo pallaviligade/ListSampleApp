@@ -12,14 +12,19 @@ public protocol FeedViewControllerDelegate {
     func didRefershFeedRequest()
 }
 
+public protocol CellController {
+    func view(at tableView: UITableView) -> UITableViewCell // This func creates view for each cell
+    func preload() 
+    func cancelLoad()
+}
 
 public final  class FeedViewController: UITableViewController,UITableViewDataSourcePrefetching, ResourceLoadingView, ResourceErrorView
 {
    
     @IBOutlet private(set) public var errorView: ErrorView?
     public var delegate: FeedViewControllerDelegate?
-    private var loadingController = [IndexPath: FeedImageCellController]()
-    private var tableModel = [FeedImageCellController]() {
+    private var loadingController = [IndexPath: CellController]()
+    private var tableModel = [CellController]() {
         didSet { tableView.reloadData() }
     }
     
@@ -46,7 +51,7 @@ public final  class FeedViewController: UITableViewController,UITableViewDataSou
         tableView.sizeTableHeaderToFit()
     }
     // Every time we get new model we so reseting it loadingController
-    public func display(_ cellController: [FeedImageCellController]) {
+    public func display(_ cellController: [CellController]) {
         loadingController = [:]
         tableModel = cellController
     }
@@ -89,7 +94,7 @@ public final  class FeedViewController: UITableViewController,UITableViewDataSou
         
     }
     
-    private func cellController(forRowAt indexPath: IndexPath) -> FeedImageCellController {
+    private func cellController(forRowAt indexPath: IndexPath) -> CellController {
         //return tableModel[indexPath.row]
         
         let controller = tableModel[indexPath.row]
