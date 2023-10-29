@@ -9,23 +9,7 @@ import UIKit
 import EssentialFeed
 
 
-public struct CellController  {
-        let delgate: UITableViewDelegate?
-        let dataSourcePrefetch:UITableViewDataSourcePrefetching?
-        let dataSource: UITableViewDataSource
-    
-   public init(dataSourceAll:  UITableViewDataSource & UITableViewDelegate & UITableViewDataSourcePrefetching ) {
-        self.delgate = dataSourceAll
-        self.dataSourcePrefetch = dataSourceAll
-        self.dataSource = dataSourceAll
-    }
-    
-    init(_ dataSource: UITableViewDataSource) {
-        self.dataSource = dataSource
-        self.dataSourcePrefetch = nil
-        self.delgate = nil
-    }
-}
+
 
 //public protocol CellController {
 //    func view(at tableView: UITableView) -> UITableViewCell // This func creates view for each cell
