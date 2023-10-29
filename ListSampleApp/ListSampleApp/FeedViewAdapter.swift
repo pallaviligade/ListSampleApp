@@ -47,7 +47,7 @@ final class  FeedViewAdapter: ResourceView {
             //          view: WeakRefVirtualProxy(view),
             //        imageTransformer: UIImage.init)
             
-            return (view, view, view)
+            return CellController(dataSourceAll: view)
         })
     }
     
