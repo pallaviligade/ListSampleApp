@@ -202,6 +202,20 @@ final class FeedUIIntegration: XCTestCase {
         
         
     }
+    
+    func test_tapOnErrorView_hidesErrorMessage() {
+            let (sut, loader) = makeSUT()
+
+            sut.loadViewIfNeeded()
+            XCTAssertEqual(sut.errorMessage, nil)
+
+            loader.completeFeedLoadingWithError(at: 0)
+            XCTAssertEqual(sut.errorMessage, loadError)
+
+            sut.simulateErrorViewTap()
+            XCTAssertEqual(sut.errorMessage, nil)
+        }
+    
     func test_feedImageViewRetryButton_isVisibleOnImageURLLoadError() {
         let image0 = makeFeedImage(imgurl: URL(string: "http://any0-url.com")!)
         let image1 = makeFeedImage(imgurl: URL(string: "http://any1-url.com")!)
@@ -496,6 +510,10 @@ public extension ListViewController {
         return view
         
     }
+    
+    func simulateErrorViewTap() {
+           errorView.simulateToTap()
+       }
     
     func simulateFeedImagViewNearVisiable(at row: Int) {
         let ds = tableView.prefetchDataSource

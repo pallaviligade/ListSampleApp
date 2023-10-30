@@ -50,8 +50,9 @@ extension FeedImageCellController: UITableViewDataSource, UITableViewDelegate, U
        cell?.locationLabel.text = viewModel.location
        cell?.discrptionLabel.text = viewModel.description
        cell?.feedImageView.image = nil
-       cell?.onRetry = delegate.didRequestImage
-       delegate.didRequestImage()
+        cell?.onRetry = { [weak self] in
+            self?.delegate.didRequestImage()
+        }
        return cell!
    }
     

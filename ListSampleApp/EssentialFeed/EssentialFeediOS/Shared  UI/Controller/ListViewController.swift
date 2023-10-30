@@ -25,7 +25,7 @@ import EssentialFeed
 public final  class ListViewController: UITableViewController,UITableViewDataSourcePrefetching, ResourceLoadingView, ResourceErrorView
 {
    
-    @IBOutlet private(set) public var errorView: ErrorView?
+    private(set) public var errorView =  ErrorView()
     public var onRefresh: (() -> Void)?
     private var loadingController = [IndexPath: CellController]()
     private var tableModel = [CellController]() {
@@ -36,8 +36,31 @@ public final  class ListViewController: UITableViewController,UITableViewDataSou
     public override func viewDidLoad() {
         super.viewDidLoad()
         title = FeedPresenter.title
+        configureErrorView()
         refresh()
     }
+    
+    private func configureErrorView() {
+           let container = UIView()
+           container.backgroundColor = .clear
+           container.addSubview(errorView)
+
+           errorView.translatesAutoresizingMaskIntoConstraints = false
+           NSLayoutConstraint.activate([
+               errorView.leadingAnchor.constraint(equalTo: container.leadingAnchor),
+               container.trailingAnchor.constraint(equalTo: errorView.trailingAnchor),
+               errorView.topAnchor.constraint(equalTo: container.topAnchor),
+               container.bottomAnchor.constraint(equalTo: errorView.bottomAnchor),
+           ])
+
+           tableView.tableHeaderView = container
+
+           errorView.onHide = { [weak self] in
+               self?.tableView.beginUpdates()
+               self?.tableView.sizeTableHeaderToFit()
+               self?.tableView.endUpdates()
+           }
+       }
     
     @IBAction func refresh()
     {
@@ -46,7 +69,7 @@ public final  class ListViewController: UITableViewController,UITableViewDataSou
     }
     
     public var errorMessage: String? {
-        return errorView?.message
+        return errorView.message
     }
     
     public override func viewDidLayoutSubviews() {
@@ -68,11 +91,7 @@ public final  class ListViewController: UITableViewController,UITableViewDataSou
     }
     
     public func display(_ viewModel: ResourceErrorViewModel) {
-        if let message = viewModel.message {
-            errorView?.show(message: message)
-        } else {
-            errorView?.hideMessage()
-        }
+        errorView.message = viewModel.message
     }
     
     public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
