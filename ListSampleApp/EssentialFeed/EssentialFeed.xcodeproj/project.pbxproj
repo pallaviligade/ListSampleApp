@@ -57,6 +57,8 @@
 		8E9A73982AEBC0E100940D05 /* IMAGE_COMMENTS_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E9A73962AEBC0E100940D05 /* IMAGE_COMMENTS_dark.png */; };
 		8E9A73992AEBC0E100940D05 /* IMAGE_COMMENTS_light.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E9A73972AEBC0E100940D05 /* IMAGE_COMMENTS_light.png */; };
 		8E9A739B2AEEB46E00940D05 /* CellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9A739A2AEEB46D00940D05 /* CellController.swift */; };
+		8E9A739D2AF15B2100940D05 /* LIST_WITH_ERROR_MESSAGE_light_extraExtraExtraLarge.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E9A739C2AF15B2100940D05 /* LIST_WITH_ERROR_MESSAGE_light_extraExtraExtraLarge.png */; };
+		8E9A739F2AF15B9E00940D05 /* IMAGE_COMMENTS_light_extraExtraExtraLarge.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E9A739E2AF15B9E00940D05 /* IMAGE_COMMENTS_light_extraExtraExtraLarge.png */; };
 		8EA1DBC729FBD65A00D2BC03 /* Httpclient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA1DBC629FBD65A00D2BC03 /* Httpclient.swift */; };
 		8EA1DBC929FBD6E300D2BC03 /* FeedItemMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA1DBC829FBD6E300D2BC03 /* FeedItemMapper.swift */; };
 		8EA67E402AE954F100F74048 /* ListSnapshotTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA67E3F2AE954F100F74048 /* ListSnapshotTest.swift */; };
@@ -241,6 +243,8 @@
 		8E9A73962AEBC0E100940D05 /* IMAGE_COMMENTS_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IMAGE_COMMENTS_dark.png; sourceTree = "<group>"; };
 		8E9A73972AEBC0E100940D05 /* IMAGE_COMMENTS_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IMAGE_COMMENTS_light.png; sourceTree = "<group>"; };
 		8E9A739A2AEEB46D00940D05 /* CellController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellController.swift; sourceTree = "<group>"; };
+		8E9A739C2AF15B2100940D05 /* LIST_WITH_ERROR_MESSAGE_light_extraExtraExtraLarge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LIST_WITH_ERROR_MESSAGE_light_extraExtraExtraLarge.png; sourceTree = "<group>"; };
+		8E9A739E2AF15B9E00940D05 /* IMAGE_COMMENTS_light_extraExtraExtraLarge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IMAGE_COMMENTS_light_extraExtraExtraLarge.png; sourceTree = "<group>"; };
 		8EA1DBC629FBD65A00D2BC03 /* Httpclient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Httpclient.swift; sourceTree = "<group>"; };
 		8EA1DBC829FBD6E300D2BC03 /* FeedItemMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItemMapper.swift; sourceTree = "<group>"; };
 		8EA67E3F2AE954F100F74048 /* ListSnapshotTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSnapshotTest.swift; sourceTree = "<group>"; };
@@ -574,6 +578,7 @@
 		8E9A73952AEBC0E100940D05 /* snapShots */ = {
 			isa = PBXGroup;
 			children = (
+				8E9A739E2AF15B9E00940D05 /* IMAGE_COMMENTS_light_extraExtraExtraLarge.png */,
 				8E9A73962AEBC0E100940D05 /* IMAGE_COMMENTS_dark.png */,
 				8E9A73972AEBC0E100940D05 /* IMAGE_COMMENTS_light.png */,
 			);
@@ -628,6 +633,7 @@
 		8EA67E412AE9555000F74048 /* snapShots */ = {
 			isa = PBXGroup;
 			children = (
+				8E9A739C2AF15B2100940D05 /* LIST_WITH_ERROR_MESSAGE_light_extraExtraExtraLarge.png */,
 				8EA76E5E2AB1C961004097E4 /* EMPTY_LIST_light.png */,
 				8EA76E622AB1C961004097E4 /* EMPTY_LIST_dark.png */,
 				8EA67E452AE9594A00F74048 /* LIST_WITH_ERROR_MESSAGE_dark.png */,
@@ -1164,7 +1170,9 @@
 				8EA67E482AE9594A00F74048 /* LIST_WITH_ERROR_MESSAGE_light.png in Resources */,
 				8EA76E672AB1C961004097E4 /* FEED_WITH_CONTENT_light.png in Resources */,
 				8EA76E642AB1C961004097E4 /* FEED_WITH_FAILED_IMAGE_LOADING_dark.png in Resources */,
+				8E9A739F2AF15B9E00940D05 /* IMAGE_COMMENTS_light_extraExtraExtraLarge.png in Resources */,
 				8E9A73982AEBC0E100940D05 /* IMAGE_COMMENTS_dark.png in Resources */,
+				8E9A739D2AF15B2100940D05 /* LIST_WITH_ERROR_MESSAGE_light_extraExtraExtraLarge.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -35,7 +35,7 @@ public final  class ListViewController: UITableViewController,UITableViewDataSou
   
     public override func viewDidLoad() {
         super.viewDidLoad()
-        title = FeedPresenter.title
+       // title = FeedPresenter.title
         configureErrorView()
         refresh()
     }

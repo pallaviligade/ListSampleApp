@@ -27,13 +27,16 @@ class ListSnapshotTest: XCTestCase {
 
             assert(snapshot: sut.snapshot(for: .iPhone8(style: .light)), named: "LIST_WITH_ERROR_MESSAGE_light")
             assert(snapshot: sut.snapshot(for: .iPhone8(style: .dark)), named: "LIST_WITH_ERROR_MESSAGE_dark")
+            assert(snapshot: sut.snapshot(for: .iPhone8(style: .light, contentSize: .extraExtraExtraLarge)), named: "LIST_WITH_ERROR_MESSAGE_light_extraExtraExtraLarge")
         }
 
         // MARK: - Helpers
         private func makeSUT() -> ListViewController {
-            let bundle = Bundle(for: ListViewController.self)
-            let storyboard = UIStoryboard(name: "Feed", bundle: bundle)
-            let controller = storyboard.instantiateInitialViewController() as! ListViewController
+            let controller = ListViewController()
+         //   let bundle = Bundle(for: ListViewController.self)
+           // let storyboard = UIStoryboard(name: "Feed", bundle: bundle)
+            //let controller = storyboard.instantiateInitialViewController() as! ListViewController
+            controller.tableView.separatorStyle = .none
             controller.loadViewIfNeeded()
             controller.tableView.showsVerticalScrollIndicator = false
             controller.tableView.showsHorizontalScrollIndicator = false

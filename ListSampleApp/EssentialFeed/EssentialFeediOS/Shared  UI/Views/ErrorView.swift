@@ -17,10 +17,7 @@ public final class ErrorView: UIButton {
     
     public var onHide: (() -> Void)?
 
-    private var isVisible: Bool {
-        return alpha > 0
-    }
-
+   
     public override init(frame: CGRect) {
             super.init(frame: frame)
             configure()
@@ -30,23 +27,7 @@ public final class ErrorView: UIButton {
             super.init(coder: coder)
         }
     
-    private func configure() {
-           backgroundColor = .errorBackgroundColor
-
-           addTarget(self, action: #selector(hideMessageAnimated), for: .touchUpInside)
-           configureLabel()
-           hideMessage()
-       }
     
-    private func configureLabel() {
-           titleLabel?.textColor = .white
-           titleLabel?.textAlignment = .center
-           titleLabel?.numberOfLines = 0
-           titleLabel?.font = .systemFont(ofSize: 17)
-       }
-    
-   
-
     private var titleAttributes: AttributeContainer {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = NSTextAlignment.center
@@ -57,8 +38,35 @@ public final class ErrorView: UIButton {
         return attributes
     }
     
+    private func configure() {
+        var configuration = Configuration.plain()
+        configuration.titlePadding = 0
+        configuration.baseForegroundColor = .white
+        configuration.background.backgroundColor = .errorBackgroundColor
+        configuration.background.cornerRadius = 0
+        self.configuration = configuration
+        
+        addTarget(self, action: #selector(hideMessageAnimated), for: .touchUpInside)
+        
+        hideMessage()
+    }
     
+   
 
+    
+    
+    private var isVisible: Bool {
+        return alpha > 0
+    }
+
+    private func setMessageAnimated(_ message: String?) {
+        if let message = message {
+            showAnimated(message)
+        } else {
+            hideMessageAnimated()
+        }
+    }
+    
     @objc func hideMessageAnimated() {
         UIView.animate(
             withDuration: 0.25,
@@ -70,13 +78,7 @@ public final class ErrorView: UIButton {
             })
     }
     
-    private func setMessageAnimated(_ message: String?) {
-        if let message = message {
-            showAnimated(message)
-        } else {
-            hideMessageAnimated()
-        }
-    }
+  
     
     private func showAnimated(_ message: String) {
         configuration?.attributedTitle = AttributedString(message, attributes: titleAttributes)
@@ -89,11 +91,11 @@ public final class ErrorView: UIButton {
     }
     
      func hideMessage() {
-           setTitle(nil, for: .normal)
-           alpha = 0
-           contentEdgeInsets = .init(top: -2.5, left: 0, bottom: -2.5, right: 0)
-           onHide?()
-       }
+         alpha = 0
+         configuration?.attributedTitle = nil
+         configuration?.contentInsets = .zero
+         onHide?()
+     }
 }
 
 extension UIColor {
