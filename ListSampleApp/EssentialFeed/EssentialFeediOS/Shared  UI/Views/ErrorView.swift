@@ -47,11 +47,17 @@ public final class ErrorView: UIButton {
         self.configuration = configuration
         
         addTarget(self, action: #selector(hideMessageAnimated), for: .touchUpInside)
-        
+        configureLabel()
         hideMessage()
     }
     
-   
+    private func configureLabel() {
+            titleLabel?.textColor = .white
+            titleLabel?.textAlignment = .center
+            titleLabel?.numberOfLines = 0
+            titleLabel?.font = .preferredFont(forTextStyle: .body)
+            titleLabel?.adjustsFontForContentSizeCategory = true
+        }
 
     
     
