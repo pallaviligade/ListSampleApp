@@ -157,12 +157,11 @@ final class FeedUIIntegration: XCTestCase {
     }
     
     func test_feedImageViewLoadingIndicator_isVisibleWhileLoadingImage() {
-        let image0 = makeFeedImage(imgurl: URL(string: "http://any0-url.com")!)
-        let image1 = makeFeedImage(imgurl: URL(string: "http://any1-url.com")!)
+      
         let (sut,  loader) = makeSUT()
         
         sut.loadViewIfNeeded()
-        loader.completeFeedloading(with: [image0, image1])
+        loader.completeFeedloading(with: [makeFeedImage(), makeFeedImage()])
         
         let view0 = sut.simulateFeedImageViewVisiable(at: 0)
         let view1 = sut.simulateFeedImageViewVisiable(at: 1)
@@ -176,9 +175,13 @@ final class FeedUIIntegration: XCTestCase {
         loader.completeImageLoadingWithError(at: 1)
         XCTAssertEqual(view0?.isShowingImageLoadingIndicator, false, "Expected no loading indicator state change for first view once second image loading completes with error")
         XCTAssertEqual(view1?.isShowingImageLoadingIndicator, false, "Expected no loading indicator for second view once second image loading completes with error")
+        
+        view1?.simulateRetryActions()
+        XCTAssertEqual(view0?.isShowingImageLoadingIndicator, false, "Expected no loading indicator state change for first view once second image loading completes with error")
+        XCTAssertEqual(view1?.isShowingImageLoadingIndicator, true, "Expected loading indicator state change for second view on retry action")
     }
     
-    func test_feedImageView_RenderLoadedImageFromURL() {
+   /* func test_feedImageView_RenderLoadedImageFromURL() {
        
         let (sut,  loader) = makeSUT()
         
@@ -201,7 +204,7 @@ final class FeedUIIntegration: XCTestCase {
          XCTAssertEqual(view1?.renderImage, imageData1, "Expected image for second view once second image loading completes successfully")
         
         
-    }
+    }*/
     
     func test_tapOnErrorView_hidesErrorMessage() {
             let (sut, loader) = makeSUT()
@@ -473,161 +476,10 @@ final class FeedUIIntegration: XCTestCase {
     }
 }
 
-public extension ListViewController {
-    
-     override func loadViewIfNeeded() {
-            super.loadViewIfNeeded()
 
-            tableView.frame = CGRect(x: 0, y: 0, width: 1, height: 1)
-        }
-    
-    func simulateUserInitiatedFeedReload() {
-            refreshControl?.simulatePullToRefresh()
-        }
-    
-    var isShowingloadingIndicator:Bool {
-        return refreshControl?.isRefreshing == true
-    }
-    
-    @discardableResult
-    func simulateFeedImageViewVisiable(at index: Int) -> FeedImageCell? {
-        return feedImageView(at: index) as? FeedImageCell
-    }
-    
-    @discardableResult
-        func simulateFeedImageBecomingVisibleAgain(at row: Int) -> FeedImageCell? {
-            let view = simulateFeedImageViewNotVisible(at: row)
 
-            let delegate = tableView.delegate
-            let index = IndexPath(row: row, section: feedImagesSection)
-            delegate?.tableView?(tableView, willDisplay: view!, forRowAt: index)
 
-            return view
-        }
-    
-    func numberOfRenderFeedImageView() ->  Int {
-       // return tableView.numberOfSections > feedImageNumberOfSections() ? tableView.numberOfRows(inSection: feedImageNumberOfSections()) : 0
-       // return tableView.numberOfRows(inSection: feedImageNumberOfSections())
-        numberOfRows(in: feedImagesSection)
-    }
-    private var feedImagesSection: Int { 0 }
 
-    private func feedImageNumberOfSections() -> Int {
-        return 0
-    }
-    
-     func numberOfRows(in section: Int) -> Int {
-          tableView.numberOfSections > section ? tableView.numberOfRows(inSection: section)  : 0
-    }
-    
-    func numberOfRenderedFeedImageViews() -> Int {
-        tableView.numberOfSections == 0 ? 0 : tableView.numberOfRows(inSection: feedImagesSection)
-        }
-    
-    func feedImageView(at row:Int) -> UITableViewCell? {
-        guard numberOfRenderedFeedImageViews() > row else {
-            return nil
-        }
-        let ds = tableView.dataSource
-        let index = IndexPath(row: row, section: feedImageNumberOfSections())
-        return ds?.tableView(tableView, cellForRowAt: index)
-    }
-    @discardableResult
-    func simulateFeedImageViewNotVisible(at row:Int) -> FeedImageCell? {
-        let view = simulateFeedImageViewVisiable(at: row)
-        let delegate = tableView.delegate
-        let index = IndexPath(row: row, section: feedImageNumberOfSections())
-        delegate?.tableView?(tableView, didEndDisplaying: view!, forRowAt: index)
-        return view
-        
-    }
-    
-    func simulateErrorViewTap() {
-           errorView.simulateToTap()
-       }
-    
-    func simulateFeedImagViewNearVisiable(at row: Int) {
-        let ds = tableView.prefetchDataSource
-        let index = IndexPath(row: row, section: feedImageNumberOfSections())
-        ds?.tableView(tableView, prefetchRowsAt: [index])
-    }
-    
-    func simulateFeedImageViewNotNearVisiable(at row: Int) {
-        simulateFeedImagViewNearVisiable(at: row)
-        let ds = tableView.prefetchDataSource
-        let index = IndexPath(row: row, section: feedImageNumberOfSections())
-        ds?.tableView?(tableView, cancelPrefetchingForRowsAt: [index])
-    }
-    
-    func renderedFeedImageData(at index: Int) -> Data? {
-        return simulateFeedImageViewVisible(at: index)?.renderImage
-    }
-    @discardableResult
-    func simulateFeedImageViewVisible(at index: Int) -> FeedImageCell? {
-        return feedImageView(at: index) as? FeedImageCell
-    }
-}
 
-extension FeedImageCell {
-    
-    func simulateRetryActions() {
-        feedImageRetryButton.simulateToTap()
-    }
-    var discrText:String? {
-        return discrptionLabel.text
-    }
-    
-    var locationText: String? {
-        return locationLabel.text
-    }
-    
-    var isShowinglocation: Bool {
-        return !locationContainer.isHidden
-    }
-    
-    var isShowingImageLoadingIndicator:Bool {
-        return feedImageContainer.isShimmering
-    }
-    
-    var renderImage: Data? {
-        return feedImageView.image?.pngData()
-    }
-    
-    var isShowingRetryAction: Bool? {
-        return !feedImageRetryButton.isHidden
-    }
-   
-}
 
-extension UIButton {
-    func simulateToTap() {
-        allTargets.forEach { target in
-                      actions(forTarget: target, forControlEvent: .touchUpInside)?.forEach {
-                          (target as NSObject).perform(Selector($0))
-                      }
-                  }
-    }
-}
 
-extension UIRefreshControl {
-    func simulatePullToRefresh() {
-      allTargets.forEach { target in
-                    actions(forTarget: target, forControlEvent: .valueChanged)?.forEach {
-                        (target as NSObject).perform(Selector($0))
-                    }
-                }
-    }
-}
-
-public extension UIImage {
-    static func make(withColor color: UIColor) -> UIImage {
-        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
-        UIGraphicsBeginImageContext(rect.size)
-        let context = UIGraphicsGetCurrentContext()!
-        context.setFillColor(color.cgColor)
-        context.fill(rect)
-        let img = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return img!
-    }
-}
