@@ -11,7 +11,7 @@ public final class ErrorView: UIButton {
    // @IBOutlet private(set) public var button: UIButton!
 
     public var message: String? {
-        get { return isVisible ? title(for: .normal) : nil }
+        get { return isVisible ? configuration?.title : nil }
         set { setMessageAnimated(newValue) }
     }
     
@@ -47,17 +47,16 @@ public final class ErrorView: UIButton {
         self.configuration = configuration
         
         addTarget(self, action: #selector(hideMessageAnimated), for: .touchUpInside)
-        configureLabel()
         hideMessage()
     }
     
-    private func configureLabel() {
-            titleLabel?.textColor = .white
-            titleLabel?.textAlignment = .center
-            titleLabel?.numberOfLines = 0
-            titleLabel?.font = .preferredFont(forTextStyle: .body)
-            titleLabel?.adjustsFontForContentSizeCategory = true
-        }
+//    private func configureLabel() {
+//            titleLabel?.textColor = .white
+//            titleLabel?.textAlignment = .center
+//            titleLabel?.numberOfLines = 0
+//            titleLabel?.font = .preferredFont(forTextStyle: .body)
+//            titleLabel?.adjustsFontForContentSizeCategory = true
+//        }
 
     
     

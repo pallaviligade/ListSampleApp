@@ -277,6 +277,21 @@ final class FeedUIIntegration: XCTestCase {
         
     }
     
+    func test_feedImageView_doesNotShowDataFromPreviousRequestWhenCellIsReused() throws {
+            let (sut, loader) = makeSUT()
+
+            sut.loadViewIfNeeded()
+            loader.completeFeedloading(with: [makeFeedImage(), makeFeedImage()])
+
+            let view0 = try XCTUnwrap(sut.simulateFeedImageViewVisible(at: 0))
+            view0.prepareForReuse()
+
+            let imageData0 = UIImage.make(withColor: .red).pngData()!
+            loader.compeletImageLoading(with: imageData0, at: 0)
+
+            XCTAssertEqual(view0.renderImage, .none, "Expected no image state change for reused view once image loading completes successfully")
+        }
+    
     func test_feedImageView_PreloadsImageURLWhenNearVisiable() {
         let image0 = makeFeedImage(imgurl: URL(string: "http://any0-url.com")!)
         let image1 = makeFeedImage(imgurl: URL(string: "http://any1-url.com")!)
@@ -459,6 +474,13 @@ final class FeedUIIntegration: XCTestCase {
 }
 
 public extension ListViewController {
+    
+     override func loadViewIfNeeded() {
+            super.loadViewIfNeeded()
+
+            tableView.frame = CGRect(x: 0, y: 0, width: 1, height: 1)
+        }
+    
     func simulateUserInitiatedFeedReload() {
             refreshControl?.simulatePullToRefresh()
         }
@@ -472,7 +494,16 @@ public extension ListViewController {
         return feedImageView(at: index) as? FeedImageCell
     }
     
-    
+    @discardableResult
+        func simulateFeedImageBecomingVisibleAgain(at row: Int) -> FeedImageCell? {
+            let view = simulateFeedImageViewNotVisible(at: row)
+
+            let delegate = tableView.delegate
+            let index = IndexPath(row: row, section: feedImagesSection)
+            delegate?.tableView?(tableView, willDisplay: view!, forRowAt: index)
+
+            return view
+        }
     
     func numberOfRenderFeedImageView() ->  Int {
        // return tableView.numberOfSections > feedImageNumberOfSections() ? tableView.numberOfRows(inSection: feedImageNumberOfSections()) : 0
@@ -490,7 +521,7 @@ public extension ListViewController {
     }
     
     func numberOfRenderedFeedImageViews() -> Int {
-            return tableView.numberOfRows(inSection: feedImageNumberOfSections())
+        tableView.numberOfSections == 0 ? 0 : tableView.numberOfRows(inSection: feedImagesSection)
         }
     
     func feedImageView(at row:Int) -> UITableViewCell? {
