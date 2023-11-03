@@ -13,9 +13,9 @@ import ListSampleApp
 import Combine
 
 
-final class FeedUIIntegration: XCTestCase {
+class FeedUIIntegration: XCTestCase {
     
-    func test_CheckTitleOfFeed() {
+    func test_feedView_hasTitle() {
         let (sut, _) = makeSUT()
        
         sut.loadViewIfNeeded()

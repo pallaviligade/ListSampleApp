@@ -46,6 +46,7 @@ public extension ListViewController {
         numberOfRows(in: feedImagesSection)
     }
     private var feedImagesSection: Int { 0 }
+    private var feedLoadMoreSection: Int { 1 }
 
     private func feedImageNumberOfSections() -> Int {
         return 0
@@ -77,9 +78,21 @@ public extension ListViewController {
         
     }
     
+    private func loadMoreFeedCell() -> LoadMoreCell? {
+        cell(row: 0, section: feedLoadMoreSection) as? LoadMoreCell
+    }
+    
     func simulateErrorViewTap() {
            errorView.simulateToTap()
        }
+    
+    func simulateLoadMoreFeedAction() {
+        guard let view = loadMoreFeedCell() else { return }
+        
+        let delegate = tableView.delegate
+        let index = IndexPath(row: 0, section: feedLoadMoreSection)
+        delegate?.tableView?(tableView, willDisplay: view, forRowAt: index)
+    }
     
     func simulateFeedImagViewNearVisiable(at row: Int) {
         let ds = tableView.prefetchDataSource
@@ -101,4 +114,37 @@ public extension ListViewController {
     func simulateFeedImageViewVisible(at index: Int) -> FeedImageCell? {
         return feedImageView(at: index) as? FeedImageCell
     }
+    
+    func cell(row: Int, section: Int) -> UITableViewCell? {
+        guard numberOfRows(in: section) > row else {
+            return nil
+        }
+        let ds = tableView.dataSource
+        let index = IndexPath(row: row, section: section)
+        return ds?.tableView(tableView, cellForRowAt: index)
+    }
+}
+
+extension ListViewController {
+    func numberOfRenderedComments() -> Int {
+        numberOfRows(in: commentsSection)
+    }
+    
+    func commentMessage(at row: Int) -> String? {
+        commentView(at: row)?.messageLabel.text
+    }
+    
+    func commentDate(at row: Int) -> String? {
+        commentView(at: row)?.dateLabel.text
+    }
+    
+    func commentUsername(at row: Int) -> String? {
+        commentView(at: row)?.usernameLabel.text
+    }
+    
+    private func commentView(at row: Int) -> ImageCommentCell? {
+        cell(row: row, section: commentsSection) as? ImageCommentCell
+    }
+    
+    private var commentsSection: Int { 0 }
 }

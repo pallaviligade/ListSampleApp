@@ -4,7 +4,7 @@
 //
 //  Created by Pallavi on 15.08.23.
 //
-
+import os
 import UIKit
 import EssentialFeed
 import EssentialFeediOS
@@ -18,6 +18,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
          URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
     }()
     
+    private lazy var scheduler: AnyDispatchQueueScheduler = DispatchQueue(
+        label: "com.essentialdeveloper.infra.queue",
+        qos: .userInitiated,
+        attributes: .concurrent
+    ).eraseToAnyScheduler()
+    
+    
     private lazy var store: FeedStore & FeedImageDataStore = {
          try! CoreDataFeedStore(storeURL: NSPersistentContainer
             .defaultDirectoryURL()
@@ -29,17 +36,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }()
     
     private var remoteURL: URL {
-        return URL(string: "https://static1.squarespace.com/static/5891c5b8d1758ec68ef5dbc2/t/5db4155a4fbade21d17ecd28/1572083034355/essential_app_feed.json")!
+        return URL(string: "https://ile-api.essentialdeveloper.com/essential-feed")!
     }
     
     private lazy var remoteFeedLoader = RemoteLoader(url:remoteURL , client: httpClient, mapper: FeedItemMapper.map(_:from:))
 
     
-    convenience init(httpClient: Httpclient, store: FeedStore & FeedImageDataStore) {
+    convenience init(httpClient: Httpclient, store: FeedStore & FeedImageDataStore, scheduler: AnyDispatchQueueScheduler) {
         self.init()
         self.httpClient = httpClient
         self.store = store
-        
+        self.scheduler = scheduler
     }
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {

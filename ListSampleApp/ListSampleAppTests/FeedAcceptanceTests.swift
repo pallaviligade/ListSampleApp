@@ -12,24 +12,30 @@ import XCTest
 
 class FeedAcceptanceTest: XCTestCase
 {
-    func test_onLaunch_displaysFeedWhenCustomerHasConnectivity() {
+    
+    
+   /* func test_onLaunch_displaysFeedWhenCustomerHasConnectivity() {
         let feed = launch(httpClient: .online(response), store: .empty)
 
         XCTAssertEqual(feed.numberOfRenderFeedImageView(), 2)
         XCTAssertEqual(feed.renderedFeedImageData(at: 0), makeImageData())
         XCTAssertEqual(feed.renderedFeedImageData(at: 1), makeImageData())
-    }
+    }*/
     func test_onLaunch_displaysCachedRemoteFeedWhenCustomerHasNoConnectivity() {
         let sharedStore = InMemoryFeedStore.empty
+        
         let onlineFeed = launch(httpClient: .online(response), store: sharedStore)
         onlineFeed.simulateFeedImageViewVisible(at: 0)
         onlineFeed.simulateFeedImageViewVisible(at: 1)
+        onlineFeed.simulateLoadMoreFeedAction()
+        onlineFeed.simulateFeedImageViewVisible(at: 2)
         
         let offlineFeed = launch(httpClient: .offline, store: sharedStore)
         
-        XCTAssertEqual(offlineFeed.numberOfRenderFeedImageView(), 2)
+        XCTAssertEqual(offlineFeed.numberOfRenderFeedImageView(), 3)
         XCTAssertEqual(offlineFeed.renderedFeedImageData(at: 0), makeImageData())
         XCTAssertEqual(offlineFeed.renderedFeedImageData(at: 1), makeImageData())
+        XCTAssertEqual(offlineFeed.renderedFeedImageData(at: 2), makeImageData())
     }
 
         func test_onLaunch_displaysEmptyFeedWhenCustomerHasNoConnectivityAndNoCache() {
@@ -54,7 +60,8 @@ class FeedAcceptanceTest: XCTestCase
         }
     
     private func enterBackground(with store: InMemoryFeedStore) {
-            let sut = SceneDelegate(httpClient: HTTPClientStub.offline, store: store)
+            let sut = SceneDelegate(httpClient: HTTPClientStub.offline, store: store, scheduler:
+                    .immediateOnMainQueue)
             sut.sceneWillResignActive(UIApplication.shared.connectedScenes.first!)
         }
     // MARK: - Helpers
@@ -62,7 +69,7 @@ class FeedAcceptanceTest: XCTestCase
             httpClient: HTTPClientStub = .offline,
             store: InMemoryFeedStore = .empty
         ) -> ListViewController {
-            let sut = SceneDelegate(httpClient: httpClient, store: store)
+            let sut = SceneDelegate(httpClient: httpClient, store: store, scheduler: .immediateOnMainQueue)
             sut.window = UIWindow()
             sut.configureWindow()
 

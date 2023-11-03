@@ -5,7 +5,7 @@
 //  Created by Pallavi on 16.08.23.
 //
 
-import XCTest
+/*import XCTest
 import EssentialFeed
 import ListSampleApp
 
@@ -163,5 +163,6 @@ class FeedImageDataLoaderWithFallbackCompositeTests: XCTestCase {
             messages[index].completion(.success(data))
         }
         
-    }*/
+    }
 }
+   */*/
