@@ -37,9 +37,9 @@ public extension ListViewController {
 }
 
 extension ListViewController {
-    @discardableResult
-    func simulateFeedImageViewVisiable(at index: Int) -> FeedImageCell? {
-        return feedImageView(at: index) as? FeedImageCell
+    
+    func renderedFeedImageData(at index: Int) -> Data? {
+        return simulateFeedImageViewVisible(at: index)?.renderImage
     }
     
     @discardableResult
@@ -52,6 +52,19 @@ extension ListViewController {
         
         return view
     }
+    
+    @discardableResult
+    func simulateFeedImageViewVisible(at index: Int) -> FeedImageCell? {
+        return feedImageView(at: index) as? FeedImageCell
+    }
+    
+    func simulateTapOnFeedImage(at row: Int) {
+        let delegate = tableView.delegate
+        let index = IndexPath(row: row, section: feedImagesSection)
+        delegate?.tableView?(tableView, didSelectRowAt: index)
+    }
+    
+  
     
     func numberOfRenderFeedImageView() ->  Int {
         // return tableView.numberOfSections > feedImageNumberOfSections() ? tableView.numberOfRows(inSection: feedImageNumberOfSections()) : 0
@@ -83,7 +96,7 @@ extension ListViewController {
     }
     @discardableResult
     func simulateFeedImageViewNotVisible(at row:Int) -> FeedImageCell? {
-        let view = simulateFeedImageViewVisiable(at: row)
+        let view = simulateFeedImageViewVisible(at: row)
         let delegate = tableView.delegate
         let index = IndexPath(row: row, section: feedImageNumberOfSections())
         delegate?.tableView?(tableView, didEndDisplaying: view!, forRowAt: index)
@@ -118,14 +131,7 @@ extension ListViewController {
         ds?.tableView?(tableView, cancelPrefetchingForRowsAt: [index])
     }
     
-    func renderedFeedImageData(at index: Int) -> Data? {
-        return simulateFeedImageViewVisible(at: index)?.renderImage
-    }
-    @discardableResult
-    func simulateFeedImageViewVisible(at index: Int) -> FeedImageCell? {
-        return feedImageView(at: index) as? FeedImageCell
-    }
-    
+   
     func cell(row: Int, section: Int) -> UITableViewCell? {
         guard numberOfRows(in: section) > row else {
             return nil
