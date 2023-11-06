@@ -21,7 +21,7 @@ class FeedImageDataLoaderWithFallbackCompositeTests: XCTestCase {
     }
     
     func test_loadImageData_loadsFromPrimaryloderFirst() {
-        let url = anyUrls()
+        let url = anyURL()
        
         let (sut,primaryLoader,fallbackLoader) = makeSUT()
         
@@ -32,7 +32,7 @@ class FeedImageDataLoaderWithFallbackCompositeTests: XCTestCase {
     }
     
     func test_loadsImageData_lodsFromFallbackOnPrimaryloderFailour() {
-        let urls = anyUrls()
+        let urls = anyURL()
         
         let (sut,primaryLoader,fallbackLoader) = makeSUT()
         

@@ -23,7 +23,7 @@ class FeedImageDataLoaderCacheDecoratorTests: XCTestCase, FeedImageDataLoaderTes
     
     func test_loadImageData_loadsFromLoader() {
         let (sut,loaderSpy) = makeSUT()
-        let url = anyUrls()
+        let url = anyURL()
         
         sut.loadImageData(from: url) { _ in }
         
@@ -32,7 +32,7 @@ class FeedImageDataLoaderCacheDecoratorTests: XCTestCase, FeedImageDataLoaderTes
     
     func test_cancelLoadImageData_cancelLoderTask() {
         let (sut,loaderSpy) = makeSUT()
-        let url = anyUrls()
+        let url = anyURL()
         
         let task = sut.loadImageData(from: url) { _ in }
         task.cancel()
@@ -49,7 +49,7 @@ class FeedImageDataLoaderCacheDecoratorTests: XCTestCase, FeedImageDataLoaderTes
         
         let exp = expectation(description: "Wait for load completion")
         
-        sut.loadImageData(from: anyUrls()) { receivedResult in
+        sut.loadImageData(from: anyURL()) { receivedResult in
             switch (receivedResult, expectedResult) {
             case let (.success(receivedFeed), .success(expectedFeed)):
               print("receivedFeed:", receivedFeed)
@@ -75,18 +75,18 @@ class FeedImageDataLoaderCacheDecoratorTests: XCTestCase, FeedImageDataLoaderTes
     func test_loadImageData_deliversErrorOnLoaderFailure() {
             let (sut, loader) = makeSUT()
             
-            expect(sut, toCompleteWith: .failure(anyError()), when: {
-                loader.complete(with: anyError())
+            expect(sut, toCompleteWith: .failure(anyNSError()), when: {
+                loader.complete(with: anyNSError())
             })
         }
     
     func test_loadImageData_doesNotCacheDataOnLoaderFailure() {
             let cache = CacheSpy()
-            let url = anyUrls()
+            let url = anyURL()
             let (sut, loader) = makeSUT(cache: cache)
 
             _ = sut.loadImageData(from: url) { _ in }
-            loader.complete(with:anyError())
+            loader.complete(with:anyNSError())
 
             XCTAssertTrue(cache.message.isEmpty, "Expected not to cache image data on load error")
         }
