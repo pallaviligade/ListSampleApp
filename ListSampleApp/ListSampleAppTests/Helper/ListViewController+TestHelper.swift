@@ -8,57 +8,70 @@
 import UIKit
 import EssentialFeediOS
 
+
+//MARK: - Shared
 public extension ListViewController {
     
-     override func loadViewIfNeeded() {
-            super.loadViewIfNeeded()
-
-            tableView.frame = CGRect(x: 0, y: 0, width: 1, height: 1)
-        }
+    override func loadViewIfNeeded() {
+        super.loadViewIfNeeded()
+        
+        tableView.frame = CGRect(x: 0, y: 0, width: 1, height: 1)
+    }
     
-    func simulateUserInitiatedFeedReload() {
-            refreshControl?.simulatePullToRefresh()
-        }
+    func simulateUserInitiatedReload() {
+        refreshControl?.simulatePullToRefresh()
+    }
     
     var isShowingloadingIndicator:Bool {
         return refreshControl?.isRefreshing == true
     }
     
+    func simulateErrorViewTap() {
+        errorView.simulateToTap()
+    }
+    
+    var errorMessage: String? {
+        return errorView.message
+    }
+    
+}
+
+extension ListViewController {
     @discardableResult
     func simulateFeedImageViewVisiable(at index: Int) -> FeedImageCell? {
         return feedImageView(at: index) as? FeedImageCell
     }
     
     @discardableResult
-        func simulateFeedImageBecomingVisibleAgain(at row: Int) -> FeedImageCell? {
-            let view = simulateFeedImageViewNotVisible(at: row)
-
-            let delegate = tableView.delegate
-            let index = IndexPath(row: row, section: feedImagesSection)
-            delegate?.tableView?(tableView, willDisplay: view!, forRowAt: index)
-
-            return view
-        }
+    func simulateFeedImageBecomingVisibleAgain(at row: Int) -> FeedImageCell? {
+        let view = simulateFeedImageViewNotVisible(at: row)
+        
+        let delegate = tableView.delegate
+        let index = IndexPath(row: row, section: feedImagesSection)
+        delegate?.tableView?(tableView, willDisplay: view!, forRowAt: index)
+        
+        return view
+    }
     
     func numberOfRenderFeedImageView() ->  Int {
-       // return tableView.numberOfSections > feedImageNumberOfSections() ? tableView.numberOfRows(inSection: feedImageNumberOfSections()) : 0
-       // return tableView.numberOfRows(inSection: feedImageNumberOfSections())
+        // return tableView.numberOfSections > feedImageNumberOfSections() ? tableView.numberOfRows(inSection: feedImageNumberOfSections()) : 0
+        // return tableView.numberOfRows(inSection: feedImageNumberOfSections())
         numberOfRows(in: feedImagesSection)
     }
     private var feedImagesSection: Int { 0 }
     private var feedLoadMoreSection: Int { 1 }
-
+    
     private func feedImageNumberOfSections() -> Int {
         return 0
     }
     
-     func numberOfRows(in section: Int) -> Int {
-          tableView.numberOfSections > section ? tableView.numberOfRows(inSection: section)  : 0
+    func numberOfRows(in section: Int) -> Int {
+        tableView.numberOfSections > section ? tableView.numberOfRows(inSection: section)  : 0
     }
     
     func numberOfRenderedFeedImageViews() -> Int {
         tableView.numberOfSections == 0 ? 0 : tableView.numberOfRows(inSection: feedImagesSection)
-        }
+    }
     
     func feedImageView(at row:Int) -> UITableViewCell? {
         guard numberOfRenderedFeedImageViews() > row else {
@@ -82,9 +95,7 @@ public extension ListViewController {
         cell(row: 0, section: feedLoadMoreSection) as? LoadMoreCell
     }
     
-    func simulateErrorViewTap() {
-           errorView.simulateToTap()
-       }
+    
     
     func simulateLoadMoreFeedAction() {
         guard let view = loadMoreFeedCell() else { return }
@@ -125,23 +136,24 @@ public extension ListViewController {
     }
 }
 
+//MARK: - Image comment shared 
 extension ListViewController {
     func numberOfRenderedComments() -> Int {
         tableView.numberOfSections == 0 ? 0 :  tableView.numberOfRows(inSection: commentsSection)
     }
-
+    
     func commentMessage(at row: Int) -> String? {
         commentView(at: row)?.messageLabel.text
     }
-
+    
     func commentDate(at row: Int) -> String? {
         commentView(at: row)?.dateLabel.text
     }
-
+    
     func commentUsername(at row: Int) -> String? {
         commentView(at: row)?.usernameLabel.text
     }
-
+    
     private func commentView(at row: Int) -> ImageCommentCell? {
         guard numberOfRenderedComments() > row else {
             return nil
@@ -150,7 +162,7 @@ extension ListViewController {
         let index = IndexPath(row: row, section: commentsSection)
         return ds?.tableView(tableView, cellForRowAt: index) as? ImageCommentCell
     }
-
+    
     private var commentsSection: Int {
         return 0
     }

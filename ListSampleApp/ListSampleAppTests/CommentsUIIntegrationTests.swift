@@ -27,15 +27,15 @@ class CommentsUIIntegrationTests: XCTestCase {
         sut.loadViewIfNeeded()
         XCTAssertEqual(loader.loadCommentsCallCount, 1, "Expected a loading request once view is loaded")
         
-        sut.simulateUserInitiatedFeedReload()
+        sut.simulateUserInitiatedReload()
         XCTAssertEqual(loader.loadCommentsCallCount, 1, "Expected no request until previous completes")
         
         loader.completeCommentsLoading(at: 0)
-        sut.simulateUserInitiatedFeedReload()
+        sut.simulateUserInitiatedReload()
         XCTAssertEqual(loader.loadCommentsCallCount, 2, "Expected another loading request once user initiates a reload")
         
         loader.completeCommentsLoading(at: 1)
-        sut.simulateUserInitiatedFeedReload()
+        sut.simulateUserInitiatedReload()
         XCTAssertEqual(loader.loadCommentsCallCount, 3, "Expected yet another loading request once user initiates another reload")
     }
     
@@ -48,7 +48,7 @@ class CommentsUIIntegrationTests: XCTestCase {
         loader.completeCommentsLoading(at: 0)
         XCTAssertFalse(sut.isShowingloadingIndicator, "Expected no loading indicator once loading completes successfully")
         
-        sut.simulateUserInitiatedFeedReload()
+        sut.simulateUserInitiatedReload()
         XCTAssertTrue(sut.isShowingloadingIndicator, "Expected loading indicator once user initiates a reload")
         
         loader.completeCommentsLoadingWithError(at: 1)
@@ -66,7 +66,7 @@ class CommentsUIIntegrationTests: XCTestCase {
         loader.completeCommentsLoading(with: [comment0], at: 0)
         assertThat(sut, isRendering: [comment0])
         
-        sut.simulateUserInitiatedFeedReload()
+        sut.simulateUserInitiatedReload()
         loader.completeCommentsLoading(with: [comment0, comment1], at: 1)
         assertThat(sut, isRendering: [comment0, comment1])
     }
@@ -79,7 +79,7 @@ class CommentsUIIntegrationTests: XCTestCase {
         loader.completeCommentsLoading(with: [comment], at: 0)
         assertThat(sut, isRendering: [comment])
         
-        sut.simulateUserInitiatedFeedReload()
+        sut.simulateUserInitiatedReload()
         loader.completeCommentsLoading(with: [], at: 1)
         assertThat(sut, isRendering: [ImageComment]())
     }
@@ -92,7 +92,7 @@ class CommentsUIIntegrationTests: XCTestCase {
         loader.completeCommentsLoading(with: [comment], at: 0)
         assertThat(sut, isRendering: [comment])
         
-        sut.simulateUserInitiatedFeedReload()
+        sut.simulateUserInitiatedReload()
         loader.completeCommentsLoadingWithError(at: 1)
         assertThat(sut, isRendering: [comment])
     }
@@ -118,7 +118,7 @@ class CommentsUIIntegrationTests: XCTestCase {
         loader.completeCommentsLoadingWithError(at: 0)
         XCTAssertEqual(sut.errorMessage, loadError)
         
-        sut.simulateUserInitiatedFeedReload()
+        sut.simulateUserInitiatedReload()
         XCTAssertEqual(sut.errorMessage, nil)
     }
     
@@ -135,6 +135,28 @@ class CommentsUIIntegrationTests: XCTestCase {
         XCTAssertEqual(sut.errorMessage, nil)
     }
     
+    func test_deinit_cancelsRunningRequest() {
+        var cancelCallCount = 0
+        
+        var sut: ListViewController?
+        
+        autoreleasepool {
+            sut = CommentsUIComposer.commentsComposedWith(commentsLoader: {
+                PassthroughSubject<[ImageComment], Error>()
+                    .handleEvents(receiveCancel: {
+                        cancelCallCount += 1
+                    }).eraseToAnyPublisher()
+            })
+            
+            sut?.loadViewIfNeeded()
+        }
+        
+        XCTAssertEqual(cancelCallCount, 0)
+        
+        sut = nil
+        
+        XCTAssertEqual(cancelCallCount, 1)
+    }
     
     
     // MARK: - Helpers

@@ -32,7 +32,7 @@ class FeedUIIntegration: XCTestCase {
             loader.completeFeedLoadingWithError(at: 0)
             XCTAssertEqual(sut.errorMessage,loadError)
 
-            sut.simulateUserInitiatedFeedReload()
+            sut.simulateUserInitiatedReload()
             XCTAssertEqual(sut.errorMessage, nil)
         }
     
@@ -43,10 +43,10 @@ class FeedUIIntegration: XCTestCase {
         sut.loadViewIfNeeded()
         XCTAssertEqual(loader.loadFeedCallCount, 1, "Expected a loading request once view is loaded")
     
-        sut.simulateUserInitiatedFeedReload()
+        sut.simulateUserInitiatedReload()
         XCTAssertEqual(loader.loadFeedCallCount, 2, "Expected another loading request once user initiates a reload")
         
-        sut.simulateUserInitiatedFeedReload()
+        sut.simulateUserInitiatedReload()
         XCTAssertEqual(loader.loadFeedCallCount, 3,"Expected yet another loading request once user initiates another reload")
         
     }
@@ -61,7 +61,7 @@ class FeedUIIntegration: XCTestCase {
         loader.completeFeedloading(at: 0)
         XCTAssertFalse(sut.isShowingloadingIndicator,"Expected no loading indicator once loading is completed")
    
-        sut.simulateUserInitiatedFeedReload()
+        sut.simulateUserInitiatedReload()
         XCTAssertTrue(sut.isShowingloadingIndicator,"Expected loading indicator once user initiates a reload")
         
         loader.completeFeedloading(at: 1)
@@ -81,7 +81,7 @@ class FeedUIIntegration: XCTestCase {
         loader.completeFeedloading(with: [imageO], at: 0)
         assertThat(sut, isRendering: [imageO]) // Check the count (1)only there is  values too
         
-        sut.simulateUserInitiatedFeedReload()
+        sut.simulateUserInitiatedReload()
         loader.completeFeedloading(with: [imageO,image1,image2,image3], at: 1) // Check the count(4) only there is  values too
        assertThat(sut, isRendering: [imageO,image1,image2,image3])
        
@@ -99,7 +99,7 @@ class FeedUIIntegration: XCTestCase {
         loader.completeFeedloading(with: [imageO , image1], at: 0)
         assertThat(sut, isRendering: [imageO, image1])
         
-        sut.simulateUserInitiatedFeedReload()
+        sut.simulateUserInitiatedReload()
         loader.completeFeedloading(with: [], at: 1) // Check the count(4) only there is  values too
        assertThat(sut, isRendering: [])
     }
@@ -112,7 +112,7 @@ class FeedUIIntegration: XCTestCase {
         loader.completeFeedloading(with: [image0], at: 0)
         assertThat(sut, isRendering: [image0])
         
-        sut.simulateUserInitiatedFeedReload()
+        sut.simulateUserInitiatedReload()
         loader.completeFeedLoadingWithError(at: 0)
         assertThat(sut, isRendering: [image0])
 
