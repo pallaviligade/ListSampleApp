@@ -169,7 +169,9 @@
 				8E0042C42AFA46FE00104FDA /* FeedUIIntegrationTests+FeedViewSpy.swift */,
 				8EA76E502AAB3CC3004097E4 /* HTTPClientStub.swift */,
 				8EA76E522AAB3D73004097E4 /* InMemoryFeedStore.swift */,
+				8EA76E4C2AA8B202004097E4 /* FeedUIIntegrationTests+LocalizeTest.swift */,
 				8E58E8BC2AF53B4E00A85CE2 /* SharedTestHelper.swift */,
+				8E78CC0C2A96201200D04C32 /* XCTestCase+MemoryLeakTracking.swift */,
 				8E58E8BE2AF7A68000A85CE2 /* FeedUIIntegrationTests+Assertions.swift */,
 			);
 			path = Helper;
@@ -235,12 +237,10 @@
 				8E001CCA2A9767DA00A36B1B /* Helper */,
 				8E78CC0A2A96201200D04C32 /* FeedImageDataLoaderWithFallbackCompositeTests.swift */,
 				8E78CC092A96201200D04C32 /* FeedLoaderWithFallbackCompositeTests.swift */,
-				8E78CC0C2A96201200D04C32 /* XCTestCase+MemoryLeakTracking.swift */,
 				8E78CC112A9620B200D04C32 /* FeedLoaderCacheDecoratorTests.swift */,
 				8E1A70F52A97899100DFA86A /* FeedImageDataLoaderCacheDecoratorTests.swift */,
-				8EA76E4A2AA8AD88004097E4 /* FeedUIIntegration.swift */,
-				8EA76E4C2AA8B202004097E4 /* FeedUIIntegrationTests+LocalizeTest.swift */,
 				8EA76E3C2AA60056004097E4 /* SceneDelegateTests.swift */,
+				8EA76E4A2AA8AD88004097E4 /* FeedUIIntegration.swift */,
 				8EA76E4E2AA8B302004097E4 /* FeedAcceptanceTests.swift */,
 				8E58E8B92AF5393500A85CE2 /* CommentsUIIntegrationTests.swift */,
 			);

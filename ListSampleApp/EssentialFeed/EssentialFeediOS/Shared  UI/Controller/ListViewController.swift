@@ -43,23 +43,11 @@ public final  class ListViewController: UITableViewController,UITableViewDataSou
     public override func viewDidLoad() {
         super.viewDidLoad()
        // title = FeedPresenter.title
-        configureTableView()
         configureErrorView()
-       // self.tableView.dataSource = dataSource
+        self.tableView.dataSource = dataSource
         refresh()
     }
     
-    private func configureTableView() {
-        dataSource.defaultRowAnimation = .fade
-        tableView.dataSource = dataSource
-        tableView.tableHeaderView = errorView.makeContainer()
-        
-        errorView.onHide = { [weak self] in
-            self?.tableView.beginUpdates()
-            self?.tableView.sizeTableHeaderToFit()
-            self?.tableView.endUpdates()
-        }
-    }
     
   
     private func configureErrorView() {
