@@ -53,16 +53,19 @@ extension ListViewController {
         return view
     }
     
+    func simulateTapOnFeedImage(at row: Int) {
+        let delegate = tableView.delegate
+        let index = IndexPath(row: row, section: feedImagesSection)
+        delegate?.tableView?(tableView, didSelectRowAt: index)
+        
+    }
+    
     @discardableResult
     func simulateFeedImageViewVisible(at index: Int) -> FeedImageCell? {
         return feedImageView(at: index) as? FeedImageCell
     }
     
-    func simulateTapOnFeedImage(at row: Int) {
-        let delegate = tableView.delegate
-        let index = IndexPath(row: row, section: feedImagesSection)
-        delegate?.tableView?(tableView, didSelectRowAt: index)
-    }
+    
     
   
     
@@ -87,16 +90,18 @@ extension ListViewController {
     }
     
     func feedImageView(at row:Int) -> UITableViewCell? {
-        guard numberOfRenderedFeedImageViews() > row else {
-            return nil
-        }
-        let ds = tableView.dataSource
-        let index = IndexPath(row: row, section: feedImageNumberOfSections())
-        return ds?.tableView(tableView, cellForRowAt: index)
+//        guard numberOfRenderedFeedImageViews() > row else {
+//            return nil
+//        }
+//        let ds = tableView.dataSource
+//        let index = IndexPath(row: row, section: feedImageNumberOfSections())
+//        return ds?.tableView(tableView, cellForRowAt: index)
+        cell(row: row, section: feedImagesSection)
     }
     @discardableResult
     func simulateFeedImageViewNotVisible(at row:Int) -> FeedImageCell? {
         let view = simulateFeedImageViewVisible(at: row)
+        
         let delegate = tableView.delegate
         let index = IndexPath(row: row, section: feedImageNumberOfSections())
         delegate?.tableView?(tableView, didEndDisplaying: view!, forRowAt: index)

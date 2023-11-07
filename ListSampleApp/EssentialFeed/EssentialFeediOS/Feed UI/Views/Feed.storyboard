@@ -129,9 +129,9 @@ Location, </string>
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="sEs-bl-d31" id="QG5-PS-eYF"/>
-                            <outlet property="delegate" destination="sEs-bl-d31" id="Ujt-wc-Q05"/>
-                            <outlet property="prefetchDataSource" destination="sEs-bl-d31" id="Rcr-fv-k6j"/>
+                            <outlet property="dataSource" destination="sEs-bl-d31" id="iYN-yT-3ve"/>
+                            <outlet property="delegate" destination="sEs-bl-d31" id="HqC-hf-fps"/>
+                            <outlet property="prefetchDataSource" destination="sEs-bl-d31" id="hay-0m-wyz"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="My Story" id="0G5-Ci-5eF"/>

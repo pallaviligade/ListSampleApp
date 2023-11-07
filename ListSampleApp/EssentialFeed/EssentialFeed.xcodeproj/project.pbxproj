@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8E001CD02A9782D700A36B1B /* FeedCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E001CCF2A9782D700A36B1B /* FeedCache.swift */; };
+		8E0042C72AFA919300104FDA /* UIView+Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0042C62AFA919300104FDA /* UIView+Container.swift */; };
 		8E009C532A373FFC00FFDCEE /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E009C522A373FFC00FFDCEE /* FeedViewModel.swift */; };
 		8E009C552A38A50500FFDCEE /* FeedImageCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E009C542A38A50500FFDCEE /* FeedImageCellViewModel.swift */; };
 		8E0527EC2A12497800F0DA37 /* FailableDeleteFeedStoreSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0527EB2A12497800F0DA37 /* FailableDeleteFeedStoreSpecs.swift */; };
@@ -191,6 +192,7 @@
 
 /* Begin PBXFileReference section */
 		8E001CCF2A9782D700A36B1B /* FeedCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCache.swift; sourceTree = "<group>"; };
+		8E0042C62AFA919300104FDA /* UIView+Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Container.swift"; sourceTree = "<group>"; };
 		8E009C522A373FFC00FFDCEE /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		8E009C542A38A50500FFDCEE /* FeedImageCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageCellViewModel.swift; sourceTree = "<group>"; };
 		8E0527EB2A12497800F0DA37 /* FailableDeleteFeedStoreSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailableDeleteFeedStoreSpecs.swift; sourceTree = "<group>"; };
@@ -621,6 +623,7 @@
 			children = (
 				8EA76E582AB07A77004097E4 /* UITableView+HeaderSizing.swift */,
 				8EB6F3B12A4C637A00CE7C25 /* TableView+Deque.swift */,
+				8E0042C62AFA919300104FDA /* UIView+Container.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1304,6 +1307,7 @@
 				8EB6F3B22A4C637A00CE7C25 /* TableView+Deque.swift in Sources */,
 				8EB251F32A65517C00ACCC22 /* ErrorView.swift in Sources */,
 				8EB6F3B42A4C63B600CE7C25 /* UIImageView+Animations.swift in Sources */,
+				8E0042C72AFA919300104FDA /* UIView+Container.swift in Sources */,
 				8E9A739B2AEEB46E00940D05 /* CellController.swift in Sources */,
 				8EA67E502AEAA23800F74048 /* ImageCommentCellController.swift in Sources */,
 				8EA76E592AB07A77004097E4 /* UITableView+HeaderSizing.swift in Sources */,

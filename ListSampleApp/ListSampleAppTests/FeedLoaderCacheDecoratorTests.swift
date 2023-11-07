@@ -23,8 +23,8 @@ class FeedLoaderCacheDecoratorTests: XCTestCase ,FeedLoderTestCase {
     }
     
     func test_load_deliversFeedOnFailourloaded() {
-       let sut = makeSUT(loaderResult: .failure(anyError()))
-        expect(sut: sut, toCompleteWith: .failure(anyError()))
+       let sut = makeSUT(loaderResult: .failure(anyNSError()))
+        expect(sut: sut, toCompleteWith: .failure(anyNSError()))
     }
     
     func test_load_cachesLoadedFeedOnLoaderSuccess() {
@@ -40,7 +40,7 @@ class FeedLoaderCacheDecoratorTests: XCTestCase ,FeedLoderTestCase {
     
     func test_load_doesNotCacheOnLoaderFailure() {
         let cache = CacheSpy()
-        let sut = makeSUT(loaderResult: .failure(anyError()), cacheSpy: cache)
+        let sut = makeSUT(loaderResult: .failure(anyNSError()), cacheSpy: cache)
         XCTAssertTrue(cache.messages.isEmpty, "Does not cache feed on error")
     }
     

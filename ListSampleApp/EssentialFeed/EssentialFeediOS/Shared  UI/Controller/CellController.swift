@@ -21,10 +21,11 @@ public struct CellController  {
     }
     
     public init(id: AnyHashable,_ dataSource: UITableViewDataSource) {
+        self.id = id
         self.dataSource = dataSource
         self.dataSourcePrefetch = nil
         self.delgate = nil
-        self.id = id
+       
     }
 }
 

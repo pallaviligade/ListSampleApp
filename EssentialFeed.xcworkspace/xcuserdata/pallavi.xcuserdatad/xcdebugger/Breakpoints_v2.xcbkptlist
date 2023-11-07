@@ -16,5 +16,339 @@
             stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6637A7F8-0282-4585-853E-3081DDC9E520"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ListSampleApp/ListSampleAppTests/FeedUIIntegration.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
+            landmarkName = "test_feedImageView_cancelsImageLoadingWhenNotVisiableAnyMore()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "6637A7F8-0282-4585-853E-3081DDC9E520 - 946223a77f06f27f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ListSampleAppTests.FeedUIIntegration.test_feedImageViewLoadingIndicator_isVisibleWhileLoadingImage() -&gt; ()"
+                  moduleName = "ListSampleAppTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pallavi/Desktop/Git/ListSampleApp/ListSampleApp/ListSampleAppTests/FeedUIIntegration.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "177"
+                  endingLineNumber = "177"
+                  offsetFromSymbolStart = "120">
+               </Location>
+               <Location
+                  uuid = "6637A7F8-0282-4585-853E-3081DDC9E520 - feb2c146d9f8b7b6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ListSampleAppTests.FeedUIIntegration.test_feedImageView_cancelsImageLoadingWhenNotVisiableAnyMore() -&gt; ()"
+                  moduleName = "ListSampleAppTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pallavi/Desktop/Git/ListSampleApp/ListSampleApp/ListSampleAppTests/FeedUIIntegration.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "176"
+                  endingLineNumber = "176"
+                  offsetFromSymbolStart = "380">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CB843B33-C522-4911-9F7C-0610220A1135"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ListSampleApp/ListSampleAppTests/FeedUIIntegration.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "181"
+            endingLineNumber = "181"
+            landmarkName = "test_feedImageView_cancelsImageLoadingWhenNotVisiableAnyMore()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "CB843B33-C522-4911-9F7C-0610220A1135 - 946223a77f06f2a0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ListSampleAppTests.FeedUIIntegration.test_feedImageViewLoadingIndicator_isVisibleWhileLoadingImage() -&gt; ()"
+                  moduleName = "ListSampleAppTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pallavi/Desktop/Git/ListSampleApp/ListSampleApp/ListSampleAppTests/FeedUIIntegration.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "182"
+                  endingLineNumber = "182"
+                  offsetFromSymbolStart = "524">
+               </Location>
+               <Location
+                  uuid = "CB843B33-C522-4911-9F7C-0610220A1135 - feb2c146d9f8b76b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ListSampleAppTests.FeedUIIntegration.test_feedImageView_cancelsImageLoadingWhenNotVisiableAnyMore() -&gt; ()"
+                  moduleName = "ListSampleAppTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pallavi/Desktop/Git/ListSampleApp/ListSampleApp/ListSampleAppTests/FeedUIIntegration.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "181"
+                  endingLineNumber = "181"
+                  offsetFromSymbolStart = "1032">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "298A6046-3D94-4982-B6B9-25EEDE519AC4"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ListSampleApp/ListSampleAppTests/Helper/FeedUIIntegrationTests+FeedViewSpy.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "FeedViewSpy"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1398FB9D-FFE0-4BC5-92C1-96AB6AFAB6FF"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ListSampleApp/ListSampleAppTests/Helper/ListViewController+TestHelper.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "simulateTapOnFeedImage(at:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1410191F-BE6E-4361-9CD3-0C7619EF7855"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ListSampleApp/EssentialFeed/EssentialFeediOS/Feed UI/Controller/FeedImageCellController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "tableView(_:didSelectRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1140B2A6-EB60-4F49-B7AC-FFAB1E31FEF0"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ListSampleApp/EssentialFeed/EssentialFeediOS/Shared  UI/Controller/ListViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
+            landmarkName = "tableView(_:didSelectRowAt:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "1140B2A6-EB60-4F49-B7AC-FFAB1E31FEF0 - 65f206bc53b23f7f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Foundation.IndexPath) -&gt; () in EssentialFeediOS.ListViewController.tableView(_: __C.UITableView, cancelPrefetchingForRowsAt: Swift.Array&lt;Foundation.IndexPath&gt;) -&gt; ()"
+                  moduleName = "EssentialFeediOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pallavi/Desktop/Git/ListSampleApp/ListSampleApp/EssentialFeed/EssentialFeediOS/Shared%20%20UI/Controller/ListViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "158"
+                  endingLineNumber = "158"
+                  offsetFromSymbolStart = "72">
+               </Location>
+               <Location
+                  uuid = "1140B2A6-EB60-4F49-B7AC-FFAB1E31FEF0 - 65f206bc53b23f7f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Foundation.IndexPath) -&gt; () in EssentialFeediOS.ListViewController.tableView(_: __C.UITableView, cancelPrefetchingForRowsAt: Swift.Array&lt;Foundation.IndexPath&gt;) -&gt; ()"
+                  moduleName = "EssentialFeediOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pallavi/Desktop/Git/ListSampleApp/ListSampleApp/EssentialFeed/EssentialFeediOS/Shared%20%20UI/Controller/ListViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "158"
+                  endingLineNumber = "158"
+                  offsetFromSymbolStart = "120">
+               </Location>
+               <Location
+                  uuid = "1140B2A6-EB60-4F49-B7AC-FFAB1E31FEF0 - 240b2e95208a67d3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EssentialFeediOS.ListViewController.tableView(_: __C.UITableView, didSelectRowAt: Foundation.IndexPath) -&gt; ()"
+                  moduleName = "EssentialFeediOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pallavi/Desktop/Git/ListSampleApp/ListSampleApp/EssentialFeed/EssentialFeediOS/Shared%20%20UI/Controller/ListViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "154"
+                  endingLineNumber = "154"
+                  offsetFromSymbolStart = "72">
+               </Location>
+               <Location
+                  uuid = "1140B2A6-EB60-4F49-B7AC-FFAB1E31FEF0 - 240b2e95208a67d3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EssentialFeediOS.ListViewController.tableView(_: __C.UITableView, didSelectRowAt: Foundation.IndexPath) -&gt; ()"
+                  moduleName = "EssentialFeediOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pallavi/Desktop/Git/ListSampleApp/ListSampleApp/EssentialFeed/EssentialFeediOS/Shared%20%20UI/Controller/ListViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "154"
+                  endingLineNumber = "154"
+                  offsetFromSymbolStart = "104">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "62A5ED4E-37D4-4E8F-8E99-5036CAFB4987"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ListSampleApp/ListSampleAppTests/FeedUIIntegration.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "test_imageSelection_notifiesHandler()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "62A5ED4E-37D4-4E8F-8E99-5036CAFB4987 - e4e83caff35bd06a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ListSampleAppTests.FeedUIIntegration.test_imageSelection_notifiesHandler() -&gt; ()"
+                  moduleName = "ListSampleAppTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pallavi/Desktop/Git/ListSampleApp/ListSampleApp/ListSampleAppTests/FeedUIIntegration.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "29"
+                  endingLineNumber = "29"
+                  offsetFromSymbolStart = "520">
+               </Location>
+               <Location
+                  uuid = "62A5ED4E-37D4-4E8F-8E99-5036CAFB4987 - 2dd438befc7fd740"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (EssentialFeed.FeedImage) -&gt; () in ListSampleAppTests.FeedUIIntegration.test_imageSelection_notifiesHandler() -&gt; ()"
+                  moduleName = "ListSampleAppTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pallavi/Desktop/Git/ListSampleApp/ListSampleApp/ListSampleAppTests/FeedUIIntegration.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "29"
+                  endingLineNumber = "29"
+                  offsetFromSymbolStart = "96">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D16B0576-709E-4BA8-9770-304609F5718A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ListSampleApp/EssentialFeed/EssentialFeediOS/Shared  UI/Controller/ListViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
+            landmarkName = "cellController(at:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "60FBC58D-74EB-4CA2-83B1-E67276DE0B94"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ListSampleApp/EssentialFeed/EssentialFeediOS/Shared  UI/Controller/CellController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "init(id:_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "60FBC58D-74EB-4CA2-83B1-E67276DE0B94 - d400224cdc4659e7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EssentialFeediOS.CellController.init(id: Swift.AnyHashable, _: __C.UITableViewDataSource) -&gt; EssentialFeediOS.CellController"
+                  moduleName = "EssentialFeediOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pallavi/Desktop/Git/ListSampleApp/ListSampleApp/EssentialFeed/EssentialFeediOS/Shared%20%20UI/Controller/CellController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "24"
+                  endingLineNumber = "24"
+                  offsetFromSymbolStart = "76">
+               </Location>
+               <Location
+                  uuid = "60FBC58D-74EB-4CA2-83B1-E67276DE0B94 - d400224cdc4659e7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EssentialFeediOS.CellController.init(id: Swift.AnyHashable, _: __C.UITableViewDataSource) -&gt; EssentialFeediOS.CellController"
+                  moduleName = "EssentialFeediOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pallavi/Desktop/Git/ListSampleApp/ListSampleApp/EssentialFeed/EssentialFeediOS/Shared%20%20UI/Controller/CellController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "24"
+                  endingLineNumber = "24"
+                  offsetFromSymbolStart = "84">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

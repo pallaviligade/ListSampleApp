@@ -23,21 +23,21 @@ class FeedUIIntegration: XCTestCase {
         XCTAssertEqual(sut.title,  feedTitle)
     }
     
-//    func test_imageSelection_notifiesHandler() {
-//        let image0 = makeFeedImage()
-//        let image1 = makeFeedImage()
-//        var selectedImages = [FeedImage]()
-//        let (sut, loader) = makeSUT(selection: { selectedImages.append($0) })
-//        
-//        sut.loadViewIfNeeded()
-//        loader.completeFeedLoading(with: [image0, image1], at: 0)
-//        
-//        sut.simulateTapOnFeedImage(at: 0)
-//        XCTAssertEqual(selectedImages, [image0])
-//        
-//        sut.simulateTapOnFeedImage(at: 1)
-//        XCTAssertEqual(selectedImages, [image0, image1])
-//    }
+    func test_imageSelection_notifiesHandler() {
+        let image0 = makeFeedImage()
+        let image1 = makeFeedImage()
+        var selectedImages = [FeedImage]()
+        let (sut, loader) = makeSUT(selection: { selectedImages.append($0) })
+        
+        sut.loadViewIfNeeded()
+        loader.completeFeedloading(with: [image0, image1], at: 0)
+        
+        sut.simulateTapOnFeedImage(at: 0)
+        XCTAssertEqual(selectedImages, [image0])
+        
+        sut.simulateTapOnFeedImage(at: 1)
+        XCTAssertEqual(selectedImages, [image0, image1])
+    }
     
     func test_loadFeedCompletion_rendersErrorMessageOnErrorUntilNextReload() {
             let (sut, loader) = makeSUT()
@@ -51,6 +51,23 @@ class FeedUIIntegration: XCTestCase {
             sut.simulateUserInitiatedReload()
             XCTAssertEqual(sut.errorMessage, nil)
         }
+    
+   /* func test_feedImageView_showsDataForNewViewRequestAfterPreviousViewIsReused() throws {
+            let (sut, loader) = makeSUT()
+
+            sut.simulateAppearance()
+            loader.completeFeedLoading(with: [makeImage(), makeImage()])
+
+            let previousView = try XCTUnwrap(sut.simulateFeedImageViewNotVisible(at: 0))
+
+            let newView = try XCTUnwrap(sut.simulateFeedImageViewVisible(at: 0))
+            previousView.prepareForReuse()
+
+            let imageData = UIImage.make(withColor: .red).pngData()!
+            loader.completeImageLoading(with: imageData, at: 1)
+
+            XCTAssertEqual(newView.renderedImage, imageData)
+        }*/
     
     func test_loadFeedActions_requestFeedFromLoader(){
         let (sut, loader) = makeSUT()
@@ -156,8 +173,8 @@ class FeedUIIntegration: XCTestCase {
     }
     
     func test_feedImageView_cancelsImageLoadingWhenNotVisiableAnyMore() {
-        let image0 = makeFeedImage(imgurl: URL(string: "http://any0-url.com")!)
-        let image1 = makeFeedImage(imgurl: URL(string: "http://any1-url.com")!)
+        let image0 = makeFeedImage(imgurl: URL(string: "http://url-0.com")!)
+        let image1 = makeFeedImage(imgurl: URL(string: "http://url-1.com")!)
         let (sut,  loader) = makeSUT()
         
         sut.loadViewIfNeeded()
@@ -348,9 +365,17 @@ class FeedUIIntegration: XCTestCase {
    
     
     
-    func makeSUT(file: StaticString = #file, line: UInt = #line ) -> (sut:ListViewController, loader: FeedViewSpy) {
+    func makeSUT(
+        selection: @escaping (FeedImage) -> Void = {  _ in },
+        file: StaticString = #file,
+        line: UInt = #line
+    ) -> (sut:ListViewController, loader: FeedViewSpy) {
         let loader = FeedViewSpy()
-        let sut  = FeedUIComposer.createFeedView(feedloader: loader.loadPublisher, imageLoader: loader.loadImageDataPubliser)
+        let sut  = FeedUIComposer.createFeedView(
+            feedloader: loader.loadPublisher,
+            imageLoader: loader.loadImageDataPubliser,
+            selection: selection
+        )
         trackForMemoryLeaks(loader, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
         return (sut, loader)
@@ -408,62 +433,7 @@ class FeedUIIntegration: XCTestCase {
         }
    
     //MARK: - Helpers
-    class FeedViewSpy: FeedImageDataLoader{
-       
-    private var feedRequests = [PassthroughSubject<[FeedImage], Error>] ()
-     
-        var loadFeedCallCount: Int {
-            return feedRequests.count
-        }
-        
-        func loadPublisher() -> AnyPublisher<[FeedImage], Error> {
-                   let publisher = PassthroughSubject<[FeedImage], Error>()
-                   feedRequests.append(publisher)
-                   return publisher.eraseToAnyPublisher()
-               }
-        
-        func completeFeedloading(with feedImage: [FeedImage] = [], at index:Int = 0) {
-            feedRequests[index].send(feedImage)
-        }
-        
-        func completeFeedLoadingWithError(at index:Int) {
-            let error = NSError(domain: "any error", code: 1)
-            feedRequests[index].send(completion:.failure(error))
-        }
-        
-        func compeletImageLoading(with imageData: Data = Data(), at index: Int = 0) {
-            imageRequest[index].completions(.success(imageData))
-        }
-        
-        func completeImageLoadingWithError(at index: Int = 0) {
-            let error = NSError(domain: "AnyError", code: 0)
-            imageRequest[index].completions(.failure(error))
-        }
-        
-        // MARK: - Helpers  FeedImageDataLoader
-       
-        private  var imageRequest = [(url: URL, completions:(FeedImageDataLoader.Result) -> Void)]()
-        
-        private(set) var cancelledImageURLs = [URL]()
-        var loadedImageUrls:  [URL] {
-            return imageRequest.map { $0.url }
-        }
-        
-        private struct TaskSpy: FeedImageDataLoaderTask {
-            let cancelCallBack: () -> Void
-            func cancel() {
-                cancelCallBack()
-            }
-       }
     
-        func loadImageData(from url: URL, completionHandler: @escaping (FeedImageDataLoader.Result) -> Void) -> FeedImageDataLoaderTask {
-            imageRequest.append((url, completionHandler))
-            return TaskSpy { [weak self]  in
-                self?.cancelledImageURLs.append(url)
-            }
-        }
-        
-    }
 }
 
 
