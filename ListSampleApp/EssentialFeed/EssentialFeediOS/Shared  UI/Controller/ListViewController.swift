@@ -27,10 +27,6 @@ public final  class ListViewController: UITableViewController,UITableViewDataSou
    
     private(set) public var errorView =  ErrorView()
     public var onRefresh: (() -> Void)?
-//    private var loadingController = [IndexPath: CellController]()
-//    private var tableModel = [CellController]() {
-//        didSet { tableView.reloadData() }
-//    }
     
     private lazy var dataSource: UITableViewDiffableDataSource<Int, CellController> = {
             .init(tableView: tableView) { (tableView, index, controller) in
@@ -40,37 +36,36 @@ public final  class ListViewController: UITableViewController,UITableViewDataSou
             }
         }()
   
+    private var onViewIsAppearing: ((ListViewController) -> Void)?
+    
     public override func viewDidLoad() {
         super.viewDidLoad()
-       // title = FeedPresenter.title
-        configureErrorView()
+        configureTableView()
         self.tableView.dataSource = dataSource
         refresh()
     }
     
+    public override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        tableView.sizeTableHeaderToFit()
+    }
+    
+    private func configureTableView() {
+            dataSource.defaultRowAnimation = .fade
+            tableView.dataSource = dataSource
+            tableView.tableHeaderView = errorView.makeContainer()
+                        
+            errorView.onHide = { [weak self] in
+                self?.tableView.beginUpdates()
+                self?.tableView.sizeTableHeaderToFit()
+                self?.tableView.endUpdates()
+            }
+    }
     
   
-    private func configureErrorView() {
-           let container = UIView()
-           container.backgroundColor = .clear
-           container.addSubview(errorView)
-
-           errorView.translatesAutoresizingMaskIntoConstraints = false
-           NSLayoutConstraint.activate([
-               errorView.leadingAnchor.constraint(equalTo: container.leadingAnchor),
-               container.trailingAnchor.constraint(equalTo: errorView.trailingAnchor),
-               errorView.topAnchor.constraint(equalTo: container.topAnchor),
-               container.bottomAnchor.constraint(equalTo: errorView.bottomAnchor),
-           ])
-
-           tableView.tableHeaderView = container
-
-           errorView.onHide = { [weak self] in
-               self?.tableView.beginUpdates()
-               self?.tableView.sizeTableHeaderToFit()
-               self?.tableView.endUpdates()
-           }
-       }
+  
+   
     public override func traitCollectionDidChange(_ previous: UITraitCollection?) {
             if previous?.preferredContentSizeCategory != traitCollection.preferredContentSizeCategory {
                 tableView.reloadData()
@@ -86,11 +81,7 @@ public final  class ListViewController: UITableViewController,UITableViewDataSou
         return errorView.message
     }
     
-    public override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        tableView.sizeTableHeaderToFit()
-    }
+   
     
     public func display(_ sections: [CellController]...) {
             var snapshot = NSDiffableDataSourceSnapshot<Int, CellController>()
@@ -107,22 +98,20 @@ public final  class ListViewController: UITableViewController,UITableViewDataSou
         }
     
     // Every time we get new model we so reseting it loadingController
-//    public func display(_ cellController: [CellController]) {
-//        var snapshot = NSDiffableDataSourceSnapshot<Int, CellController>()
-//                snapshot.appendSections([0])
-//                snapshot.appendItems(cellController, toSection: 0)
-//                dataSource.apply(snapshot)
-//
-////        loadingController = [:]
-////        tableModel = cellController
+
 //    }
+    
     public func display(_ viewModel: ResourceLoadingViewModel) {
+        refreshControl?.update(isRefreshing: viewModel.isLoading)
+    }
+    
+   /* public func display(_ viewModel: ResourceLoadingViewModel) {
         if viewModel.isLoading {
             refreshControl?.beginRefreshing()
         }else {
             refreshControl?.endRefreshing()
         }
-    }
+    }*/
     
     public func display(_ viewModel: ResourceErrorViewModel) {
         errorView.message = viewModel.message
@@ -131,6 +120,11 @@ public final  class ListViewController: UITableViewController,UITableViewDataSou
     public override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let dl = cellController(at: indexPath)?.delgate
         dl?.tableView?(tableView, didSelectRowAt: indexPath)
+    }
+    
+    public override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let dl = cellController(at: indexPath)?.delgate
+        dl?.tableView?(tableView, willDisplay: cell, forRowAt: indexPath)
     }
     
     public override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -168,5 +162,33 @@ public final  class ListViewController: UITableViewController,UITableViewDataSou
         let controller = loadingController[indexPath]
         loadingController[indexPath] = nil
         return controller
-    }*/
+    }
+   private func configureErrorView() {
+          let container = UIView()
+          container.backgroundColor = .clear
+          container.addSubview(errorView)
+
+          errorView.translatesAutoresizingMaskIntoConstraints = false
+          NSLayoutConstraint.activate([
+              errorView.leadingAnchor.constraint(equalTo: container.leadingAnchor),
+              container.trailingAnchor.constraint(equalTo: errorView.trailingAnchor),
+              errorView.topAnchor.constraint(equalTo: container.topAnchor),
+              container.bottomAnchor.constraint(equalTo: errorView.bottomAnchor),
+          ])
+
+          tableView.tableHeaderView = container
+
+          errorView.onHide = { [weak self] in
+              self?.tableView.beginUpdates()
+              self?.tableView.sizeTableHeaderToFit()
+              self?.tableView.endUpdates()
+          }
+      }
+   */
+}
+
+extension UIRefreshControl {
+    func update(isRefreshing: Bool) {
+        isRefreshing ? beginRefreshing() : endRefreshing()
+    }
 }
