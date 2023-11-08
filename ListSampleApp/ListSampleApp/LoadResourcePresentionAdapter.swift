@@ -33,35 +33,12 @@ final class LoadResourcePresentionAdapter<Resource, View: ResourceView> {
             
         }, receiveValue: { [weak self] feed in
             self?.presenter?.didFinishLoading(with: feed)
-        })
-
-        
-        
-        
-      /*  feedloader.load { [weak self] result in
-            switch result {
-            case let .success(feed):
-                self?.presenter?.didFinishLoadingFeed(feed)
-                break
-            case let .failure(error):
-                self?.presenter?.didFinishLoadingFeed(with: error)
-                break
-            }
-          
-        }*/
-        
+        })    
     }
     
 }
 
 
-//extension LoadResourcePresentionAdapter : FeedViewControllerDelegate {
-//    // Every time FeedViewController requests to load feed throug its delegate we will just call
-//    func didRefershFeedRequest() {
-//        loadResource()
-//    }
-//
-//}
 
 extension LoadResourcePresentionAdapter: FeedImageCellControllerDelegate {
     func didRequestImage() {

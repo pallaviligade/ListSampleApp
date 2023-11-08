@@ -21,16 +21,14 @@ public final class FeedUIComposer {
         imageLoader:  @escaping (URL) ->  FeedImageDataLoader.Publisher,
         selection: @escaping (FeedImage) -> Void = { _ in }
     ) -> ListViewController {
-        let presentionAdapter = FeedPresentationAdapoter(loader: { feedloader().dispatchOnMainQueue()})
+        let presentionAdapter = FeedPresentationAdapoter(loader: feedloader)
         
         let feedViewController = makeFeedViewController( title: FeedPresenter.title)
         feedViewController.onRefresh = presentionAdapter.loadResource
-//        presentionAdapter.presenter = FeedPresenter(
-//            feedview: WeakRefVirtualProxy(feedViewController),
-//            errorView: FeedViewAdapter(controller: feedViewController, loader: MainQueueDispatchDecorater(decoratee: imageLoader)))
+
         
         presentionAdapter.presenter = LoadResourcePresenter(resourceView: FeedViewAdapter(controller: feedViewController,
-                                                                                          loader: { imageLoader($0).dispatchOnMainQueue() },
+                                                                                          loader: imageLoader,
                                                                                           selection: selection),
                                                             loadingView: WeakRefVirtualProxy(feedViewController),
                                                             errorView: WeakRefVirtualProxy(feedViewController), mapper: FeedPresenter.map)
