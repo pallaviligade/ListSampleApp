@@ -35,12 +35,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         LocalFeedLoader(store: store, currentDate: Date.init)
     }()
     
-    private var remoteURL: URL {
+    private var baseURL: URL {
         return URL(string: "https://ile-api.essentialdeveloper.com/essential-feed")!
     }
     
-    private lazy var remoteFeedLoader = RemoteLoader(url:remoteURL , client: httpClient, mapper: FeedItemMapper.map(_:from:))
+    private lazy var remoteFeedLoader = RemoteLoader(url:baseURL , client: httpClient, mapper: FeedItemMapper.map(_:from:))
 
+    private lazy var navigationController = UINavigationController(
+            rootViewController: FeedUIComposer.createFeedView(
+                feedloader: makeRemoteFeedLoaderWithLocalFallback,
+                imageLoader: makeImageFeedLoaderWithLocalFallBack,
+                selection: showComments))
     
     convenience init(httpClient: Httpclient, store: FeedStore & FeedImageDataStore, scheduler: AnyDispatchQueueScheduler) {
         self.init()
@@ -56,37 +61,39 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         configureWindow()
     }
     func configureWindow() {
-        
-       /* let remoteURL = URL(string: "https://ile-api.essentialdeveloper.com/essential-feed/v1/feed")!
-        
-               let localStoreUrl = URL(string: "https://ile-api.essentialdeveloper.com/essential-feed/v1/feed")!
-              
-               let remoteFeedloader = RemoteFeedLoader(url: remoteURL, client: httpClient)
-                let RemoteImageloader = RemoteFeedImageDataLoader(client: httpClient)
-               let feedViewController = FeedUIComposer.createFeedView(feedloader: remoteFeedloader, imageLoader: RemoteImageloader)
-               self.window?.rootViewController = feedViewController
-        
-        let localImageLoder = LocalFeedImageDataLoader(store: store)
-         let localFeedLoder = LocalFeedLoader(store: store, currentDate: Date.init)*/
-        
-        
       
-         let feedview = FeedUIComposer.createFeedView(
-             feedloader: makeRemoteFeedLoaderWithLocalFallback,
-             imageLoader: makeImageFeedLoaderWithLocalFallBack)
-         
-        self.window?.rootViewController = UINavigationController(rootViewController: feedview)
-
+       /* let feedview = FeedUIComposer.createFeedView(
+            feedloader: makeRemoteFeedLoaderWithLocalFallback,
+            imageLoader: makeImageFeedLoaderWithLocalFallBack)*/
+        
+        self.window?.rootViewController = navigationController
+        window?.makeKeyAndVisible()
+        
     }
     
     func sceneWillResignActive(_ scene: UIScene) {
         localFeedLoder.validateCache(completion: {_ in })
     }
     
+    private func showComments(for image: FeedImage) {
+           let url = baseURL.appendingPathComponent("/v1/image/\(image.id)/comments")
+           let comments = CommentsUIComposer.commentsComposedWith(commentsLoader: makeRemoteCommentsLoader(url: url))
+           navigationController.pushViewController(comments, animated: true)
+       }
+
+       private func makeRemoteCommentsLoader(url: URL) -> () -> AnyPublisher<[ImageComment], Error> {
+           return { [httpClient] in
+               return httpClient
+                   .getPublisher(url: url)
+                   .tryMap(ImageCommentMapper.map)
+                   .eraseToAnyPublisher()
+           }
+       }
+    
     private func makeRemoteFeedLoaderWithLocalFallback() -> AnyPublisher<[FeedImage], Error>
     {
        
-        
+        let remoteURL = baseURL.appendingPathComponent("/v1/feed")
        //  lazy var remoteFeedLoader = RemoteFeedLoader(url: remoteURL, client: httpClient)
 
        // let remoteFeedLoader = RemoteFeedLoader(url: remoteURL, client: httpClient)

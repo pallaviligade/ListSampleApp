@@ -128,16 +128,6 @@ public final  class ListViewController: UITableViewController,UITableViewDataSou
         errorView.message = viewModel.message
     }
     
-//    public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return tableModel.count
-//    }
-//
-//    public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//       // return cellController(forRowAt: indexPath).view(at: tableView)
-//        let ds = cellController(forRowAt: indexPath).dataSource
-//        return ds.tableView(tableView, cellForRowAt: indexPath)
-//    }
-    
     public override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let dl = cellController(at: indexPath)?.delgate
         dl?.tableView?(tableView, didSelectRowAt: indexPath)
