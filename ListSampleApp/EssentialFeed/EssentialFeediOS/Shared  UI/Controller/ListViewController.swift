@@ -98,20 +98,10 @@ public final  class ListViewController: UITableViewController,UITableViewDataSou
         }
     
     // Every time we get new model we so reseting it loadingController
-
-//    }
     
     public func display(_ viewModel: ResourceLoadingViewModel) {
         refreshControl?.update(isRefreshing: viewModel.isLoading)
     }
-    
-   /* public func display(_ viewModel: ResourceLoadingViewModel) {
-        if viewModel.isLoading {
-            refreshControl?.beginRefreshing()
-        }else {
-            refreshControl?.endRefreshing()
-        }
-    }*/
     
     public func display(_ viewModel: ResourceErrorViewModel) {
         errorView.message = viewModel.message
