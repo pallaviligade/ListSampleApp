@@ -54,12 +54,12 @@ class FeedAcceptanceTest: XCTestCase
         }
     
     private func showCommentsForFirstImage() -> ListViewController {
-            let feed = launch(httpClient: .online(response), store: .empty)
-
-            feed.simulateTapOnFeedImage(at: 0)
-            RunLoop.current.run(until: Date())
-
-            let nav = feed.navigationController
+        let feed = launch(httpClient: .online(response), store: .empty)
+        
+        feed.simulateTapOnFeedImage(at: 0)
+        RunLoop.current.run(until: Date())
+        
+        let nav = feed.navigationController
         let vc = nav?.topViewController as! ListViewController
         vc.simulateAppearance()
         return vc

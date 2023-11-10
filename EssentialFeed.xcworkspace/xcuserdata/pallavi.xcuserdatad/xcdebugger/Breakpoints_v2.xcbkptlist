@@ -19,69 +19,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "62A5ED4E-37D4-4E8F-8E99-5036CAFB4987"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ListSampleApp/ListSampleAppTests/FeedUIIntegration.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
-            landmarkName = "test_imageSelection_notifiesHandler()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "62A5ED4E-37D4-4E8F-8E99-5036CAFB4987 - e4e83caff35bd06a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ListSampleAppTests.FeedUIIntegration.test_imageSelection_notifiesHandler() -&gt; ()"
-                  moduleName = "ListSampleAppTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/pallavi/Desktop/Git/ListSampleApp/ListSampleApp/ListSampleAppTests/FeedUIIntegration.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "29"
-                  endingLineNumber = "29"
-                  offsetFromSymbolStart = "520">
-               </Location>
-               <Location
-                  uuid = "62A5ED4E-37D4-4E8F-8E99-5036CAFB4987 - 2dd438befc7fd740"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (EssentialFeed.FeedImage) -&gt; () in ListSampleAppTests.FeedUIIntegration.test_imageSelection_notifiesHandler() -&gt; ()"
-                  moduleName = "ListSampleAppTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/pallavi/Desktop/Git/ListSampleApp/ListSampleApp/ListSampleAppTests/FeedUIIntegration.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "29"
-                  endingLineNumber = "29"
-                  offsetFromSymbolStart = "96">
-               </Location>
-               <Location
-                  uuid = "62A5ED4E-37D4-4E8F-8E99-5036CAFB4987 - e4e83caff35bd06a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ListSampleAppTests.FeedUIIntegration.test_imageSelection_notifiesHandler() -&gt; ()"
-                  moduleName = "ListSampleAppTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/pallavi/Desktop/Git/ListSampleApp/ListSampleApp/ListSampleAppTests/FeedUIIntegration.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "29"
-                  endingLineNumber = "29"
-                  offsetFromSymbolStart = "640">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "932A6628-D62E-4C67-A0FC-1836E4805F6A"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -130,85 +67,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "C42CA246-F353-4C17-8AD8-5B81DFBD5EB1"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ListSampleApp/ListSampleApp/SceneDelegate.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
-            landmarkName = "showComments(for:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "C42CA246-F353-4C17-8AD8-5B81DFBD5EB1 - c557d3e041e82972"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ListSampleApp.SceneDelegate.showComments(for: EssentialFeed.FeedImage) -&gt; ()"
-                  moduleName = "ListSampleApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/pallavi/Desktop/Git/ListSampleApp/ListSampleApp/ListSampleApp/SceneDelegate.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "79"
-                  endingLineNumber = "79"
-                  offsetFromSymbolStart = "220">
-               </Location>
-               <Location
-                  uuid = "C42CA246-F353-4C17-8AD8-5B81DFBD5EB1 - c557d3e041e82972"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ListSampleApp.SceneDelegate.showComments(for: EssentialFeed.FeedImage) -&gt; ()"
-                  moduleName = "ListSampleApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/pallavi/Desktop/Git/ListSampleApp/ListSampleApp/ListSampleApp/SceneDelegate.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "79"
-                  endingLineNumber = "79"
-                  offsetFromSymbolStart = "268">
-               </Location>
-               <Location
-                  uuid = "C42CA246-F353-4C17-8AD8-5B81DFBD5EB1 - c557d3e041e8d6fe"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ListSampleApp.SceneDelegate.showComments(for: EssentialFeed.FeedImage) -&gt; ()"
-                  moduleName = "ListSampleApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/pallavi/Desktop/Git/ListSampleApp/ListSampleApp/ListSampleApp/SceneDelegate.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "75"
-                  endingLineNumber = "75"
-                  offsetFromSymbolStart = "284">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "B011DDE2-E2DB-40AE-88A1-D504AE063006"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ListSampleApp/ListSampleApp/SceneDelegate.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
-            landmarkName = "makeRemoteCommentsLoader(url:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "E408C70E-5AD8-4ED8-8025-9F81E4DA7344"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -225,70 +83,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "6DCA9707-3843-48AD-A36E-D19F19390DB0"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ListSampleApp/ListSampleApp/SceneDelegate.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
-            landmarkName = "configureWindow()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "B6C2F355-C1D3-475E-BE18-E65A61FFBDBB"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ListSampleApp/ListSampleAppTests/Helper/HTTPClientStub.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
-            landmarkName = "online(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "B6C2F355-C1D3-475E-BE18-E65A61FFBDBB - b0e22d1068da00ed"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static ListSampleAppTests.HTTPClientStub.online((Foundation.URL) -&gt; (Foundation.Data, __C.NSHTTPURLResponse)) -&gt; ListSampleAppTests.HTTPClientStub"
-                  moduleName = "ListSampleAppTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/pallavi/Desktop/Git/ListSampleApp/ListSampleApp/ListSampleAppTests/Helper/HTTPClientStub.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "34"
-                  endingLineNumber = "34"
-                  offsetFromSymbolStart = "68">
-               </Location>
-               <Location
-                  uuid = "B6C2F355-C1D3-475E-BE18-E65A61FFBDBB - ad7b3e0d87e6554a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Foundation.URL) -&gt; Swift.Result&lt;(Foundation.Data, __C.NSHTTPURLResponse), Swift.Error&gt; in static ListSampleAppTests.HTTPClientStub.online((Foundation.URL) -&gt; (Foundation.Data, __C.NSHTTPURLResponse)) -&gt; ListSampleAppTests.HTTPClientStub"
-                  moduleName = "ListSampleAppTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/pallavi/Desktop/Git/ListSampleApp/ListSampleApp/ListSampleAppTests/Helper/HTTPClientStub.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "34"
-                  endingLineNumber = "34"
-                  offsetFromSymbolStart = "64">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "B0EA9A84-2DF0-437D-AE4B-DD91A830598A"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -300,22 +94,6 @@
             endingLineNumber = "16"
             landmarkName = "FeedAcceptanceTest"
             landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "FE146F74-E593-46CF-A778-297CB0153CA6"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ListSampleApp/ListSampleAppTests/FeedUIIntegration.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
-            landmarkName = "test_loadingFeedIndicator_isVisibleWhileLoadingFeed()"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

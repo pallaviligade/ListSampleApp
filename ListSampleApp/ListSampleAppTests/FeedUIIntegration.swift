@@ -24,8 +24,8 @@ class FeedUIIntegration: XCTestCase {
     }
     
     func test_imageSelection_notifiesHandler() {
-        let image0 = makeFeedImage()
-        let image1 = makeFeedImage()
+        let image0 = makeImage()
+        let image1 = makeImage()
         var selectedImages = [FeedImage]()
         let (sut, loader) = makeSUT(selection: { selectedImages.append($0) })
         
@@ -102,10 +102,10 @@ class FeedUIIntegration: XCTestCase {
     }
     func test_loadFeedCompletions_renderSuccessfullyLoaded()
     {
-        let imageO  = makeFeedImage(description: "first item", location: "Berlin")
-        let image1  = makeFeedImage(description: nil, location: "Berlin")
-        let image2  = makeFeedImage(description: "first item", location: nil)
-        let image3  = makeFeedImage(description: nil, location: nil)
+        let imageO  = makeImage(description: "first item", location: "Berlin")
+        let image1  = makeImage(description: nil, location: "Berlin")
+        let image2  = makeImage(description: "first item", location: nil)
+        let image3  = makeImage(description: nil, location: nil)
 
         let (sut, loader) = makeSUT()
         sut.simulateAppearance()
@@ -124,8 +124,8 @@ class FeedUIIntegration: XCTestCase {
     
     func test_loadFeedCompletion_rendersSuccessfullyLoadedEmptyFeedAfterNonEmptyFeed() {
         
-        let imageO  = makeFeedImage()
-        let image1  = makeFeedImage()
+        let imageO  = makeImage()
+        let image1  = makeImage()
         let (sut, loader) = makeSUT()
         
         sut.simulateAppearance()
@@ -138,7 +138,7 @@ class FeedUIIntegration: XCTestCase {
     }
     
     func test_loadFeedCompletion_doesNotAlterCurrentRenderingStateOnError() {
-        let image0 = makeFeedImage()
+        let image0 = makeImage()
         let (sut,loader) = makeSUT()
         
         sut.simulateAppearance()
@@ -153,8 +153,8 @@ class FeedUIIntegration: XCTestCase {
     }
     
     func test_feedImageView_loadsImageUrlsWhenVisiable() {
-        let image0 = makeFeedImage(imgurl: URL(string: "http://any0-url.com")!)
-        let image1 = makeFeedImage(imgurl: URL(string: "http://any1-url.com")!)
+        let image0 = makeImage(imgurl: URL(string: "http://any0-url.com")!)
+        let image1 = makeImage(imgurl: URL(string: "http://any1-url.com")!)
         let (sut,  loader) = makeSUT()
         
         sut.simulateAppearance()
@@ -173,8 +173,8 @@ class FeedUIIntegration: XCTestCase {
     }
     
     func test_feedImageView_cancelsImageLoadingWhenNotVisiableAnyMore() {
-        let image0 = makeFeedImage(imgurl: URL(string: "http://url-0.com")!)
-        let image1 = makeFeedImage(imgurl: URL(string: "http://url-1.com")!)
+        let image0 = makeImage(imgurl: URL(string: "http://any0-url.com")!)
+        let image1 = makeImage(imgurl: URL(string: "http://any1-url.com")!)
         let (sut,  loader) = makeSUT()
         
         sut.simulateAppearance()
@@ -194,7 +194,7 @@ class FeedUIIntegration: XCTestCase {
         let (sut,  loader) = makeSUT()
         
         sut.simulateAppearance()
-        loader.completeFeedloading(with: [makeFeedImage(), makeFeedImage()])
+        loader.completeFeedloading(with: [makeImage(), makeImage()])
         
         let view0 = sut.simulateFeedImageViewVisible(at: 0)
         let view1 = sut.simulateFeedImageViewVisible(at: 1)
@@ -253,8 +253,8 @@ class FeedUIIntegration: XCTestCase {
         }
     
     func test_feedImageViewRetryButton_isVisibleOnImageURLLoadError() {
-        let image0 = makeFeedImage(imgurl: URL(string: "http://any0-url.com")!)
-        let image1 = makeFeedImage(imgurl: URL(string: "http://any1-url.com")!)
+        let image0 = makeImage(imgurl: URL(string: "http://any0-url.com")!)
+        let image1 = makeImage(imgurl: URL(string: "http://any1-url.com")!)
         let (sut,  loader) = makeSUT()
 
         sut.simulateAppearance()
@@ -279,7 +279,7 @@ class FeedUIIntegration: XCTestCase {
         let (sut,  loader) = makeSUT()
         
         sut.simulateAppearance()
-        loader.completeFeedloading(with: [makeFeedImage()])
+        loader.completeFeedloading(with: [makeImage()])
         
         let view0 = sut.simulateFeedImageViewVisible(at: 0)
         XCTAssertEqual(view0?.isShowingRetryAction, false, "Expected no retry action while loading image")
@@ -290,8 +290,8 @@ class FeedUIIntegration: XCTestCase {
         
      }
     func test_feedImageViewRetryAction_retriesImageLoad() {
-        let image0 = makeFeedImage(imgurl: URL(string: "http://any0-url.com")!)
-        let image1 = makeFeedImage(imgurl: URL(string: "http://any1-url.com")!)
+        let image0 = makeImage(imgurl: URL(string: "http://any0-url.com")!)
+        let image1 = makeImage(imgurl: URL(string: "http://any1-url.com")!)
         let (sut,  loader) = makeSUT()
 
         sut.simulateAppearance()
@@ -317,7 +317,7 @@ class FeedUIIntegration: XCTestCase {
             let (sut, loader) = makeSUT()
 
             sut.simulateAppearance()
-            loader.completeFeedloading(with: [makeFeedImage(), makeFeedImage()])
+            loader.completeFeedloading(with: [makeImage(), makeImage()])
 
             let view0 = try XCTUnwrap(sut.simulateFeedImageViewVisible(at: 0))
             view0.prepareForReuse()
@@ -329,8 +329,8 @@ class FeedUIIntegration: XCTestCase {
         }
     
     func test_feedImageView_PreloadsImageURLWhenNearVisiable() {
-        let image0 = makeFeedImage(imgurl: URL(string: "http://any0-url.com")!)
-        let image1 = makeFeedImage(imgurl: URL(string: "http://any1-url.com")!)
+        let image0 = makeImage(imgurl: URL(string: "http://any0-url.com")!)
+        let image1 = makeImage(imgurl: URL(string: "http://any1-url.com")!)
         let (sut,  loader) = makeSUT()
 
         sut.simulateAppearance()
@@ -345,8 +345,8 @@ class FeedUIIntegration: XCTestCase {
         
     }
     func test_feedImageView_cancelsImageURLPreloadingWhenNotNearVisibleAnymore() {
-        let image0 = makeFeedImage(imgurl: URL(string: "http://any0-url.com")!)
-        let image1 = makeFeedImage(imgurl: URL(string: "http://any1-url.com")!)
+        let image0 = makeImage(imgurl: URL(string: "http://any0-url.com")!)
+        let image1 = makeImage(imgurl: URL(string: "http://any1-url.com")!)
         let (sut,  loader) = makeSUT()
 
         sut.simulateAppearance()
@@ -381,16 +381,15 @@ class FeedUIIntegration: XCTestCase {
         return (sut, loader)
     }
     
-    func makeFeedImage(description:String? = nil, location:String? = nil, imgurl: URL = URL(string: "https://any-url.com")!) ->  FeedImage
+    func makeImage(description:String? = nil, location:String? = nil, imgurl: URL = URL(string: "http://any-url.com")!) ->  FeedImage
     {
-        let feedImage =  FeedImage(id: UUID(), description: description, location: location, imageURL:imgurl)
-        return feedImage
+         FeedImage(id: UUID(), description: description, location: location, imageURL:imgurl)
         
     }
     func test_feedImageView_doesNotRenderLoadedImageWhenNotVisibleAnymore() {
             let (sut, loader) = makeSUT()
             sut.simulateAppearance()
-        loader.completeFeedloading(with: [makeFeedImage()])
+        loader.completeFeedloading(with: [makeImage()])
 
             let view = sut.simulateFeedImageViewNotVisible(at: 0)
             loader.compeletImageLoading(with: anyImageData())
@@ -427,7 +426,7 @@ class FeedUIIntegration: XCTestCase {
         let (sut, loader) = makeSUT()
         sut.simulateAppearance()
         
-        loader.completeFeedloading(with: [makeFeedImage()])
+        loader.completeFeedloading(with: [makeImage()])
         _ = sut.simulateFeedImageViewVisible(at: 0)
         
         let exp =  expectation(description: "Wait for background queue")
