@@ -131,22 +131,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5096D13F-0E53-4F8E-A3BA-FD0A02570355"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ListSampleApp/ListSampleApp/SceneDelegate.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
-            landmarkName = "showComments(for:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "A6DA596F-F7C1-4D01-91E4-BB1CC80B55ED"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -163,16 +147,64 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "1D161C52-A261-4EC6-BEA8-CDA5751BB002"
+            uuid = "C42CA246-F353-4C17-8AD8-5B81DFBD5EB1"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ListSampleApp/EssentialFeed/EssentialFeediOS/Shared  UI/Controller/ListViewController.swift"
+            filePath = "ListSampleApp/ListSampleApp/SceneDelegate.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121"
-            landmarkName = "tableView(_:didSelectRowAt:)"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "showComments(for:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "C42CA246-F353-4C17-8AD8-5B81DFBD5EB1 - c557d3e041e82972"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ListSampleApp.SceneDelegate.showComments(for: EssentialFeed.FeedImage) -&gt; ()"
+                  moduleName = "ListSampleApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pallavi/Desktop/Git/ListSampleApp/ListSampleApp/ListSampleApp/SceneDelegate.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "79"
+                  endingLineNumber = "79"
+                  offsetFromSymbolStart = "220">
+               </Location>
+               <Location
+                  uuid = "C42CA246-F353-4C17-8AD8-5B81DFBD5EB1 - c557d3e041e82972"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ListSampleApp.SceneDelegate.showComments(for: EssentialFeed.FeedImage) -&gt; ()"
+                  moduleName = "ListSampleApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pallavi/Desktop/Git/ListSampleApp/ListSampleApp/ListSampleApp/SceneDelegate.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "79"
+                  endingLineNumber = "79"
+                  offsetFromSymbolStart = "268">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B011DDE2-E2DB-40AE-88A1-D504AE063006"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ListSampleApp/ListSampleApp/SceneDelegate.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
+            landmarkName = "makeRemoteCommentsLoader(url:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

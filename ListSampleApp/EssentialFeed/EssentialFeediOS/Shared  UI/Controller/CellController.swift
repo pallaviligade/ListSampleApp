@@ -9,22 +9,22 @@ import UIKit
 
 public struct CellController  {
         let id: AnyHashable
-        let delgate: UITableViewDelegate?
-        let dataSourcePrefetch:UITableViewDataSourcePrefetching?
+        let delegate: UITableViewDelegate?
+        let dataSourcePrefetching:UITableViewDataSourcePrefetching?
         let dataSource: UITableViewDataSource
     
    public init(id: AnyHashable,dataSourceAll:  UITableViewDataSource & UITableViewDelegate & UITableViewDataSourcePrefetching ) {
        self.id = id
-        self.delgate = dataSourceAll
-        self.dataSourcePrefetch = dataSourceAll
+        self.delegate = dataSourceAll
+        self.dataSourcePrefetching = dataSourceAll
         self.dataSource = dataSourceAll
     }
     
     public init(id: AnyHashable,_ dataSource: UITableViewDataSource) {
         self.id = id
         self.dataSource = dataSource
-        self.dataSourcePrefetch = nil
-        self.delgate = nil
+        self.dataSourcePrefetching = nil
+        self.delegate = nil
        
     }
 }
