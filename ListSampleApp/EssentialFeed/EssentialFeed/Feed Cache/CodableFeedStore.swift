@@ -5,7 +5,7 @@
 //  Created by Pallavi on 12.05.23.
 //
 
-/*import Foundation
+import Foundation
 
 public final class CodableFeedStore: FeedStore {
  
@@ -52,7 +52,7 @@ public final class CodableFeedStore: FeedStore {
             let decorder = JSONDecoder()
             do{
                 let json = try decorder.decode(Cache.self, from: data)
-                complectionHandler(.success(.found(feed: json.localFeed, timestamp: json.timespam)))
+                complectionHandler(.success((feed: json.localFeed, timestamp: json.timespam)))
             }catch {
                 complectionHandler(.failure(error))
             }
@@ -90,4 +90,4 @@ public final class CodableFeedStore: FeedStore {
        
     }
 }
-*/
+
