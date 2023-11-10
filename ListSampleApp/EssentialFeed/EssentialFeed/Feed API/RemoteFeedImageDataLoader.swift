@@ -12,9 +12,9 @@ public final class RemoteFeedImageDataLoader: FeedImageDataLoader {
         case invaildData
         case connectivity
     }
-    private let httpClient: Httpclient
+    private let httpClient: HTTPClient
     
-   public init(client: Httpclient) {
+   public init(client: HTTPClient) {
         httpClient = client
     }
     

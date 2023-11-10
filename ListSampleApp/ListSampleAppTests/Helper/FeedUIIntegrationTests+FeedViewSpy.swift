@@ -12,7 +12,7 @@ import EssentialFeediOS
 
 extension FeedUIIntegration {
     
-    class FeedViewSpy: FeedImageDataLoader{
+    class LoaderSpy: FeedImageDataLoader{
        
     private var feedRequests = [PassthroughSubject<[FeedImage], Error>] ()
      

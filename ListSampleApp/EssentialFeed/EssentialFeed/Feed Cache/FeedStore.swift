@@ -8,13 +8,8 @@
 import Foundation
 
 
-public enum CachedFeed {
-     case empty
-     case found (feed: [LocalFeedImage], timestamp: Date)
-     case failure(Error)
-}
-//public typealias CachedFeed = (feed: [LocalFeedImage], timestamp: Date)
 
+public typealias CachedFeed = (feed: [LocalFeedImage], timestamp: Date)
 
 public protocol FeedStore {
      typealias  RetrivalsResult = Result<CachedFeed?, Error>

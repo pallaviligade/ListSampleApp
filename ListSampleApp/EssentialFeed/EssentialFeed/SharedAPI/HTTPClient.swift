@@ -10,7 +10,7 @@ public protocol HTTPClientTask {
     func cancel()
 }
 
-public protocol Httpclient {
+public protocol HTTPClient {
     
      typealias Result = Swift.Result <(Data,HTTPURLResponse), Error>
 

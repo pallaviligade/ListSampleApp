@@ -11,7 +11,7 @@ import EssentialFeed
 import EssentialFeediOS
 
 
-public extension Httpclient {
+public extension HTTPClient {
     typealias Publisher = AnyPublisher<(Data, HTTPURLResponse), Error>
 
     func getPublisher(url: URL) -> Publisher {

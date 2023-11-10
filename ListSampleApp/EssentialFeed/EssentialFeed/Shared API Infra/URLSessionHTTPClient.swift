@@ -7,7 +7,7 @@
 
 import Foundation
 
-public final class URLSessionHTTPClient:Httpclient {
+public final class URLSessionHTTPClient:HTTPClient {
     
     public  let session: URLSession
     
@@ -25,7 +25,7 @@ public final class URLSessionHTTPClient:Httpclient {
             }
         }
     
-    public func get(from url: URL, completion: @escaping (Httpclient.Result) -> Void) -> HTTPClientTask {
+    public func get(from url: URL, completion: @escaping (HTTPClient.Result) -> Void) -> HTTPClientTask {
         // let url = URL(string: "http://wrong-url.com")!
         
         

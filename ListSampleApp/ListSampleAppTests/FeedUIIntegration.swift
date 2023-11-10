@@ -369,9 +369,9 @@ class FeedUIIntegration: XCTestCase {
         selection: @escaping (FeedImage) -> Void = {  _ in },
         file: StaticString = #file,
         line: UInt = #line
-    ) -> (sut:ListViewController, loader: FeedViewSpy) {
-        let loader = FeedViewSpy()
-        let sut  = FeedUIComposer.createFeedView(
+    ) -> (sut:ListViewController, loader: LoaderSpy) {
+        let loader = LoaderSpy()
+        let sut  = FeedUIComposer.feedComposedWith(
             feedloader: loader.loadPublisher,
             imageLoader: loader.loadImageDataPubliser,
             selection: selection

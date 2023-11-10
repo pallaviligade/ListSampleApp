@@ -14,7 +14,7 @@ import Combine
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    private lazy var httpClient: Httpclient = {
+    private lazy var httpClient: HTTPClient = {
          URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
     }()
     
@@ -42,12 +42,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private lazy var remoteFeedLoader = RemoteLoader(url:baseURL , client: httpClient, mapper: FeedItemMapper.map(_:from:))
 
     private lazy var navigationController = UINavigationController(
-            rootViewController: FeedUIComposer.createFeedView(
+            rootViewController: FeedUIComposer.feedComposedWith(
                 feedloader: makeRemoteFeedLoaderWithLocalFallback,
                 imageLoader: makeImageFeedLoaderWithLocalFallBack,
                 selection: showComments))
     
-    convenience init(httpClient: Httpclient, store: FeedStore & FeedImageDataStore, scheduler: AnyDispatchQueueScheduler) {
+    convenience init(httpClient: HTTPClient, store: FeedStore & FeedImageDataStore, scheduler: AnyDispatchQueueScheduler) {
         self.init()
         self.httpClient = httpClient
         self.store = store
@@ -62,10 +62,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     func configureWindow() {
       
-       /* let feedview = FeedUIComposer.createFeedView(
-            feedloader: makeRemoteFeedLoaderWithLocalFallback,
-            imageLoader: makeImageFeedLoaderWithLocalFallBack)*/
-        
         self.window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         
@@ -121,7 +117,7 @@ extension RemoteLoader: FeedLoader where Resource == [FeedImage] {}
 public typealias RemoteImageCommentsLoader = RemoteLoader<[ImageComment]>
 
 public extension RemoteImageCommentsLoader {
-    convenience init(url: URL, client: Httpclient) {
+    convenience init(url: URL, client: HTTPClient) {
         self.init(url: url, client: client, mapper: ImageCommentMapper.map(_:response:))
     }
 }
@@ -129,7 +125,7 @@ public extension RemoteImageCommentsLoader {
 public typealias RemoteFeedLoader = RemoteLoader<[FeedImage]>
 
 public extension RemoteFeedLoader {
-    convenience init(url: URL, client: Httpclient) {
+    convenience init(url: URL, client: HTTPClient) {
         self.init(url: url, client: client, mapper: FeedItemMapper.map(_:from:))
     }
 }

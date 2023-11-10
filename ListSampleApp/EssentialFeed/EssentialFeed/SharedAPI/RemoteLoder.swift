@@ -9,7 +9,7 @@ import Foundation
 
 public final class RemoteLoader<Resource> {
     private let url: URL
-    private let client: Httpclient
+    private let client: HTTPClient
     private let mapper: Mapper
 
     public enum Error: Swift.Error {
@@ -20,7 +20,7 @@ public final class RemoteLoader<Resource> {
     public typealias Mapper = (Data, HTTPURLResponse) throws -> Resource
     public typealias Result = Swift.Result<Resource, Swift.Error>
 
-    public init(url: URL, client: Httpclient, mapper: @escaping Mapper) {
+    public init(url: URL, client: HTTPClient, mapper: @escaping Mapper) {
         self.url = url
         self.client = client
         self.mapper = mapper

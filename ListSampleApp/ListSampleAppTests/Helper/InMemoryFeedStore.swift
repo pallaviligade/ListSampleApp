@@ -23,7 +23,7 @@ extension InMemoryFeedStore: FeedStore {
     }
     
     public func insert(_ feed: [LocalFeedImage], timestamp: Date, completion: @escaping FeedStore.InsertionCompletion) {
-        feedCache = CachedFeed.found(feed: feed, timestamp: timestamp)
+        feedCache = CachedFeed(feed: feed, timestamp: timestamp)
         completion(.success(()))
     }
     
@@ -50,11 +50,11 @@ extension InMemoryFeedStore  {
     }
     
     static var withExpiredFeedCache: InMemoryFeedStore {
-        InMemoryFeedStore(feedCache:CachedFeed.found(feed: [], timestamp: Date.distantPast))
+        InMemoryFeedStore(feedCache:CachedFeed(feed: [], timestamp: Date.distantPast))
     }
     
     static var withNonExpiredFeedCache: InMemoryFeedStore {
-        InMemoryFeedStore(feedCache: CachedFeed.found(feed: [], timestamp: Date()))
+        InMemoryFeedStore(feedCache: CachedFeed(feed: [], timestamp: Date()))
     }
 }
 

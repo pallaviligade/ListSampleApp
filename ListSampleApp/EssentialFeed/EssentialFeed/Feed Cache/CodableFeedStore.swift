@@ -5,7 +5,7 @@
 //  Created by Pallavi on 12.05.23.
 //
 
-import Foundation
+/*import Foundation
 
 public final class CodableFeedStore: FeedStore {
  
@@ -48,7 +48,7 @@ public final class CodableFeedStore: FeedStore {
     public func retrieve(completion complectionHandler:@escaping FeedStore.RetrievalCompletion) {
         let storeURL = self.storeURL
         queue.async {
-            guard let data  =  try? Data(contentsOf: storeURL) else { return complectionHandler(.success(.empty)) }
+            guard let data  =  try? Data(contentsOf: storeURL) else { return complectionHandler(.success(.none)) }
             let decorder = JSONDecoder()
             do{
                 let json = try decorder.decode(Cache.self, from: data)
@@ -90,3 +90,4 @@ public final class CodableFeedStore: FeedStore {
        
     }
 }
+*/

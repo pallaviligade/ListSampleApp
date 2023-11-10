@@ -8,12 +8,6 @@
 import Foundation
 
 
-
-
-//extension LoadFeedResult:Equatable where Error: Equatable { // This Generic
-//
-//}
-
 public protocol FeedLoader
 {
      typealias Result = Swift.Result<[FeedImage], Error>

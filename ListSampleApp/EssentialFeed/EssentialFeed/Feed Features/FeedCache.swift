@@ -8,7 +8,7 @@
 import Foundation
 
 public protocol FeedCache {
-     typealias saveResult = Result<Void, Error>
+    typealias Result = Swift.Result<Void, Error>
     
-     func save(_ item: [FeedImage], completion: @escaping (saveResult) -> Void)
+     func save(_ item: [FeedImage], completion: @escaping (Result) -> Void)
 }

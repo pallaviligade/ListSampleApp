@@ -8,29 +8,14 @@
 import CoreData
 
 extension CoreDataFeedStore: FeedStore {
-
-//    public func retrieve(completion: @escaping RetrievalCompletion) {
-//        perform { context in
-//            completion(Result {
-//                try ManagedCache.find(in: context).map {
-//                    CachedFeed(feed: $0.localFeed, timestamp: $0.timestamp)
-//                }
-//            })
-//        }
-//    }
     
     public func retrieve(completion: @escaping RetrievalCompletion) {
             perform { context in
-                do {
-                    if let cache = try ManagedCache.find(in: context) {
-                       // completion(.found(feed: cache.localFeed, timestamp: cache.timestamp))
-                        completion(.success(.found(feed: cache.localFeed, timestamp: cache.timestamp)))
-                    } else {
-                        completion(.success(.empty))
+                completion(Result {
+                    try ManagedCache.find(in: context).map {
+                        CachedFeed(feed: $0.localFeed, timestamp: $0.timestamp)
                     }
-                } catch {
-                    completion(.failure(error))
-                }
+                })
             }
         }
 

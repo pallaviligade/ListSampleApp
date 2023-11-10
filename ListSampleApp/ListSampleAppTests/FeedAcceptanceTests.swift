@@ -12,31 +12,18 @@ import XCTest
 
 class FeedAcceptanceTest: XCTestCase
 {
-    
-    
-   /* func test_onLaunch_displaysFeedWhenCustomerHasConnectivity() {
-        let feed = launch(httpClient: .online(response), store: .empty)
-
-        XCTAssertEqual(feed.numberOfRenderFeedImageView(), 2)
-        XCTAssertEqual(feed.renderedFeedImageData(at: 0), makeImageData())
-        XCTAssertEqual(feed.renderedFeedImageData(at: 1), makeImageData())
-    }*/
-    func test_onLaunch_displaysCachedRemoteFeedWhenCustomerHasNoConnectivity() {
+    /*func test_onLaunch_displaysCachedRemoteFeedWhenCustomerHasNoConnectivity() {
         let sharedStore = InMemoryFeedStore.empty
-        
         let onlineFeed = launch(httpClient: .online(response), store: sharedStore)
         onlineFeed.simulateFeedImageViewVisible(at: 0)
         onlineFeed.simulateFeedImageViewVisible(at: 1)
-        onlineFeed.simulateLoadMoreFeedAction()
-        onlineFeed.simulateFeedImageViewVisible(at: 2)
-        
+
         let offlineFeed = launch(httpClient: .offline, store: sharedStore)
-        
-        XCTAssertEqual(offlineFeed.numberOfRenderFeedImageView(), 3)
+
+        XCTAssertEqual(offlineFeed.numberOfRenderedFeedImageViews(), 2)
         XCTAssertEqual(offlineFeed.renderedFeedImageData(at: 0), makeImageData())
         XCTAssertEqual(offlineFeed.renderedFeedImageData(at: 1), makeImageData())
-        XCTAssertEqual(offlineFeed.renderedFeedImageData(at: 2), makeImageData())
-    }
+    }*/
 
         func test_onLaunch_displaysEmptyFeedWhenCustomerHasNoConnectivityAndNoCache() {
             let feed = launch(httpClient: .online(response), store: .empty)

@@ -52,7 +52,7 @@ final class EssentialFeedAPIEndToEndTestTests: XCTestCase {
         return recivedResult
     }
     
-    private func ephemeralClient(file: StaticString = #file, line: UInt = #line) -> Httpclient {
+    private func ephemeralClient(file: StaticString = #file, line: UInt = #line) -> HTTPClient {
             let client = URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
             return client
         }
