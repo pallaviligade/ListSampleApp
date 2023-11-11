@@ -46,7 +46,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.init()
         self.httpClient = httpClient
         self.store = store
-       // self.scheduler = scheduler
     }
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -85,9 +84,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     {
        
         let url = FeedEndpoint.get.url(baseURL: baseURL)
-       //  lazy var remoteFeedLoader = RemoteFeedLoader(url: remoteURL, client: httpClient)
 
-       // let remoteFeedLoader = RemoteFeedLoader(url: remoteURL, client: httpClient)
         return httpClient
             .getPublisher(url: url)
             .tryMap(FeedItemMapper.map)
