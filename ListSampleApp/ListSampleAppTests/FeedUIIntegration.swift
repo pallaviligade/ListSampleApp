@@ -52,22 +52,7 @@ class FeedUIIntegration: XCTestCase {
             XCTAssertEqual(sut.errorMessage, nil)
         }
     
-   /* func test_feedImageView_showsDataForNewViewRequestAfterPreviousViewIsReused() throws {
-            let (sut, loader) = makeSUT()
-
-            sut.simulateAppearance()
-            loader.completeFeedLoading(with: [makeImage(), makeImage()])
-
-            let previousView = try XCTUnwrap(sut.simulateFeedImageViewNotVisible(at: 0))
-
-            let newView = try XCTUnwrap(sut.simulateFeedImageViewVisible(at: 0))
-            previousView.prepareForReuse()
-
-            let imageData = UIImage.make(withColor: .red).pngData()!
-            loader.completeImageLoading(with: imageData, at: 1)
-
-            XCTAssertEqual(newView.renderedImage, imageData)
-        }*/
+    
     
     func test_loadFeedActions_requestFeedFromLoader(){
         let (sut, loader) = makeSUT()
@@ -213,6 +198,8 @@ class FeedUIIntegration: XCTestCase {
         XCTAssertEqual(view0?.isShowingImageLoadingIndicator, false, "Expected no loading indicator state change for first view once second image loading completes with error")
         XCTAssertEqual(view1?.isShowingImageLoadingIndicator, true, "Expected loading indicator state change for second view on retry action")
     }
+    
+    
     
    /* func test_feedImageView_RenderLoadedImageFromURL() {
        

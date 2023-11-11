@@ -21,7 +21,6 @@ public final class ListViewController: UITableViewController, UITableViewDataSou
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        
         configureTableView()
         refresh()
     }

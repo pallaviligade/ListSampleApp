@@ -43,9 +43,9 @@ extension FeedImageCellController: UITableViewDataSource, UITableViewDelegate, U
        cell?.locationContainer.isHidden = !viewModel.hasLocation
        cell?.locationLabel.text = viewModel.location
        cell?.discrptionLabel.text = viewModel.description
-     //  cell?.feedImageView.image = nil
-      //  cell?.feedImageContainer.isShimmering = true
-       // cell?.feedImageRetryButton.isHidden = true
+        cell?.feedImageView.image = nil
+                cell?.feedImageContainer.isShimmering = true
+                cell?.feedImageRetryButton.isHidden = true
         cell?.onRetry = { [weak self] in
             self?.delegate.didRequestImage()
         }
@@ -58,6 +58,11 @@ extension FeedImageCellController: UITableViewDataSource, UITableViewDelegate, U
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selection()
+    }
+    
+    public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        self.cell = cell as? FeedImageCell
+        delegate.didRequestImage()
     }
     
     public func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -73,10 +78,7 @@ extension FeedImageCellController: UITableViewDataSource, UITableViewDelegate, U
     }
     
     
-//    public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//            self.cell = cell as? FeedImageCell
-//            delegate.didRequestImage()
-//        }
+  
    
      private func releaseCellForReuse() {
          cell?.onReuse = nil
