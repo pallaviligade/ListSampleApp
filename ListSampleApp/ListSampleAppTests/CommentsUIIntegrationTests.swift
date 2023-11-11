@@ -131,6 +131,17 @@ class CommentsUIIntegrationTests: XCTestCase {
         XCTAssertEqual(sut.errorMessage, nil)
     }
     
+    func test_loadCommentsActions_runsAutomaticallyOnlyOnFirstAppearance() {
+            let (sut, loader) = makeSUT()
+            XCTAssertEqual(loader.loadCommentsCallCount, 0, "Expected no loading requests before view appears")
+
+            sut.simulateAppearance()
+            XCTAssertEqual(loader.loadCommentsCallCount, 1, "Expected a loading request once view appears")
+
+            sut.simulateAppearance()
+            XCTAssertEqual(loader.loadCommentsCallCount, 1, "Expected no loading request the second time view appears")
+        }
+    
     func test_deinit_cancelsRunningRequest() {
         var cancelCallCount = 0
         
@@ -144,7 +155,7 @@ class CommentsUIIntegrationTests: XCTestCase {
                     }).eraseToAnyPublisher()
             })
             
-            sut?.loadViewIfNeeded()
+            sut?.simulateAppearance()
         }
         
         XCTAssertEqual(cancelCallCount, 0)

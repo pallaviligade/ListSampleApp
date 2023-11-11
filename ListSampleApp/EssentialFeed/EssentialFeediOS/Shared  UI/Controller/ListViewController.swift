@@ -18,12 +18,21 @@ public final class ListViewController: UITableViewController, UITableViewDataSou
     }()
     
     public var onRefresh: (() -> Void)?
-    
+    private var onViewIsAppearing: ((ListViewController) -> Void)?
     public override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        refresh()
+        onViewIsAppearing = { vc in
+                    vc.onViewIsAppearing = nil
+                    vc.refresh()
+                }
     }
+    
+    public override func viewIsAppearing(_ animated: Bool) {
+            super.viewIsAppearing(animated)
+
+            onViewIsAppearing?(self)
+        }
     
     private func configureTableView() {
         dataSource.defaultRowAnimation = .fade
