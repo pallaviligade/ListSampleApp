@@ -52,7 +52,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
      
         guard let _ = (scene as? UIWindowScene) else { return }
         
-        configureWindow()
+         configureWindow()
     }
     func configureWindow() {
       
@@ -84,7 +84,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     {
        
         let url = FeedEndpoint.get.url(baseURL: baseURL)
-
+       print("URL:", url)
         return httpClient
             .getPublisher(url: url)
             .tryMap(FeedItemMapper.map)
