@@ -22,9 +22,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     
     private lazy var store: FeedStore & FeedImageDataStore = {
-         try! CoreDataFeedStore(storeURL: NSPersistentContainer
-            .defaultDirectoryURL()
-            .appendingPathComponent("feed-store.sqlite"))
+        try! CoreDataFeedStore(
+            storeURL: NSPersistentContainer
+                .defaultDirectoryURL()
+                .appendingPathComponent("feed-store.sqlite"))
     }()
     
     private lazy var localFeedLoder: LocalFeedLoader = {
@@ -55,8 +56,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
          configureWindow()
     }
     func configureWindow() {
-      
-        self.window?.rootViewController = navigationController
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         
     }
