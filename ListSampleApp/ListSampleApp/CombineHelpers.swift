@@ -28,18 +28,17 @@ public extension HTTPClient {
 }
 
 public extension FeedImageDataLoader {
-    
     typealias Publisher = AnyPublisher<Data, Error>
-    
-    func loadImageDataPubliser(from url: URL) -> Publisher {
+
+    func loadImageDataPublisher(from url: URL) -> Publisher {
         var task: FeedImageDataLoaderTask?
-        
-        return Deferred{
+
+        return Deferred {
             Future { completion in
                 task = self.loadImageData(from: url, completionHandler: completion)
             }
         }
-        .handleEvents(receiveCancel: {task?.cancel() }) // we are using side effect after recving effect that is cancel
+        .handleEvents(receiveCancel: { task?.cancel() })
         .eraseToAnyPublisher()
     }
 }
