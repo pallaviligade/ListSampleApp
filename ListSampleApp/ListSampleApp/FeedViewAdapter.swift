@@ -14,7 +14,6 @@ final class  FeedViewAdapter: ResourceView {
     
     private typealias FeedPresentatioAdapter =  LoadResourcePresentionAdapter<Data, WeakRefVirtualProxy<FeedImageCellController>>
     private weak var controller : ListViewController?
-    //private let imageloader: FeedImageDataLoader
     private let selection:  (FeedImage) -> Void
     private let imageloader:(URL) -> FeedImageDataLoader.Publisher
     
@@ -26,12 +25,9 @@ final class  FeedViewAdapter: ResourceView {
     
     func display(_ viewmodel: EssentialFeed.FeedViewModel) {
         controller?.display(viewmodel.feed.map { model in
-            //  FeedImageCellController(ViewModel: FeedImageCellViewModel(model:model , imageLoader: loader, imageTransfer: UIImage.init) )
             
             let adapter = FeedPresentatioAdapter (loader: { [imageloader] in
-                
                 imageloader(model.imageURL)
-                
             })
             
             let view = FeedImageCellController(
@@ -46,12 +42,6 @@ final class  FeedViewAdapter: ResourceView {
                 loadingView: WeakRefVirtualProxy(view),
                 errorView: WeakRefVirtualProxy(view),
                 mapper: UIImage.tryMake)
-            //          let view = FeedImageCellController(delegate: adapter)
-            
-            //        adapter.presenter = FeedImagePresenter(
-            //          view: WeakRefVirtualProxy(view),
-            //        imageTransformer: UIImage.init)
-            
             return CellController(id: model, view)
         })
     }

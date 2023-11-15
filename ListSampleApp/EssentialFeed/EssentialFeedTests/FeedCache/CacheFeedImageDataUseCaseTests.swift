@@ -28,7 +28,7 @@ final class CacheFeedImageDataUseCaseTests: XCTestCase {
     func test_saveImageDataFromURL_failsOnStoreInsertionError() {
         let (sut, store) = makeSUT()
         
-        expect(sut, toCompleteWith: .failure(LocalFeedImageDataLoader.SaveError.failure)) {
+        expect(sut, toCompleteWith: failed()) {
             let insertionError = anyNSError()
             store.completeInsertion(with: insertionError)
             
@@ -61,6 +61,11 @@ final class CacheFeedImageDataUseCaseTests: XCTestCase {
         
         
     }
+    
+    private func failed() -> LocalFeedImageDataLoader.SaveResult {
+        return .failure(LocalFeedImageDataLoader.SaveError.failure)
+    }
+    
     private func expect(_ sut: LocalFeedImageDataLoader, toCompleteWith ExpectedResult: LocalFeedImageDataLoader.SaveResult, when action: () -> Void, file:StaticString = #file, line: UInt = #line) {
         
         let exp = expectation(description: "wait for load completion")

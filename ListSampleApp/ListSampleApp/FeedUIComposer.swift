@@ -23,16 +23,15 @@ public final class FeedUIComposer {
     ) -> ListViewController {
         let presentionAdapter = FeedPresentationAdapoter(loader: feedLoader)
         
-        let feedViewController = makeFeedViewController( title: FeedPresenter.title)
+        let feedViewController = makeFeedViewController(title: FeedPresenter.title)
         feedViewController.onRefresh = presentionAdapter.loadResource
-
         
         presentionAdapter.presenter = LoadResourcePresenter(
             resourceView: FeedViewAdapter(controller: feedViewController,
-            loader: imageLoader,
-            selection: selection),
+                                          loader: imageLoader,
+                                          selection: selection),
             loadingView: WeakRefVirtualProxy(feedViewController),
-           errorView: WeakRefVirtualProxy(feedViewController),
+            errorView: WeakRefVirtualProxy(feedViewController),
             mapper: FeedPresenter.map)
         
       
@@ -43,12 +42,9 @@ public final class FeedUIComposer {
         let bundle = Bundle(for: ListViewController.self)
         let storyboard = UIStoryboard(name: "Feed", bundle: bundle)
         let feedViewController = storyboard.instantiateInitialViewController() as! ListViewController
-      
         feedViewController.title = FeedPresenter.title
         return feedViewController
-        
-        
-    }
+  }
     
 }
 

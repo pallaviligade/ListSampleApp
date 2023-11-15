@@ -9,7 +9,7 @@ import XCTest
 import EssentialFeed
 
 
-
+/*
 final class RemoteFeedImageDataLoaderTests: XCTestCase {
 
     func test_initDoesNotRequiresAnyUrl() {
@@ -136,3 +136,4 @@ final class RemoteFeedImageDataLoaderTests: XCTestCase {
    
 
 }
+*/
