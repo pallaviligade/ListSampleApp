@@ -108,8 +108,8 @@ class FeedSnapShotTests: XCTestCase {
         let cellController = FeedImageCellController(viewModel: stub.viewModel, delegate: stub, selection: {})
         stub.controller = cellController
         return [
-            CellController(id: UUID(), loadMore),
-            CellController(id: UUID(), cellController)
+            CellController(id: UUID(), cellController),
+            CellController(id: UUID(), loadMore)
          ]
     }
     

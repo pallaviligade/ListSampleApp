@@ -134,12 +134,8 @@ Location</string>
                             <outlet property="prefetchDataSource" destination="1hh-nG-9OR" id="9XQ-fL-7iO"/>
                         </connections>
                     </tableView>
-                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="yrT-VT-7jR" userLabel="Refresh Control">
-                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="8Jh-rD-dxp">
                         <autoresizingMask key="autoresizingMask"/>
-                        <connections>
-                            <action selector="refresh" destination="1hh-nG-9OR" eventType="valueChanged" id="OPy-Q1-D7T"/>
-                        </connections>
                     </refreshControl>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RzX-Pc-Xwa" userLabel="First Responder" sceneMemberID="firstResponder"/>
