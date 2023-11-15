@@ -14,10 +14,10 @@ public final class FeedUIComposer {
     
     private init() {}
     
-    private typealias FeedPresentationAdapoter = LoadResourcePresentionAdapter<[FeedImage], FeedViewAdapter>
+    private typealias FeedPresentationAdapoter = LoadResourcePresentionAdapter<Paginated<FeedImage>, FeedViewAdapter>
     
     public static func feedComposedWith(
-        feedLoader: @escaping () -> AnyPublisher<[FeedImage], Error>,
+        feedLoader: @escaping () -> AnyPublisher<Paginated<FeedImage>, Error>,
         imageLoader:  @escaping (URL) ->  FeedImageDataLoader.Publisher,
         selection: @escaping (FeedImage) -> Void = { _ in }
     ) -> ListViewController {
@@ -32,7 +32,7 @@ public final class FeedUIComposer {
                                           selection: selection),
             loadingView: WeakRefVirtualProxy(feedViewController),
             errorView: WeakRefVirtualProxy(feedViewController),
-            mapper: FeedPresenter.map)
+            mapper: {$0})
         
       
         return feedViewController
