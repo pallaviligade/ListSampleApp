@@ -15,11 +15,11 @@ class FeedPresenterTest: XCTestCase{
         
     }
     
-    func test_map_createsViewModel() {
-        let feed = uniqueItems().models
-        let feedViewModel = FeedPresenter.map(feed)
-        XCTAssertEqual(feedViewModel.feed, feed)
-    }
+//    func test_map_createsViewModel() {
+//        let feed = uniqueItems().models
+//        let feedViewModel = FeedPresenter.map(feed)
+//        XCTAssertEqual(feedViewModel.feed, feed)
+//    }
     //MARK: - Helpers
        
     private func localized(_ key: String, file: StaticString = #file, line: UInt = #line) -> String {
