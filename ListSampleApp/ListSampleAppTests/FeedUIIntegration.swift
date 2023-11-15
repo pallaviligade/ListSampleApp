@@ -349,7 +349,16 @@ class FeedUIIntegration: XCTestCase {
     
    
   
-   
+    func test_loadMoreActions_requestMoreFromLoader() {
+            let (sut, loader) = makeSUT()
+            sut.loadViewIfNeeded()
+            loader.completeFeedloading()
+
+            XCTAssertEqual(loader.loadMoreCallCount, 0, "Expected no requests before until load more action")
+
+            sut.simulateLoadMoreFeedAction()
+            XCTAssertEqual(loader.loadMoreCallCount, 1, "Expected load more request")
+        }
     
     
     func makeSUT(

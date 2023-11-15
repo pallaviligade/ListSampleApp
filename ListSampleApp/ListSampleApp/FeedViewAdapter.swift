@@ -24,7 +24,7 @@ final class  FeedViewAdapter: ResourceView {
     }
     
     func display(_ viewmodel: Paginated<FeedImage>) {
-        controller?.display(viewmodel.items.map { model in
+        let feed: [CellController] = viewmodel.items.map { model in
             
             let adapter = FeedPresentatioAdapter (loader: { [imageloader] in
                 imageloader(model.imageURL)
@@ -43,11 +43,17 @@ final class  FeedViewAdapter: ResourceView {
                 errorView: WeakRefVirtualProxy(view),
                 mapper: UIImage.tryMake)
             return CellController(id: model, view)
-        })
+        }
+        let loadMore = LoadMoreCellController {
+            
+        }
+        
+        let loadMoreSection = [CellController(id: UUID(), loadMore)]
+
+        controller?.display(feed, loadMoreSection)
     }
-    
-    
 }
+    
 
 extension UIImage {
      struct InvalidImageData: Error {}
