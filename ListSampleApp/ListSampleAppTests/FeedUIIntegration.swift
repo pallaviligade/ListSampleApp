@@ -180,6 +180,7 @@ class FeedUIIntegration: XCTestCase {
         }
     
    
+   //MARk: - Image view tests
     
     func test_feedImageView_loadsImageUrlsWhenVisiable() {
         let image0 = makeImage(imgurl: URL(string: "http://any0-url.com")!)
