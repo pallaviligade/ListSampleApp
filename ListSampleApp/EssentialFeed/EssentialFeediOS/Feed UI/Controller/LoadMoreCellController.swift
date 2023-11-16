@@ -24,18 +24,17 @@ public class LoadMoreCellController: NSObject, UITableViewDataSource, UITableVie
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        cell.selectionStyle = .none
         return cell
     }
     
     public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         reloadIfNeeded()
         
-//        offsetObserver = tableView.observe(\.contentOffset, options: .new) { [weak self] (tableView, _) in
-//            guard tableView.isDragging else { return }
-//            
-//            self?.reloadIfNeeded()
-//        }
+        offsetObserver = tableView.observe(\.contentOffset, options: .new) { [weak self] (tableView, _) in
+            guard tableView.isDragging else { return }
+            
+            self?.reloadIfNeeded()
+        }
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
