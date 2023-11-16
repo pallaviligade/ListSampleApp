@@ -19,6 +19,7 @@ class ManagedFeedImage: NSManagedObject {
 extension ManagedFeedImage {
     
     static func data(with url: URL, in context: NSManagedObjectContext) throws -> Data? {
+        if let data = context.userInfo[url] as? Data { return data }
             return try first(with: url, in: context)?.data
         }
     
