@@ -16,14 +16,14 @@ import EssentialFeed
         case insert(data: Data, url: URL)
     }
     
-    private var Retrievalcompletions = [(FeedImageDataStore.RetrievalResult) -> Void]()
+     private var retrievalResult: Result<Data?, Error>?
      private var insertionResult: Result<Void, Error>?
      
     var recivedMessage = [message]()
     
-    func retrieve(dataForUrl url: URL, completionHandler: @escaping (FeedImageDataStore.RetrievalResult) -> Void) {
+    func retrieve(dataForUrl url: URL) throws -> Data? {
         recivedMessage.append(.retrieve(dataForUrl: url))
-        Retrievalcompletions.append(completionHandler)
+        return try retrievalResult?.get()
     }
     
     func insert(_ data: Data, for url: URL) throws {
@@ -31,12 +31,12 @@ import EssentialFeed
         try insertionResult?.get()
     }
     
-    func completeRetrieval(with error: Error, index: Int = 0){
-        Retrievalcompletions[index](.failure(error))
+    func completeRetrieval(with error: Error){
+        retrievalResult = .failure(error)
     }
     
-    func completeRetrieval(with data: Data?, index: Int = 0){
-        Retrievalcompletions[index](.success(data))
+    func completeRetrieval(with data: Data?){
+        retrievalResult = .success(data)
     }
      
      func completeInsertion(with error: Error) {

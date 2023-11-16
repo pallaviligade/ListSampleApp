@@ -48,14 +48,14 @@ extension LocalFeedImageDataLoader: FeedImageDataLoader {
         
         let task = LoadImageDataTask(completion: completionHandler)
         
-        store.retrieve(dataForUrl: url) { [weak self]  result in
-            guard  self != nil else { return }
-            
-            task.complete(with: result
-                .mapError { _ in loadError.failed}
-                .flatMap { data in data.map{.success($0)} ?? .failure(loadError.notFound) }
-            )
-        }
+        task.complete(
+                    with: Swift.Result {
+                        try store.retrieve(dataForURL: url)
+                    }
+                    .mapError { _ in loadError.failed }
+                    .flatMap { data in
+                        data.map { .success($0) } ?? .failure(loadError.notFound)
+                    })
         return task
     }
     
