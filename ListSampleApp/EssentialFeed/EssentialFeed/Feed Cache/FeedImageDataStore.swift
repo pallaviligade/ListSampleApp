@@ -18,7 +18,7 @@ public protocol FeedImageDataStore {
     func retrieve(dataForUrl url: URL, completionHandler: @escaping (RetrievalResult) -> Void)
     
     @available(*, deprecated)
-    func insert(_ data: Data, for url: URL, completionHandler: @escaping (InsertionResult) -> Void)
+    func insert(_ data: Data, for url: URL, completion: @escaping (InsertionResult) -> Void)
 }
 
 public extension FeedImageDataStore {
