@@ -17,7 +17,7 @@ import EssentialFeed
     }
     
     private var Retrievalcompletions = [(FeedImageDataStore.RetrievalResult) -> Void]()
-    private var InsertionsCompletions = [(FeedImageDataStore.InsertionResult) -> Void]()
+     private var insertionResult: Result<Void, Error>?
      
     var recivedMessage = [message]()
     
@@ -26,9 +26,9 @@ import EssentialFeed
         Retrievalcompletions.append(completionHandler)
     }
     
-    func insert(_ data: Data, for url: URL, completionHandler: @escaping (InsertionResult) -> Void) {
+    func insert(_ data: Data, for url: URL) throws {
         recivedMessage.append(.insert(data: data, url: url))
-        InsertionsCompletions.append(completionHandler)
+        try insertionResult?.get()
     }
     
     func completeRetrieval(with error: Error, index: Int = 0){
@@ -39,12 +39,12 @@ import EssentialFeed
         Retrievalcompletions[index](.success(data))
     }
      
-     func completeInsertion(with error: Error, index: Int = 0) {
-         InsertionsCompletions[index](.failure(error))
+     func completeInsertion(with error: Error) {
+         insertionResult = .failure(error)
      }
      
-     func completeInsertionSuccessfully( index: Int = 0) {
-         InsertionsCompletions[index](.success(()))
+     func completeInsertionSuccessfully() {
+         insertionResult = .success(())
      }
     
 }

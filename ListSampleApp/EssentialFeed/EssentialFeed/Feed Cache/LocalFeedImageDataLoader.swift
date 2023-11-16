@@ -71,8 +71,8 @@ extension LocalFeedImageDataLoader: FeedImageDataCache {
     }
     
     public func save(_  data: Data, for url: URL, completion completionHandler:@escaping (SaveResult) -> Void) {
-        store.insert(data, for: url) { result in
-            completionHandler(result.map {_ in SaveError.failure})
-        }
+        completionHandler(SaveResult {
+                    try store.insert(data, for: url)
+                }.mapError { _ in SaveError.failure })
     }
 }
