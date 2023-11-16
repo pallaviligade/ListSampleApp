@@ -91,35 +91,46 @@ class FeedUIIntegration: XCTestCase {
         let image1  = makeImage(description: nil, location: "Berlin")
         let image2  = makeImage(description: "first item", location: nil)
         let image3  = makeImage(description: nil, location: nil)
-
+        
         let (sut, loader) = makeSUT()
         sut.simulateAppearance()
         assertThat(sut, isRendering: []) // Check the count(0) only there is no values
+        
+        loader.completeFeedloading(with: [imageO, image1], at: 0)
+        assertThat(sut, isRendering: [imageO, image1])
+        
+        sut.simulateLoadMoreFeedAction()
+        loader.completeLoadMore(with: [imageO, image1, image2, image3], at: 0)
+        assertThat(sut, isRendering: [imageO, image1, image2, image3])
         
         loader.completeFeedloading(with: [imageO], at: 0)
         assertThat(sut, isRendering: [imageO]) // Check the count (1)only there is  values too
         
         sut.simulateUserInitiatedReload()
-        loader.completeFeedloading(with: [imageO,image1,image2,image3], at: 1) // Check the count(4) only there is  values too
-       assertThat(sut, isRendering: [imageO,image1,image2,image3])
-       
-       
-
+        loader.completeFeedloading(with: [imageO,image1], at: 1) // Check the count(4) only there is  values too
+        assertThat(sut, isRendering: [imageO,image1])
+        
+        
+        
     }
     
     func test_loadFeedCompletion_rendersSuccessfullyLoadedEmptyFeedAfterNonEmptyFeed() {
         
-        let imageO  = makeImage()
+        let image0  = makeImage()
         let image1  = makeImage()
         let (sut, loader) = makeSUT()
         
         sut.simulateAppearance()
-        loader.completeFeedloading(with: [imageO , image1], at: 0)
-        assertThat(sut, isRendering: [imageO, image1])
+        loader.completeFeedloading(with: [image0], at: 0)
+        assertThat(sut, isRendering: [image0])
+        
+        sut.simulateLoadMoreFeedAction()
+        loader.completeLoadMore(with: [image0, image1], at: 0)
+        assertThat(sut, isRendering: [image0, image1])
         
         sut.simulateUserInitiatedReload()
-        loader.completeFeedloading(with: [], at: 1) // Check the count(4) only there is  values too
-       assertThat(sut, isRendering: [])
+        loader.completeFeedloading(with: [], at: 1)
+        assertThat(sut, isRendering: [])
     }
     
     func test_loadFeedCompletion_doesNotAlterCurrentRenderingStateOnError() {
@@ -136,6 +147,20 @@ class FeedUIIntegration: XCTestCase {
 
         
     }
+    
+    func test_loadMoreCompletion_dispatchesFromBackgroundToMainThread() {
+            let (sut, loader) = makeSUT()
+            sut.simulateAppearance()
+            loader.completeFeedloading(at: 0)
+            sut.simulateLoadMoreFeedAction()
+
+            let exp = expectation(description: "Wait for background queue")
+            DispatchQueue.global().async {
+                loader.completeLoadMore()
+                exp.fulfill()
+            }
+            wait(for: [exp], timeout: 1.0)
+        }
     
     func test_feedImageView_loadsImageUrlsWhenVisiable() {
         let image0 = makeImage(imgurl: URL(string: "http://any0-url.com")!)
