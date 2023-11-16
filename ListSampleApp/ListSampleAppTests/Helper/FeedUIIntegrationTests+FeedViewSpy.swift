@@ -40,7 +40,7 @@ extension FeedUIIntegration {
         }
         
         
-        func completeFeedLoadingWithError(at index:Int = 0) {
+        func completeFeedLoadingWithError(at index:Int) {
             let error = NSError(domain: "any error", code: 1)
             feedRequests[index].send(completion:.failure(error))
         }
