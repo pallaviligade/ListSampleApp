@@ -7,7 +7,7 @@
 
 import Foundation
 
-public final class RemoteFeedImageDataLoader: FeedImageDataLoader {
+/*public final class RemoteFeedImageDataLoader: FeedImageDataLoader {
     public enum Error: Swift.Error {
         case invaildData
         case connectivity
@@ -60,10 +60,6 @@ public final class RemoteFeedImageDataLoader: FeedImageDataLoader {
     
 }
 
-extension HTTPURLResponse {
-    static var OK_200: Int { return 200 }
-    
-    var isOk: Bool {
-        return statusCode == HTTPURLResponse.OK_200
-    }
-}
+
+
+*/

@@ -42,7 +42,7 @@ public final class ImageCommentMapper {
         return root.comments
     }
     
-    private static func isOk(_ reponse: HTTPURLResponse) -> Bool {
+    public static func isOk(_ reponse: HTTPURLResponse) -> Bool {
         (200...299).contains(reponse.statusCode)
     }
 }
