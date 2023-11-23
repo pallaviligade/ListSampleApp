@@ -11,7 +11,7 @@ public class InMemoryFeedStore {
     private(set) var feedCache: CachedFeed?
     private var feedImageDataCache: [URL: Data] = [:]
     
-    init(feedCache: CachedFeed? = nil) {
+    private init(feedCache: CachedFeed? = nil) {
         self.feedCache = feedCache
     }
 }
@@ -34,13 +34,13 @@ extension InMemoryFeedStore: FeedStore {
 
 
 extension InMemoryFeedStore:  FeedImageDataStore {
-    public func insert(_ data: Data, for url: URL, completionHandler completion: @escaping (FeedImageDataStore.InsertionResult) -> Void) {
+     func insert(_ data: Data, for url: URL) throws {
         feedImageDataCache[url] = data
-        completion(.success(()))
+       
     }
     
-    public func retrieve(dataForUrl url: URL, completionHandler completion: @escaping (FeedImageDataStore.RetrievalResult) -> Void) {
-        completion(.success(feedImageDataCache[url]))
+     func retrieve(dataForUrl url: URL) throws ->  Data? {
+        feedImageDataCache[url]
     }
 }
 
