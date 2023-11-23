@@ -34,12 +34,12 @@ extension InMemoryFeedStore: FeedStore {
 
 
 extension InMemoryFeedStore:  FeedImageDataStore {
-     func insert(_ data: Data, for url: URL) throws {
+    public func insert(_ data: Data, for url: URL) throws {
         feedImageDataCache[url] = data
        
     }
     
-     func retrieve(dataForUrl url: URL) throws ->  Data? {
+    public func retrieve(dataForURL url: URL) throws ->  Data? {
         feedImageDataCache[url]
     }
 }

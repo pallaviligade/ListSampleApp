@@ -21,7 +21,7 @@ import EssentialFeed
      
     var recivedMessage = [message]()
     
-    func retrieve(dataForUrl url: URL) throws -> Data? {
+     func retrieve(dataForURL url: URL) throws -> Data? {
         recivedMessage.append(.retrieve(dataForUrl: url))
         return try retrievalResult?.get()
     }
