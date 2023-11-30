@@ -5,7 +5,7 @@
 //  Created by Pallavi on 13.06.23.
 //
 
-import Foundation
+/*import Foundation
 import EssentialFeed
 
 final class FeedImageCellViewModel<Image> {
@@ -60,3 +60,4 @@ final class FeedImageCellViewModel<Image> {
         task = nil
     }
 }
+*/

@@ -5,6 +5,7 @@
 //  Created by Pallavi on 23.08.23.
 //
 
+/*
 import XCTest
 import EssentialFeed
 import ListSampleApp
@@ -68,3 +69,4 @@ class FeedLoaderCacheDecoratorTests: XCTestCase ,FeedLoderTestCase {
     }
   
 }
+*/

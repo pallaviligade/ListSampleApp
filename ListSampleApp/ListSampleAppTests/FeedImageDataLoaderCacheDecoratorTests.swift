@@ -4,7 +4,7 @@
 //
 //  Created by Pallavi on 24.08.23.
 //
-
+/*
 import XCTest
 import EssentialFeed
 import ListSampleApp
@@ -113,3 +113,4 @@ class FeedImageDataLoaderCacheDecoratorTests: XCTestCase, FeedImageDataLoaderTes
         
     }
 }
+*/

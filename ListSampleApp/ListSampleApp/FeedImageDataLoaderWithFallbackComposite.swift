@@ -5,7 +5,7 @@
 //  Created by Pallavi on 18.08.23.
 //
 
-import Foundation
+/*import Foundation
 import EssentialFeed
 
 public class FeedImageDataLoaderWithFallbackComposite: FeedImageDataLoader {
@@ -42,3 +42,4 @@ public class FeedImageDataLoaderWithFallbackComposite: FeedImageDataLoader {
     }
     
 }
+*/

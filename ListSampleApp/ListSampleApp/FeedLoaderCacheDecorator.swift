@@ -33,6 +33,6 @@ public final class FeedLoaderCacheDecorator : FeedLoader{
 
 private extension FeedCache {
     func saveIgnoringResult(_ feed: [FeedImage]) {
-        save(feed) { _ in }
+       try? save(feed)
     }
 }

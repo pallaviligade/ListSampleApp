@@ -4,7 +4,7 @@
 //
 //  Created by Pallavi on 25.08.23.
 //
-
+/*
 import XCTest
 import EssentialFeed
 
@@ -36,3 +36,4 @@ extension FeedImageDataLoaderTestCase {
             wait(for: [exp], timeout: 1.0)
         }
 }
+*/

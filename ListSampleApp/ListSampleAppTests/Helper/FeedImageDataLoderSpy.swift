@@ -5,7 +5,7 @@
 //  Created by Pallavi on 25.08.23.
 //
 
-import EssentialFeed
+/*import EssentialFeed
 
  class FeedImageDataLoderSpy: FeedImageDataLoader {
     private(set) var messages = [(url: URL, completion: (FeedImageDataLoader.Result) -> Void)]()
@@ -38,3 +38,4 @@ import EssentialFeed
         messages[index].completion(.failure(error))
     }
 }
+*/
