@@ -30,40 +30,27 @@ final class CacheFeedUseCaseTests: XCTestCase {
     
     func test_save_doesNotRequestCacheInsertionOnDeletionError () {
         let (sut, store) = makeSUT()
-       // let items = [uiqureItem(), uiqureItem()]
-        let error = anyError()
-        
+        let deletionError = anyNSError()
+        store.completeDeletion(with: deletionError)
         sut.save(uniqueItems().models)
-        store.completeDeletion(with: error)// when
         
         
         XCTAssertEqual(store.recivedMessages, [.deleteCachedFeed])
 
     }
     
-//    func test_save_requestsNewCacheInsertionOnSuccessfulDeletion() {
-//
-//        let (sut, store) = makeSUT()
-//        let items = [uiqureItem(), uiqureItem()]
-//
-//        sut.save(items)
-//        store.completeDeletionSuccessFully() // when
-//
-//        XCTAssertEqual(store.insertCallCount, 1)
-//
-//    }
+
     
     func test_save_requestsNewCacheInsertionWithTimeStampOnSuccessfulDeletion() {
         let timestamp = Date()
-        let items = [uniqueImage(), uniqueImage()]
-        let localitems = items.map { LocalFeedImage(id: $0.id, description: $0.description, location: $0.location, url: $0.imageURL) }
-        let (sut, store) =  makeSUT(currentDate: { timestamp })
+        let items =  uniqueItems()
+        let (sut, store) = makeSUT(currentDate: { timestamp })
+                store.completeDeletionSuccessFully()
       
         
-        sut.save(items)
-        store.completeDeletionSuccessFully() // when
+        sut.save(items.models) { _ in }
         
-        XCTAssertEqual(store.recivedMessages, [.deleteCachedFeed, .insert(localitems, timestamp)])
+        XCTAssertEqual(store.recivedMessages, [.deleteCachedFeed, .insert(items.localitems, timestamp)])
 
 
     }
