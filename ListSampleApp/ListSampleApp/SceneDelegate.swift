@@ -75,7 +75,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         do {
                     try localFeedLoader.validateCache()
                 } catch {
-                    logger.error("Failed to validate cache with error: \(error.localizedDescription)")
+                    //logger.error("Failed to validate cache with error: \(error.localizedDescription)")
                 }
     }
 

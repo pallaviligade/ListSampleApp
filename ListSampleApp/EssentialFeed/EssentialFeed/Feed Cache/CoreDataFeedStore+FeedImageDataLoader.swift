@@ -11,7 +11,7 @@ import Foundation
 extension CoreDataFeedStore: FeedImageDataStore {
 
     public func insert(_ data: Data, for url: URL) throws {
-       try performAsync { context in
+       try performSync { context in
                 Result {
                     try ManagedFeedImage.first(with: url, in: context)
                                         .map { $0.data = data }
