@@ -37,16 +37,23 @@ extension LocalFeedLoader: FeedCache {
 }
 
 extension LocalFeedLoader {
-    public typealias loadResult = FeedLoader.Result
     
-    public func load(completion completionHandler:@escaping (loadResult) -> Void){
-        completionHandler(loadResult {
+    public func load() throws -> [FeedImage] {
             if let cache = try store.retrieve(), FeedCachePolicy.validate(cache.timestamp, against: currentDate()) {
                 return cache.feed.toModels()
             }
             return []
-        })
-    }
+        }
+//    public typealias loadResult = FeedLoader.Result
+//    
+//    public func load(completion completionHandler:@escaping (loadResult) -> Void){
+//        completionHandler(loadResult {
+//            if let cache = try store.retrieve(), FeedCachePolicy.validate(cache.timestamp, against: currentDate()) {
+//                return cache.feed.toModels()
+//            }
+//            return []
+//        })
+//    }
 }
 extension LocalFeedLoader {
     public typealias ValidationResult = Result<Void, Error>
