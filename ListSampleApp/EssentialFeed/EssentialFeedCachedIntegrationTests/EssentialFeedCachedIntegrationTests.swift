@@ -126,7 +126,6 @@ final class EssentialFeedCachedIntegrationTests: XCTestCase {
         }
         
         private func save(_ feed: [FeedImage], with loader: LocalFeedLoader, file: StaticString = #filePath, line: UInt = #line) {
-            let saveExp = expectation(description: "Wait for save completion")
             do {
                 try loader.save(feed)
             }
