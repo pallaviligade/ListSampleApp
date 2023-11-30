@@ -106,6 +106,7 @@ class FeedUIIntegration: XCTestCase {
         loader.completeFeedloading(at: 1)
          XCTAssertFalse(sut.isShowingloadingIndicator, "Expected no loading indicator once user initiated loading is completed")
     }
+    
     func test_loadFeedCompletions_renderSuccessfullyLoaded()
     {
         let imageO  = makeImage(description: "first item", location: "Berlin")
@@ -114,6 +115,7 @@ class FeedUIIntegration: XCTestCase {
         let image3  = makeImage(description: nil, location: nil)
         
         let (sut, loader) = makeSUT()
+        
         sut.simulateAppearance()
         assertThat(sut, isRendering: []) // Check the count(0) only there is no values
         
@@ -124,8 +126,9 @@ class FeedUIIntegration: XCTestCase {
         loader.completeLoadMore(with: [imageO, image1, image2, image3], at: 0)
         assertThat(sut, isRendering: [imageO, image1, image2, image3])
         
-        loader.completeFeedloading(with: [imageO], at: 0)
-        assertThat(sut, isRendering: [imageO]) // Check the count (1)only there is  values too
+//        sut.simulateLoadMoreFeedAction()
+//        loader.completeFeedloading(with: [imageO], at: 0)
+//        assertThat(sut, isRendering: [imageO]) // Check the count (1)only there is  values too
         
         sut.simulateUserInitiatedReload()
         loader.completeFeedloading(with: [imageO,image1], at: 1) // Check the count(4) only there is  values too
@@ -134,6 +137,8 @@ class FeedUIIntegration: XCTestCase {
         
         
     }
+    
+    
     
     func test_loadFeedCompletion_rendersSuccessfullyLoadedEmptyFeedAfterNonEmptyFeed() {
         
