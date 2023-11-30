@@ -32,7 +32,7 @@ class feedStoreSpy: FeedStore {
      }
      
      func completeDeletion(with error:Error)  {
-         deletionResult = .success(())
+         deletionResult = .failure(error)
         
      }
      func completeDeletionSuccessFully() {
