@@ -90,7 +90,7 @@ class CoreDataFeedImageDataStoreTests: XCTestCase {
         do {
             let image = localImage(url: url)
             try sut.insert([image], timestamp: Date())
-            
+            try sut.insert(data, for: url)
         } catch {
             XCTFail("Failed to insert \(data) with error \(error)", file: file, line: line)
         }
