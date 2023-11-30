@@ -22,7 +22,10 @@ public final class ListViewController: UITableViewController, UITableViewDataSou
     
     public override func viewDidLoad() {
         super.viewDidLoad()
+        
         configureTableView()
+        configureTraitCollectionObservers()
+       
         onViewIsAppearing = { vc in
                     vc.onViewIsAppearing = nil
                     vc.refresh()
@@ -34,6 +37,12 @@ public final class ListViewController: UITableViewController, UITableViewDataSou
 
             onViewIsAppearing?(self)
         }
+    
+    public override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        tableView.sizeTableHeaderToFit()
+    }
     
     private func configureTableView() {
         dataSource.defaultRowAnimation = .fade
@@ -47,21 +56,23 @@ public final class ListViewController: UITableViewController, UITableViewDataSou
         }
     }
     
-    public override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        tableView.sizeTableHeaderToFit()
-    }
-    
-    public override func traitCollectionDidChange(_ previous: UITraitCollection?) {
-        if previous?.preferredContentSizeCategory != traitCollection.preferredContentSizeCategory {
-            tableView.reloadData()
+    private func configureTraitCollectionObservers() {
+        registerForTraitChanges(
+            [UITraitPreferredContentSizeCategory.self]
+        ) { (self: Self, previous: UITraitCollection) in
+            self.tableView.reloadData()
         }
     }
     
     @IBAction private func refresh() {
         onRefresh?()
     }
+    
+//    public override func traitCollectionDidChange(_ previous: UITraitCollection?) {
+//        if previous?.preferredContentSizeCategory != traitCollection.preferredContentSizeCategory {
+//            tableView.reloadData()
+//        }
+//    }
     
     public func display(_ sections: [CellController]...) {
         var snapshot = NSDiffableDataSourceSnapshot<Int, CellController>()
